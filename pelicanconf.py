@@ -35,5 +35,5 @@ DEFAULT_PAGINATION = 4
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
-# Theme configuration:
-ABOUT_IMAGE = "images/nicokosi.png"
+# Theme configuration (hyde):
+PROFILE_IMAGE = "nicokosi.png"
