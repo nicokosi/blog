@@ -19,7 +19,7 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-THEME = "/Users/nicolas/work/nicokosi-blog/pelican-themes/hyde"
+THEME = "pelican-themes/hyde"
 
 # Blogroll
 LINKS = ()
