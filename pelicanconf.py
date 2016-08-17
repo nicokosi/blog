@@ -11,6 +11,7 @@ TIMEZONE = 'Europe/Paris'
 DEFAULT_LANG = 'fr'
 
 GITHUB_URL = 'http://github.com/nicokosi/'
+TWITTER_USERNAME = 'nicokosi'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
