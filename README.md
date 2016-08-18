@@ -6,18 +6,15 @@ site generation.
 
 # Install static site generator
 
-1. Install Pelican static page generator, see
-http://docs.getpelican.com/en/latest/install.html.
-
+- Install Pelican static page generator, see http://docs.getpelican.com/en/latest/install.html.
 On Mac OS, with `Homebrew`:
-```bash
+```sh
 brew install python
 pip install pelican
 pip install markdown
 ```
-
-2. Install Pelican themes:
-```bash
+- Install Pelican themes:
+```sh
 git clone --recursive https://github.com/getpelican/pelican-themes pelican-themes
 ```
 
