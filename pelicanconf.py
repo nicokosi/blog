@@ -45,3 +45,5 @@ THEME = "pelican-clean-blog"
 #HEADER_COVER = 'images/nicokosi-large.png'
 HEADER_COLOR = 'PowderBlue'
 SITESUBTITLE = '#SoftwareDevelopment #Tools #ProgrammingLanguages #WhatElse?;-)'
+
+DISQUS_SITENAME = 'nicokosi-blog'
