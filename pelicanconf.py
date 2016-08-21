@@ -11,7 +11,6 @@ TIMEZONE = 'Europe/Paris'
 DEFAULT_LANG = 'fr'
 
 GITHUB_URL = 'http://github.com/nicokosi/'
-TWITTER_USERNAME = 'nicokosi'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -20,7 +19,12 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-THEME = "pelican-themes/hyde"
+STATIC_PATHS = [
+	'images',
+	'extra/favicon.ico']
+EXTRA_PATH_METADATA = {
+    'extra/favicon.ico': {'path': 'favicon.ico'}
+}
 
 # Blogroll
 LINKS = ()
@@ -31,10 +35,13 @@ SOCIAL = (
   ('github', 'http://github.com/nicokosi'),
 )
 
-DEFAULT_PAGINATION = 4
+DEFAULT_CATEGORY = 'all'
+DISPLAY_CATEGORIES_ON_MENU = False
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
-# Theme configuration (hyde):
-PROFILE_IMAGE = "nicokosi.png"
+THEME = "pelican-clean-blog"
+#HEADER_COVER = 'images/nicokosi-large.png'
+HEADER_COLOR = 'PowderBlue'
+SITESUBTITLE = '#SoftwareDevelopment #Tools #ProgrammingLanguages #WhatElse?;-)'
