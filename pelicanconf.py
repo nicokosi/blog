@@ -42,8 +42,8 @@ DISPLAY_CATEGORIES_ON_MENU = False
 RELATIVE_URLS = True
 
 THEME = "pelican-clean-blog"
-#HEADER_COVER = 'images/nicokosi-large.png'
 HEADER_COLOR = 'PowderBlue'
 SITESUBTITLE = '#SoftwareDevelopment #WhatElse?;-)'
+HEADER_TITLE_LOGO = 'images/nicokosi.png'
 
 DISQUS_SITENAME = 'nicokosi-blog'
