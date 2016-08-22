@@ -7,8 +7,8 @@ SITENAME = "Nicokosi's blog"
 SITEURL = 'http://nicokosi.github.io'
 
 TIMEZONE = 'Europe/Paris'
-
 DEFAULT_LANG = 'fr'
+DEFAULT_DATE_FORMAT = '%Y-%m-%d'
 
 GITHUB_URL = 'http://github.com/nicokosi/'
 
