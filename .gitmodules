@@ -1,3 +1,6 @@
 [submodule "pelican-clean-blog"]
 	path = pelican-clean-blog
 	url = git@github.com:nicokosi/pelican-clean-blog.git
+[submodule "output"]
+	path = output
+	url = git@github.com:nicokosi/nicokosi.github.io.git
