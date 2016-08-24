@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Nicolas Kosinski'
 SITENAME = "Nicokosi's blog"
-SITEURL = 'http://nicokosi.github.io'
+SITEURL = 'https://nicokosi.github.io'
 
 TIMEZONE = 'Europe/Paris'
 DEFAULT_LANG = 'fr'
