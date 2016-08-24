@@ -20,6 +20,7 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 STATIC_PATHS = [
+	'css',
 	'images',
 	'extra/favicon.ico']
 EXTRA_PATH_METADATA = {
@@ -45,5 +46,6 @@ THEME = "pelican-clean-blog"
 HEADER_COLOR = 'PowderBlue'
 SITESUBTITLE = '#SoftwareDevelopment #WhatElse?;-)'
 HEADER_TITLE_LOGO = 'images/nicokosi.png'
+CSS_OVERRIDE = 'css/nicokosi.css'
 
 DISQUS_SITENAME = 'nicokosi-blog'
