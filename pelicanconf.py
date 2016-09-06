@@ -47,5 +47,8 @@ HEADER_COLOR = 'PowderBlue'
 SITESUBTITLE = '#SoftwareDevelopment #WhatElse?;-)'
 HEADER_TITLE_LOGO = 'images/nicokosi.png'
 CSS_OVERRIDE = 'css/nicokosi.css'
+FOOTER_INCLUDE = 'custom-footer.html'
+IGNORE_FILES = [FOOTER_INCLUDE]
+EXTRA_TEMPLATES_PATHS = ['templates']
 
 DISQUS_SITENAME = 'nicokosi-blog'
