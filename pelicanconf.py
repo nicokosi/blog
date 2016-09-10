@@ -34,6 +34,7 @@ LINKS = ()
 SOCIAL = (
   ('twitter', 'http://twitter.com/nicokosi'),
   ('github', 'http://github.com/nicokosi'),
+  ('linkedin', 'https://www.linkedin.com/in/nicolas-kosinski-95184811'),
 )
 
 DEFAULT_CATEGORY = 'all'
