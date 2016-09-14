@@ -40,6 +40,8 @@ SOCIAL = (
 DEFAULT_CATEGORY = 'all'
 DISPLAY_CATEGORIES_ON_MENU = False
 
+GOOGLE_ANALYTICS = 'UA-11930016-2'
+
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 
