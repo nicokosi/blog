@@ -1,5 +1,5 @@
 Title: Let's play with pattern matching in Scala
-Date: 2016-09-13 00:00
+Date: 2016-09-14 00:00
 Tags: scala, pattern-matching, console, repl
 Slug: scala-pattern-matching
 Author: Nicolas Kosinski
@@ -8,11 +8,11 @@ Lang: en
 
 
 Pattern matching is a powerful technique for filtering and testing variables. This article aims at illustrating pattern matching in Scala using a simple example.
-Let's say we want to return the color (redo or black) of a playing card.
+Let's say we want to return the color (red or black) of a playing card.
 
 Notes: The code below "shows" the console output using comments (ex: `"foo" // foo`). I have used a [IntelliJ IDEA worksheet](https://confluence.jetbrains.com/display/IntelliJIDEA/Working+with+Scala+Worksheet) but the standard Scala console can also be used (REPL FTW!)
 
-
+<br/>
 ## Step #1: let's create a simple class
 
 Let's create a immutable class for the "club" suite:
@@ -42,13 +42,12 @@ club.hashCode() // 1976061787
 new Club().hashCode() // 1751431390
 ```
 
-
+<br/>
 ## Step #2: let's create a case class
 
 A `case class` has two benefits:
 
 1. auto-implement `equals`, `hashCode` and `toString` methods.
-
 2. enhance pattern matching capability via two methods: a "constructor" method, `apply`, and a "de-constructor" method, `unapply`.
 
 ```scala
@@ -70,7 +69,7 @@ CardSuite("♣", "club").hashCode() // 1302714609
 CardSuite("♣", "club").hashCode() // 1302714609
 ```
 
-
+<br/>
 ## "Bonus" step: use an enumeration
 
 Since there are four suites in French playing cards, we can create an enumeration. This is not directly related to our pattern matching example, but let's do it, for fun and profit. ;-)
@@ -86,10 +85,12 @@ CardSuites.CLUB != CardSuites.DIAMOND // true
 CardSuites.values // List(CardSuite(♦,diamond), CardSuite(♥,heart), CardSuite(♠,spade), CardSuite(♣,club))
 ```
 
+<br/>
+## Last step: let's use pattern matching!
 
-## Last step: let's us pattern matching!
+### First example
 
-Here is a first pattern matching example, used in a function that returns the color of a suite card.:
+Here is a first pattern matching example, used in a function that returns the color of a suite card:
 ```scala
 def justColor(cardSuite: CardSuite): String = cardSuite match {
   case CardSuites.CLUB | CardSuites.SPADE => "black"
@@ -100,9 +101,11 @@ def justColor(cardSuite: CardSuite): String = cardSuite match {
 justColor(CardSuites.SPADE) // black
 ```
 This example demonstrates:
- - the `|` notation (_disjunction_) that can be used to group several cases;
- - the `_` notation (_wildcard_) for "other cases".
 
+- the `|` notation (_disjunction_) that can be used to group several cases;
+- the `_` notation (_wildcard_) for "other cases".
+
+### Second example
 
 Here is a second example to demonstrate field filtering, also known as "de-structuring":
 ```scala
@@ -115,3 +118,6 @@ describeColor(CardSuites.SPADE) // spade is black
 We only keep the suite label using the `unapply` method of our case class.
 
 That's all folks! 🤓
+
+
+PS: Thanks to Jérôme Prudent for the Scala tips and for the review. Jérôme contributes to the [Arolla blog](http://www.arolla.fr/blog) ([direct link to his posts](http://www.arolla.fr/blog/author/jerome-prudent/)).
