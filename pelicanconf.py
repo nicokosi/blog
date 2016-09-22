@@ -15,9 +15,11 @@ GITHUB_URL = 'http://github.com/nicokosi/'
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
-TRANSLATION_FEED_ATOM = None
-AUTHOR_FEED_ATOM = None
+TRANSLATION_FEED_ATOM = 'feeds/all-%s.atom.xml'
+AUTHOR_FEED_ATOM = 'feeds/%s.atom.xml'
+TRANSLATION_FEED_RSS = None
 AUTHOR_FEED_RSS = None
+
 
 STATIC_PATHS = [
 	'css',
