@@ -37,6 +37,7 @@ SOCIAL = (
   ('twitter', 'http://twitter.com/nicokosi'),
   ('github', 'http://github.com/nicokosi'),
   ('linkedin', 'https://www.linkedin.com/in/nicolas-kosinski-95184811'),
+  ('rss', 'https://nicokosi.github.io/feeds/all.atom.xml'),
 )
 
 DEFAULT_CATEGORY = 'all'
