@@ -18,12 +18,19 @@ Codons notre énumération correspondant à nos quatre enseignes (carreau, cœur
 data Enseigne = Carreau | Coeur | Pique | Trèfle deriving (Eq, Ord, Enum, Show)
 ```
 Nous venons de créer notre propre type (_data type_), nommé "Enseigne" qui :
+
 * a quatre constructeurs (_value constructors_)
+
 * hérite des classes de base :
-  * `Eq` pour implémenter l'égalité entre deux valeurs
-  * `Ord` pour pouvoir comparer deux valeurs
-  * `Enum` pour que les valeurs sont finies et ordonnées (_sequentially ordered types_)
-  * `Show` pour avoir une représentation sous forme de chaîne de caractères, ce qui peut être utile pour débugguer ou pour évaluer interactivement du code via le REPL.
+
+    * `Eq` pour implémenter l'égalité entre deux valeurs
+
+    * `Ord` pour pouvoir comparer deux valeurs
+
+    * `Enum` pour que les valeurs sont finies et ordonnées (_sequentially ordered types_)
+
+    * `Show` pour avoir une représentation sous forme de chaîne de caractères, ce qui peut être utile pour débugguer ou pour évaluer interactivement du code via le REPL.
+
 
 Utilisons maintenant le REPL, `ghci` (_Glascow Haskell Compiler Interactive environment_), pour interagir avec cette énumération :
 ```sh
@@ -115,7 +122,7 @@ Nous avons ici utilisé le mot-clé `where` qui nous permet de partager des expr
 
 ### Troisième exemple, "dé-structuration" via des 'wild-cards'
 
-Définissons notre propre type `Carte` combinant un rang (1, 2, 3, ..., valet, dame, roi) et une une enseigne :
+Définissons notre propre type `Carte` combinant un rang (1, 2, 3, ..., valet, dame, roi) et une enseigne :
 
 ```haskell
 data Rang = R1 | R2 | R3 | R4 | R5 | R6 | R7 | R8 | R9 | R10 | Valet | Dame | Roi deriving (Eq, Ord, Enum, Show)
