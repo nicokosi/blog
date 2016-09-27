@@ -62,8 +62,8 @@ Exemple d'appel :
 
 Notons que :
 
-* L'opérateur `$` nous permet de chaîner nos fonctions, plutôt que de les imbriquer dans parenthèses (`putStrLn(symbole(Coeur))`).
-* la méthode `puStrLn` permet d'afficher des caractères Unicode, à l'inverse de la méthode standard `show` qui ne retourne que des chaînes ASCII.
+* L'opérateur `$` nous permet de chaîner nos fonctions, plutôt que de les imbriquer dans des parenthèses (`putStrLn(symbole(Coeur))`).
+* la méthode `putStrLn` permet d'afficher des caractères Unicode, à l'inverse de la méthode standard `show` qui ne retourne que des chaînes ASCII. 😎
 
 <br/>
 Remarque : le compilateur sait détecter un pattern matching non exhaustif. Par exemple, le code suivant :
