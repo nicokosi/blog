@@ -4,11 +4,9 @@ Tags: haskell, pattern-matching
 Slug: haskell-pattern-matching
 Author: Nicolas Kosinski
 Summary: Découvrons par l'exemple le pattern matching en Haskell
-Status: draft
 Lang: fr
 
-Reprenons l'exemple des cartes à jouer utilisé dans l'article ["Jouons avec le pattern matching en Scala"](https://nicokosi.github.io/scala-pattern-matching.html),
-et codons de façon interactive un exemple similaire en Haskell.
+Découvrons le pattern matching en Haskell en reprenant l'exemple des cartes à jouer utilisé dans l'article ["Jouons avec le pattern matching en Scala"](https://nicokosi.github.io/scala-pattern-matching.html).
 
 <br/>
 ## Préambule : création d'une énumération
@@ -16,23 +14,20 @@ et codons de façon interactive un exemple similaire en Haskell.
 Codons notre énumération correspondant à nos quatre enseignes (carreau, cœur, pique et trèfle) :
 ```haskell
 data Enseigne = Carreau | Coeur | Pique | Trèfle
-  deriving (Eq, Ord, Enum, Show)
+  deriving (Eq, Enum, Show)
 ```
-Nous venons de créer notre propre type (_data type_), nommé "Enseigne" qui :
+Nous venons de créer notre propre type (_data type_) qui :
 
 * a quatre constructeurs (_value constructors_)
 * hérite des classes de base :
     * `Eq` pour implémenter l'égalité entre deux valeurs
-    * `Ord` pour pouvoir comparer deux valeurs
     * `Enum` pour que les valeurs sont finies et ordonnées (_sequentially ordered types_)
     * `Show` pour avoir une représentation sous forme de chaîne de caractères, ce qui peut être utile pour débugguer ou pour évaluer interactivement du code via le REPL.
 
 
-Utilisons maintenant le REPL, `ghci` (_Glascow Haskell Compiler Interactive environment_), pour interagir avec cette énumération :
+Utilisons maintenant `ghci` (_Glascow Haskell Compiler Interactive environment_), le REPL d'Haskell, pour interagir avec cette énumération :
 ```haskell
 *Main> Coeur == Coeur
-True
-*Main> Coeur < Pique
 True
 *Main> succ Coeur
 Pique
@@ -63,7 +58,7 @@ Exemple d'appel :
 Notons que :
 
 * L'opérateur `$` nous permet de chaîner nos fonctions, plutôt que de les imbriquer dans des parenthèses (`putStrLn(symbole(Coeur))`).
-* la méthode `putStrLn` permet d'afficher des caractères Unicode, à l'inverse de la méthode standard `show` qui ne retourne que des chaînes ASCII. 😎
+* la fonction `putStrLn` permet d'afficher des caractères Unicode, à l'inverse de la fonction standard `show` qui ne retourne que des chaînes ASCII. 😎
 
 <br/>
 Remarque : le compilateur sait détecter un pattern matching non exhaustif. Par exemple, le code suivant :
@@ -92,7 +87,7 @@ Et l'appel de cette fonction génére une exception :
 
 ### Deuxième exemple, partage d'expression via un bloc 'where'
 
-Autre exemple, implémentons une fonction `couleur` qui retourne la chaîne de caractères "rouge" ou "noir" pour une enseigne :
+Autre exemple, implémentons une fonction `couleur` qui retourne la couleur d'une enseigne (chaîne de caractères "rouge" ou "noir") :
 
 ```haskell
 couleur :: Enseigne -> String
@@ -114,8 +109,9 @@ Exemple d'appel :
 
 Nous avons ici utilisé le mot-clé `where` qui nous permet de partager des expressions.
 <br/>
+<br/>
 
-### Troisième exemple, pattern matching déstructurant
+### Troisième exemple, déstructuration
 
 Définissons notre propre type `Carte` combinant un rang (1, 2, 3, ..., valet, dame, roi) et une enseigne :
 
@@ -129,7 +125,7 @@ data Carte = Carte {
   enseigne :: Enseigne
 } deriving (Eq, Show)
 ```
-Le type `Carte` utilise la syntax _record_ permettant de nommer les champs.
+Le type `Carte` utilise la syntaxe _record_ permettant de nommer les champs.
 
 Nous pouvons ainsi utiliser le pattern matching pour "déstructurer" une carte en filtrant les champs. Par exemple, la fonction suivante permet de déterminer si deux cartes, associées par un _tuple_, sont de même enseigne :
 

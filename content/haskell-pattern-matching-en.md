@@ -5,32 +5,29 @@ Slug: haskell-pattern-matching
 Author: Nicolas Kosinski
 Summary: Let's discover Haskell pattern matching
 Lang: en
-Status: draft
 
-
-Let's discover Haskell pattern matching via a basic example similar to ["Let's play with pattern matching in Scala"](https://nicokosi.github.io/scala-pattern-matching-en.html).
+Let's discover Haskell and pattern matching via basic examples similar to ["Let's play with pattern matching in Scala"](https://nicokosi.github.io/scala-pattern-matching-en.html).
 
 <br/>
 ## Step #1: create an enumeration
 
 
-Since there are four suites in French playing cards, we can create an enumeration.
+We can create an enumeration that represent the four suites in French playing cards:
 
 ```haskell
 data CardSuite = Club | Diamond | Heart | Spade
-  deriving (Eq, Ord, Enum, Show)
+  deriving (Eq, Enum, Show)
 ```
-We have just created our own "CardSuite" type (_data type_) which:
+We have just created our own _data type_ which:
 
 * has four constructors (_value constructors_)
 * inherits from Haskell's base types:
     * `Eq` in order to know if two values are equal or not
-    * `Ord` in order to compare two values (less that or equal)
     * `Enum` so that all values are known and ordered (_sequentially ordered types_)
     * `Show` so that we can have a string representation for debugging/troubleshooting
 
 
-We can then use the REPL, `ghci` (_Glascow Haskell Compiler Interactive environment_), to demonstrate how we can use this enumeration:
+We can then use `ghci` (_Glascow Haskell Compiler Interactive environment_), the Haskell REPL, to illustrate how we can use this enumeration:
 ```haskell
 *Main> Heart == Heart
 True
@@ -49,7 +46,7 @@ Spade
 The following function returns the Unicode symbol for a given card suite:
 ```haskell
 symbol :: CardSuite -> String
-symbole cardSuite =
+symbol cardSuite =
   case cardSuite of
     Club -> "♣"
     Diamond ->"♦"
@@ -58,23 +55,24 @@ symbole cardSuite =
 ```
 Let's evaluate it :
 ```haskell
-*Main> putStrLn $ symbole $ Coeur
+*Main> putStrLn $ symbol $ Heart
 ♥
 ```
 
 Notice that:
 
-* The `$` operator allows is a way chain function calls, omitting to use nested parenthesis (`putStrLn(symbole(Coeur))`).
-* the `putStrLn` standard method can display Unicode characters, whereas the standard `show` only displays ASCII characters. 😎
+* The `$` operator allows is a way chain function calls, omitting to use nested parenthesis (`putStrLn(symbol(Heart))`).
+* the `putStrLn` standard function can display Unicode characters, whereas the standard function `show` only displays ASCII characters. 😎
 
 <br/>
-Morevover, the Haskell compiler can detect a non-exhastive pattern matching non exhaustif. For instance, the following code :
+Morevover, the Haskell compiler can detect a non-exhaustive pattern matching. For instance, the following code :
 ```haskell
 symbol :: CardSuite -> String
-symbol cardSuite = case cardSuite of
+symbol cardSuite =
+  case cardSuite of
     Club -> "♣"
 ```
-generate a compile-time warning :
+generates a compile-time warning :
 ```haskell
 warning: [-Wincomplete-patterns]
     Pattern match(es) are non-exhaustive
@@ -84,10 +82,10 @@ warning: [-Wincomplete-patterns]
             Heart
             Spade
 ```
-and the following call triggers an error :
+and the following evaluation triggers an error :
 ```haskell
 *Main> symbol Diamond
-"*** Exception: test.hs:(5,20)-(6,17): Non-exhaustive patterns in case
+"*** Exception: test-en.hs:(13,3)-(14,15): Non-exhaustive patterns in case
 ```
 
 <br/>
@@ -97,12 +95,13 @@ and the following call triggers an error :
 Let's implement a `color` function that returns "red" or "black" depending on the input card suite:
 
 ```haskell
-color :: cardSuite -> String
-color cardSuite = case cardSuite of
-    Diamond -> rouge
-    Heart -> rouge
-    Spade -> noir
-    Club -> noir
+color :: CardSuite -> String
+color cardSuite =
+  case cardSuite of
+    Club -> black
+    Diamond -> red
+    Heart -> red
+    Spade -> black
     where
       red = "red"
       black = "black"
@@ -110,11 +109,12 @@ color cardSuite = case cardSuite of
 
 Let's evaluate it:
 ```
-*Main> color(Heart)
+*Main> color Heart
 "red"
 ```
 
 The `where` keyword is used there to share some expressions.
+<br/>
 <br/>
 
 ### Example #3: destructuring
@@ -146,16 +146,16 @@ Call examples:
 ```
 *Main> :{
 *Main| sameSuite (
-*Main|     Card {rank=R1, suite=Diamond},
-*Main|     Card {rank=R1, suite=Heart} )
+*Main|        Card {rank=R1, suite=Diamond},
+*Main|        Card {rank=R1, suite=Heart} )
 *Main| :}
 False
 *Main> :{
 *Main| sameSuite (
-*Main|     Card {rank=Jack, suite=Heart},
-*Main|     Card {rank=R1, suite=Diamond} )
+*Main|      Card {rank=Jack, suite=Heart},
+*Main|      Card {rank=R1, suite=Diamond} )
 *Main| :}
-True
+False
 ```
 
 Card ranks, that are not needed by our function, have been filtered using the _wild-card_ symbol (`_`).
