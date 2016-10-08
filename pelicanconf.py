@@ -44,6 +44,7 @@ DEFAULT_CATEGORY = 'all'
 DISPLAY_CATEGORIES_ON_MENU = False
 
 GOOGLE_ANALYTICS = 'UA-11930016-2'
+GOOGLE_SITE_VERIFICATION = 'DJHKjkpGljcaLi1uAkfR27mqILGCLLKjX_EKY4C4nxk'
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
