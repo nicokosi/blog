@@ -41,7 +41,7 @@ Spade
 
 ## Pattern matching examples
 
-### Basic example
+### Example #1
 
 The following function returns the Unicode symbol for a given card suite:
 ```haskell
@@ -90,7 +90,7 @@ and the following evaluation triggers an error :
 
 <br/>
 
-### Exemple #2, share expression with a 'where' block
+### Example #2, share expression with a 'where' block
 
 Let's implement a `color` function that returns "red" or "black" depending on the input card suite:
 
