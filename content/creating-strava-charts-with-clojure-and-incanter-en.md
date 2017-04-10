@@ -8,9 +8,9 @@ Lang: en
 
 #Creating Strava charts via Clojure and Incanter
 
-I use [Strava](https://www.strava.com/) to record my jogging sessions: I can record my sessions via my smartphone, publish them so that I can view/share them on strava.com.
+I use [Strava](https://www.strava.com/) to record my jogging sessions: I can record my sessions via my smartphone and publish them. I can then review or share them.
 
-In addition to Strava dashboard, I wanted to generate my own charts in order to visualize my progress.
+In addition to provided Strava dashboards, I wanted to generate my own charts in order to visualize my progress.
 
 
 <br/>
@@ -38,7 +38,10 @@ So let's dive into it!
 <br/>
 ###1. Retrieve data via Strava API
 
-The following function calls the [Strava API for activities](http://strava.github.io/api/v3/activities/) with an authorization token, and retrieves the 200 last activities (run/ride/swim) as a JSON object array and converts is to a sequence of Clojure maps:
+The following function:
+
+- calls the [Strava API for activities](http://strava.github.io/api/v3/activities/) with an authorization token to retrieves the 200 last activities (run/ride/swim), as a JSON object array
+- converts this JSON object array to a sequence of Clojure maps:
 ```clojure
 (defn strava-activities [token]
   (json/read-str (:body
