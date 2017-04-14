@@ -57,7 +57,7 @@ On définit les fonctions suivantes pour transformer les données :
 ; Convertir les vitesses en km/h (l'API Strava retourne des m/s) :
 (def meters-per-second->kilometers-per-hour (partial * 3.6))
 
-; Convertir les distances en minutes (l'API Strava API retourne des secondes) :
+; Convertir les durées en minutes (l'API Strava API retourne des secondes) :
 (defn- seconds->minutes [s] (/ s 60))
 
 ; Incanter peut seulement générer des graphiques à partir de données numériques, les dates au format ISO doivent donc être converties en timestamps :
@@ -79,7 +79,7 @@ Ces fonctions peuvent être appliquées aux données brutes, en utilisant par ex
 <br/>
 ###3. Affichage d'un graphique avec Incanter
 
-La dernière étape consiste à utilise l'une des fonctions de la librairie Incanter pour afficher un graphique. L'exemple de code suivant affiche l'évolution de la vitesse moyenne de chaque sortie en fonction de la date de la sortie :
+La dernière étape consiste à utiliser l'une des fonctions de la librairie Incanter pour afficher un graphique. L'exemple de code suivant affiche l'évolution de la vitesse moyenne de chaque sortie en fonction de la date de la sortie :
 ```clojure
 (defn display-chart [token]
   (let [activities (get-activities token)]

@@ -40,7 +40,7 @@ So let's dive into it!
 
 The following function:
 
-- calls the [Strava API for activities](http://strava.github.io/api/v3/activities/) with an authorization token to retrieves the 200 last activities (run/ride/swim), as a JSON object array
+- calls the [Strava API for activities](http://strava.github.io/api/v3/activities/) with an authorization token to retrieve the 200 last activities (run/ride/swim), as a JSON object array
 - converts this JSON object array to a sequence of Clojure maps:
 ```clojure
 (defn strava-activities [token]
