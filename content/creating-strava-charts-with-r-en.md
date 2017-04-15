@@ -17,7 +17,7 @@ So our goal is still to:
 
 1. call Strava API that returns activities as JSON data
 2. transform data: do basic conversions (meters per second into km/h, seconds into minutes, etc.)
-3. display a chart (example: average speed per date)
+3. display a chart (example: distance and moving time)
 
 <br/>
 R has many additional libraries that are available on "CRAN repository". The following statements import the libraries I have selected:
@@ -47,11 +47,11 @@ activities <- content(activities, "text") # Retrieve JSON content as string
 We then need to transform our JSON content into tabular data, called `dataframes`:
 ```r
 activities <- fromJSON(activities)      # Transform JSON content into lists
-activities <- lapply(activities, function(x) {      # Apply an anonyous function on each list element
+activities <- lapply(activities, function(x) {      # Apply an anonymous function on each list elements
   x[sapply(x, is.null)] <- NA           # Replace nulls by "missing" (N/A)
   unlist(x)
 })
-df <- data.frame(do.call("rbind", activities)) # transformer les listes de listes en dataframe
+df <- data.frame(do.call("rbind", activities))
 ```
 I have to admit I "cheated" with Google because R data structures are not my cup of tea! 🤓
 
@@ -62,19 +62,13 @@ However, we can notice that:
 - Variables can be re-affected (and their type can change)
 
 
-Distances and speeds can be converted, and dates can be formatted :
+Distances and durations can be converted:
 ```r
-# Convert speeds into km/h (Strava API returns m/s):
-df$average_speed <- as.numeric(as.character(df$average_speed)) * 3.6
-
 # Convert durations into minutes (Strava API returns seconds):
 df$moving_time <- as.numeric(as.character(df$moving_time)) / 60
 
-# Convert distances into kilometers :
+# Convert distances into kilometers (Strava API returns meters):
 df$distance <- as.numeric(as.character(df$distance)) / 1000
-
-# Format dates:
-df$start_date <- as.Date(df$start_date) # ISO to yyyy-mm-dd
 ```
 
 Nota bene: our dataframe contains `factors` (factors are data with all known values). Before converting them, we need to retrieve their name via the function `as.character`.
@@ -84,7 +78,7 @@ Nota bene: our dataframe contains `factors` (factors are data with all known val
 
 ###3. Display a chart
 
-The final step consists in using the `ggplot2` library to display a chart for "average speed over time" and export it as a PNG image:
+The final step consists in using the `ggplot2` library to display a chart for "distance and moving time" and export it as a PNG image:
 ```r
   ggplot(df, aes(x=distance, y=moving_time)) +
     geom_point(size=1, colour="#CC0000") + # red points
@@ -95,7 +89,7 @@ The final step consists in using the `ggplot2` library to display a chart for "a
 ```
 
 The generated chart:
-![Chart: average speed over time](images/r-chart-average-speed-over-time.png)
+![Chart: distance and moving time](images/r-chart-distance-per-moving-time.png)
 
 
 The [full code](https://gist.github.com/nicokosi/241331f67692945ddca4e4ea2cc0597d) that displays several charts.

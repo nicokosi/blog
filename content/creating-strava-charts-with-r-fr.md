@@ -16,8 +16,8 @@ R est un langage idéal pour le calcul statistique et la génération de graphiq
 Le but est toujours de :
 
 1. appeler l'API Strava pour récupérer les données au format JSON
-2. faire quelques transformations, essentiellement des conversions (m/s en km/h, secondes en minutes)
-3. afficher des graphiques (exemple : évolution de la vitesse moyenne par sortie en fonction du temps)
+2. faire quelques transformations, essentiellement des conversions
+3. afficher des graphiques (exemple : temps en mouvement en fonction de la distance parcourue)
 
 C'est parti !
 
@@ -61,19 +61,13 @@ J'avoue que j'ai triché en "googlant" car les manipulations de structures ne so
 On peut en tout cas remarquer que les variables ne sont pas typées - R est un language dynamique - et peuvent être ré-affectées. Par exemple, `activities` est une variable de type `character` (chaîne de caractères, contenant les données JSON) qui devient ensuite une variable de type `list`.
 
 
-Il m'a fallu convertir les dates, les distances et les vitesses pour utiliser des unités plus appriopriées :
+Il m'a fallu convertir les distances et les durées pour utiliser des unités plus appriopriées :
 ```r
-# Convertir les vitesses en km/h (l'API Strava retourne des m/s) :
-df$average_speed <- as.numeric(as.character(df$average_speed)) * 3.6
-
-# Convertir les distances en minutes (l'API Strava API retourne des secondes) :
+# Convertir les durées en minutes (l'API Strava API retourne des secondes) :
 df$moving_time <- as.numeric(as.character(df$moving_time)) / 60
 
-# Convertir les mètres en kilomètres :
+# Convertir les distances en kilomètres (l'API Strava API retourne des mètres) :
 df$distance <- as.numeric(as.character(df$distance)) / 1000
-
-# Formater les dates ISO :
-df$start_date <- as.Date(df$start_date) # yyyy-mm-dd
 ```
 
 Pour l'anectode, les données sont des `factors`, c'est-à-dire des données dont on connaît toutes les valeurs (une énumération, en quelque sorte). Avant de les convertir, il faut récupérer leur libellé via la fonction `as.character`.
@@ -83,7 +77,7 @@ Pour l'anectode, les données sont des `factors`, c'est-à-dire des données don
 
 ###3. Affichage d'un graphique
 
-La dernière étape consiste à utiliser l'une des fonctions de la librairie `ggplot2` pour afficher et sauvegarder un graphique. Le code suivant affiche l'évolution de la vitesse moyenne de chaque sortie en fonction de la date :
+La dernière étape consiste à utiliser l'une des fonctions de la librairie `ggplot2` pour afficher et sauvegarder un graphique. Le code suivant affiche le temps en mouvement en fonction de la distance parcourue :
 ```r
   ggplot(df, aes(x=distance, y=moving_time)) + # à partir du dataframe, afficher les données 'distance' en fonction de 'moving_time`
     geom_point(size=1, colour="#CC0000") + # afficher les points en rouge
@@ -94,7 +88,7 @@ La dernière étape consiste à utiliser l'une des fonctions de la librairie `gg
 ```
 
 Le graphique généré :
-![Chart: average speed over time](images/r-chart-average-speed-over-time.png)
+![Chart: distance et temps en mouvement](images/r-chart-distance-per-moving-time.png)
 
 
 Voici le lien vers le [code complet](https://gist.github.com/nicokosi/241331f67692945ddca4e4ea2cc0597d) pour afficher plusieurs graphiques similaires.
