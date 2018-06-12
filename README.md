@@ -13,11 +13,15 @@ brew install python
 pip install pelican
 pip install markdown
 ```
-- Install Pelican themes:
+- Install Pelican theme:
+```sh
+git clone git@github.com:nicokosi/pelican-clean-blog.git
+```
+If needed, all themes can be installed this way:
 ```sh
 git clone --recursive https://github.com/getpelican/pelican-themes pelican-themes
-```
 
+```
 
 # Generate local site
 
