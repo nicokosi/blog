@@ -18,11 +18,9 @@ Plan :
 5. Exécutable moins optimisé pour une application `Clojure`
 6. Conclusion
 
-
-
 ## Introduction
 
-Suite à mes premiers essais infructueux l'an dernier (lire mon article précédent [Du Clojure "natif" grâce à GraalVM](https://nicokosi.github.io/clojure-goes-native-with-graalvm.html)), voici un compte rendu plus positif de mes expérimentations avec les versions _release_ de [GraalVM](https://www.graalvm.org/) sorties à partir de mai 2019 (cf. les [_release notes_](https://www.graalvm.org/docs/release-notes/)).
+Suite à mes premiers essais infructueux l'an dernier (lire mon article précédent [Du Clojure "natif" grâce à GraalVM](https://nicokosi.github.io/clojure-goes-native-with-graalvm.html)), voici un compte rendu plus positif de mes expérimentations avec les versions _release_ de [GraalVM](https://www.graalvm.org/) sorties à partir de mai 2019 (cf. les [_release notes_](https://www.graalvm.org/docs/release-notes/)), en utilisant des applications en ligne de commandes implémentée en [Java](https://go.java/), [Kotlin](https://kotlinlang.org/) et [Clojure](https://clojure.org/).
 
 ## Outillage
 
@@ -37,7 +35,7 @@ Nous utiliserons les outils suivants :
 
 Notre "hello world" est un programme Java de 10 lignes qui compte le nombre de mots d'un fichier de texte : [wordcount-with-java-stream](https://github.com/nicokosi/wordcount-with-java-stream).
 
-Générons un JAR exécutable via Maven et OpenJDK, cela prend 2 secondes sur ma machine ⚡ :
+Générons un JAR exécutable via Maven et OpenJDK, cela prend 2 secondes sur ma machine :
 
 ```sh
 $ sdk use java 8.0.222.hs-adpt
@@ -45,9 +43,9 @@ Using java version 8.0.222.hs-adpt in this shell.
 $ time ./mvnw clean --quiet compile
 ./mvnw clean --quiet compile  6.24s user 0.31s system 323% cpu 2.022 total
 ```
+Note : le temps d'exécution indiqué par la commande `time` se trouve à la fin de la dernière ligne, en millisecondes : `2.022 total` signifie 2,002 millisecondes.
 
-Puis générons l'exécutable via GraalVM native-image, cela prendre 40 secondes sur ma machine 🐌 :
-
+Puis générons l'exécutable via GraalVM native-image, cela prend 40 secondes sur ma machine :
 ```sh
 $ time $HOME/.sdkman/candidates/java/19.1.1-grl/bin/native-image \
      --enable-https \
@@ -57,22 +55,18 @@ $ time $HOME/.sdkman/candidates/java/19.1.1-grl/bin/native-image \
      wordcount-with-java-stream
 $HOME/.sdkman/candidates/java/19.1.1-grl/bin/native-image --enable-https   -c  236,70s user 2,75s system 566% cpu 42,285 total
 ```
-
-Comparons les temps d'exécution pour un petit fichier d'entrée :
-
+Comparons les temps d'exécution pour un petit fichier d'entrée.
 ```sh
 $ alias wordcount_java=" $HOME/.sdkman/candidates/java/8.0.222.hs-adpt/bin/java -cp target/classes org.nicokosi.WordCount"
 $ time wordcount_java /etc/hosts
 File /etc/hosts contains 26 words
 /home/nkosinski/.sdkman/candidates/java/8.0.222.hs-adpt/bin/java -cp     0,16s user 0,02s system 152% cpu 0,118 total
 ```
-
 ```sh
 $ time ./wordcount-with-java-stream /etc/hosts
 File /etc/hosts contains 26 words
 ./wordcount-with-java-stream /etc/hosts  0,00s user 0,01s system 92% cpu 0,007 total
 ```
-
 Puis comparons l'empreinte mémoire :
 
 ```sh
@@ -83,6 +77,7 @@ $ JAVA_HOME=$HOME/.sdkman/candidates/java/8.0.222.hs-adpt \
 ==23352==     in use at exit: 34,892,297 bytes in 6,155 blocks
 ==23352==   total heap usage: 14,555 allocs, 8,400 frees, 49,960,719 bytes allocated  **
 ```
+Note : la mémoire totale allouée est à la fin de la dernière ligne ; `49,960,719 bytes allocated` signifie que 50 mégaoctets ont été alloués.
 
 ```sh
 $ valgrind ./wordcount-with-java-stream /etc/hosts
@@ -94,14 +89,14 @@ $ valgrind ./wordcount-with-java-stream /etc/hosts
 
 Pour résumer, au prix d'un temps de compilation plus long (40 secondes au lieu de 2 secondes), GraalVM :
 
-- accélère l'exécution "courte" (7 millisecondes au lieu de 118 millisecondes)
-- réduit l'empreinte mémoire de notre application (10 kilooctets au lieu de 34 mégaoctets)
+- accélère l'exécution "courte" : 7 millisecondes au lieu de 118 millisecondes ;
+- réduit l'empreinte mémoire de notre application : 10 kilooctets au lieu de 34 mégaoctets.
 
 ## Exécutable optimisé pour une application `Kotlin`
 
-Faisant la même chose pour une application [`Kotlin`](https://kotlinlang.org/) un peu plus complexe, [pullpitoK](https://github.com/nicokosi/pullpitoK/) (200 lignes de codes avec des librairies tierces) qui consomme les API GitHub pour afficher des statistiques sur les pull requests GitHub.
+Faisant la même chose pour une application [Kotlin](https://kotlinlang.org/) un peu plus complexe, [pullpitoK](https://github.com/nicokosi/pullpitoK/) (200 lignes de codes avec des librairies tierces) qui consomme les API GitHub pour afficher des statistiques sur les pull requests GitHub.
 
-La phase de constuction étant similaire au paragraphe précédent, concentrons-nous sur la comparaison du temps de démarrage pour une exécution rapide (affichage de l'aide souvent appellée "usage message"](https://en.wikipedia.org/wiki/Usage_message)) :
+La différence de temps de construction étant similaire au paragraphe précédent, concentrons-nous sur la comparaison du temps de démarrage pour une exécution rapide (affichage de l'aide souvent appelée ["usage message"](https://en.wikipedia.org/wiki/Usage_message)) :
 
 ```sh
 $ export PATH=$HOME/.sdkman/candidates/java/8.0.222.hs-adpt/bin:$PATH
@@ -116,8 +111,7 @@ $ time (pullpitoK --help | head -1)
 Usage: pullpitoK <repository> <token>
 ( PULLPITOK_LIBSUNEC=/Users/nicolas/.sdkman/candidates/java/19.1.1-grl/jre/li)  0.00s user 0.00s system 88% cpu 0.009 total
 ```
-
-Soit 10 millisecondes avec la version native contre 100 millisecondes pour la version JVM.
+Soit 9 millisecondes avec la version native contre 93 millisecondes pour la version JVM.
 
 Comparons maintenant l'empreinte mémoire :
 
@@ -140,6 +134,7 @@ Usage: pullpitoK <repository> <token>
 ==27690== HEAP SUMMARY:
 ==27690==     in use at exit: 228 bytes in 1 blocks
 ==27690==   total heap usage: 6 allocs, 5 frees, 2,196 bytes allocated
+...
 ```
 
 Soit 12 kilooctets avec la version native contre 32 mégaoctets pour la version JVM.
@@ -151,7 +146,7 @@ Dans mon billet [Du Clojure "natif" grâce à GraalVM](https://nicokosi.github.i
 - GraalVM était encore expérimental (_release candidates_) à l'époque
 - l'outil Native Image possède des [limitations](https://github.com/oracle/graal/blob/master/substratevm/LIMITATIONS.md) qui concernent notamment le chargement de classes dynamiques, l'utilisation de la réflexion (API java.lang.reflect) etc.
 
-Essayons de refaire l'essai avec une version _release_ de GraalVM pour l'application [hubstats](https://github.com/nicokosi/hubstats/) (200 lignes de codes, utilisation de librairies tierces pour appeller les API HTTP GitHub).
+Essayons de refaire l'essai avec une version _release_ de GraalVM pour l'application [hubstats](https://github.com/nicokosi/hubstats/) (200 lignes de codes, utilisation de librairies tierces pour appeler les API HTTP GitHub).
 
 ```sh
 $ time $HOME/.sdkman/candidates/java/19.1.1-grl/bin/native-image \
@@ -161,9 +156,7 @@ $ time $HOME/.sdkman/candidates/java/19.1.1-grl/bin/native-image \
    -jar target/hubstats-0.1.0-SNAPSHOT-standalone.jar \
    hubstats
 ```
-
-La compilation native échoue 💥. Voici un extrait du message d'erreur :
-
+La compilation native échoue. Voici un extrait du message d'erreur :
 ```
 Error: Unsupported features in 4 methods
 Detailed message:
@@ -175,7 +168,7 @@ To diagnose the issue, you can add the option --report-unsupported-elements-at-r
 Nous pourrions corriger ça en adaptant le code source. Par facilité, essayons le mode `fallback` ("solution de repli") de Native Image qui permet de contourner les limitations en embarquant une JVM classique :
 
 ```sh
-$ # Contruction de l'exécutable avec GraalVM
+$ # Construction de l'exécutable avec GraalVM
 time $HOME/.sdkman/candidates/java/19.1.1-grl/bin/native-image \
    --enable-https \
    --force-fallback \
@@ -218,7 +211,6 @@ Display statistics for GitHub pull requests.
 ==2690==   total heap usage: 170,569 allocs, 135,769 frees, 406,386,571 bytes allocated
 ...
 ```
-
 ```sh
 $ valgrind pullpitoK
 ...
@@ -232,11 +224,11 @@ Usage: pullpitoK <repository> <token>
 
 ## Conclusion
 
-Au travers de ces trois petites applications utilisant des langages différents (`Java`, `Kotlin`, `Clojure`), nous avons pu vérifier le double intérêt des images natives : avoir un **exécutable compact** déployable sans Java Virtual Machine et bénéficier d'une **consommation mémoire réduite** et (parfois !) d'un **démarrage rapide**.
+Au travers de ces trois petites applications utilisant des langages différents (Java, Kotlin et Clojure), nous avons pu vérifier le double intérêt des images natives : avoir un **exécutable compact** déployable sans Java Virtual Machine et bénéficier d'une **consommation mémoire réduite** et (parfois !) d'un **démarrage rapide**.
 
-De plus, on présent l'intérêt qu'aura GraalVM pour moderniser Java, en particulier pour un usage en **_cloud-computing_** et pour les **microservices**. Se référerer aux frameworks tels [Quarkus](https://quarkus.io/) et [Micronaut](https://micronaut.io/). 
+De plus, on pressent l'intérêt qu'aura GraalVM pour moderniser Java, en particulier pour un usage en **_cloud-computing_** et pour les **microservices**. Se référencer aux frameworks tels [Quarkus](https://quarkus.io/) et [Micronaut](https://micronaut.io/).
 
 A  tester ultérieurement :
 
 - la gestion de la mémoire par le ramasse-miettes (_garbage collector_)
-- la différence entre la version gratuite et les versions _Community Edition_ et _Enterprise Edition_.
+- la différence entre les versions _Community Edition_ et _Enterprise Edition_.
