@@ -25,9 +25,12 @@ git clone --recursive https://github.com/getpelican/pelican-themes pelican-theme
 
 # Generate local site
 
-```bash
-make html && make serve
+Generate content:
+```sh
+pelican content
 ```
 
-If error `ValueError: unknown locale: UTF-8` occurs, consider setting the
-following environment variables: `LC_ALL="en_US.UTF-8" LANG="en_US.UTF-8"`.
+Serve content of http://localhost:8000/:
+```sh
+pelican --listen
+```
