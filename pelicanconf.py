@@ -15,8 +15,6 @@ GITHUB_URL = 'http://github.com/nicokosi/'
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
 CATEGORY_FEED_ATOM = None
-TRANSLATION_FEED_ATOM = 'feeds/all-%s.atom.xml'
-AUTHOR_FEED_ATOM = 'feeds/%s.atom.xml'
 TRANSLATION_FEED_RSS = None
 AUTHOR_FEED_RSS = None
 
@@ -56,6 +54,6 @@ HEADER_TITLE_LOGO = 'images/nicokosi.png'
 CSS_OVERRIDE = 'css/nicokosi.css'
 FOOTER_INCLUDE = 'custom-footer.html'
 IGNORE_FILES = [FOOTER_INCLUDE]
-EXTRA_TEMPLATES_PATHS = ['templates']
+THEME_TEMPLATES_OVERRIDES = ['templates']
 
 DISQUS_SITENAME = 'nicokosi-blog'
