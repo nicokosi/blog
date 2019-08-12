@@ -1,5 +1,5 @@
 Title: Du code Java/Kotlin/Clojure "natif" grâce à GraalVM
-Date: 2019-08-09 07:00
+Date: 2019-08-13
 Tags: java clojure kotlin native graalvm jvm
 Slug: java-clojure-and-kotlin-go-native-with-graalvm
 Author: Nicolas Kosinski
@@ -26,7 +26,7 @@ Suite à mes premiers essais infructueux l'an dernier (lire mon article précéd
 
 Nous utiliserons les outils suivants :
 
-- [GraalVM Community Edition](https://www.graalvm.org/downloads/) ("_a High-performance polyglot VM_") pour générer des exécutables à partir de bytecode JVM
+- [GraalVM Community Edition](https://www.graalvm.org/downloads/) ("_a High-performance polyglot VM_") et plus particulièrement la fonctionnalité [Native Image](https://www.graalvm.org/docs/getting-started/#native-images) via la commande `native-image` pour générer des exécutables à partir de _bytecode_ JVM.
 - [SDKMAN!](https://sdkman.io/) ("_The Software Development Kit Manager_") pour installer / utiliser des versions différentes du _Java Development Kit_ / _Java Runtime Environment_
 - [time](http://manpages.ubuntu.com/manpages/cosmic/en/man1/time.1.html) ("_run programs and summarize system resource usage_") pour mesurer le temps d'exécution
 - [valgrind](http://valgrind.org/) ("_tool for memory debugging, memory leak detection, and profiling_") pour évaluer l'empreinte mémoire des processus
@@ -43,9 +43,9 @@ Using java version 8.0.222.hs-adpt in this shell.
 $ time ./mvnw clean --quiet compile
 ./mvnw clean --quiet compile  6.24s user 0.31s system 323% cpu 2.022 total
 ```
-Note : le temps d'exécution indiqué par la commande `time` se trouve à la fin de la dernière ligne, en millisecondes : `2.022 total` signifie 2,002 millisecondes.
+Note : le temps d'exécution indiqué par la commande `time` se trouve à la fin de la dernière ligne, en secondes : `2.022 total` pour 2,022 secondes.
 
-Puis générons l'exécutable via GraalVM native-image, cela prend 40 secondes sur ma machine :
+Puis générons l'exécutable via GraalVM native-image, cela prend 42 secondes sur ma machine :
 ```sh
 $ time $HOME/.sdkman/candidates/java/19.1.1-grl/bin/native-image \
      --enable-https \
@@ -77,7 +77,7 @@ $ JAVA_HOME=$HOME/.sdkman/candidates/java/8.0.222.hs-adpt \
 ==23352==     in use at exit: 34,892,297 bytes in 6,155 blocks
 ==23352==   total heap usage: 14,555 allocs, 8,400 frees, 49,960,719 bytes allocated  **
 ```
-Note : la mémoire totale allouée est à la fin de la dernière ligne ; `49,960,719 bytes allocated` signifie que 50 mégaoctets ont été alloués.
+Note : la mémoire totale allouée est à la fin de la dernière ligne ; `49,960,719 bytes allocated` signifie qu'environ 50 mégaoctets ont été alloués.
 
 ```sh
 $ valgrind ./wordcount-with-java-stream /etc/hosts
@@ -87,14 +87,14 @@ $ valgrind ./wordcount-with-java-stream /etc/hosts
 ==23753==   total heap usage: 8 allocs, 5 frees, 12,436 bytes allocated**
 ```
 
-Pour résumer, au prix d'un temps de compilation plus long (40 secondes au lieu de 2 secondes), GraalVM :
+Pour résumer, au prix d'un temps de compilation plus long (42 secondes au lieu de 2 secondes), GraalVM :
 
 - accélère l'exécution "courte" : 7 millisecondes au lieu de 118 millisecondes ;
-- réduit l'empreinte mémoire de notre application : 10 kilooctets au lieu de 34 mégaoctets.
+- réduit l'empreinte mémoire de notre application : 12 kilooctets au lieu de 50 mégaoctets.
 
 ## Exécutable optimisé pour une application `Kotlin`
 
-Faisant la même chose pour une application [Kotlin](https://kotlinlang.org/) un peu plus complexe, [pullpitoK](https://github.com/nicokosi/pullpitoK/) (200 lignes de codes avec des librairies tierces) qui consomme les API GitHub pour afficher des statistiques sur les pull requests GitHub.
+Faisons la même chose pour une application [Kotlin](https://kotlinlang.org/) un peu plus complexe, [pullpitoK](https://github.com/nicokosi/pullpitoK/) (200 lignes de codes avec des librairies tierces) qui consomme les API GitHub pour afficher des statistiques sur les pull requests GitHub.
 
 La différence de temps de construction étant similaire au paragraphe précédent, concentrons-nous sur la comparaison du temps de démarrage pour une exécution rapide (affichage de l'aide souvent appelée ["usage message"](https://en.wikipedia.org/wiki/Usage_message)) :
 
@@ -137,7 +137,7 @@ Usage: pullpitoK <repository> <token>
 ...
 ```
 
-Soit 12 kilooctets avec la version native contre 32 mégaoctets pour la version JVM.
+Soit 2 kilooctets avec la version native contre 33 mégaoctets pour la version JVM.
 
 ## Exécutable _moins optimisé_ pour une application `Clojure`
 
@@ -224,11 +224,20 @@ Usage: pullpitoK <repository> <token>
 
 ## Conclusion
 
-Au travers de ces trois petites applications utilisant des langages différents (Java, Kotlin et Clojure), nous avons pu vérifier le double intérêt des images natives : avoir un **exécutable compact** déployable sans Java Virtual Machine et bénéficier d'une **consommation mémoire réduite** et (parfois !) d'un **démarrage rapide**.
+Au travers de ces trois petites applications utilisant des langages différents (Java, Kotlin et Clojure), nous avons pu vérifier les bénéfices des exécutables "images natives GraalVM" :
+
+- avoir un **exécutable compact** déployable sans _Java Virtual Machine_
+- une **consommation mémoire réduite**
+- un **démarrage rapide** (parfois !)
 
 De plus, on pressent l'intérêt qu'aura GraalVM pour moderniser Java, en particulier pour un usage en **_cloud-computing_** et pour les **microservices**. Se référencer aux frameworks tels [Quarkus](https://quarkus.io/) et [Micronaut](https://micronaut.io/).
 
-A  tester ultérieurement :
+A tester ultérieurement :
 
 - la gestion de la mémoire par le ramasse-miettes (_garbage collector_)
+
 - la différence entre les versions _Community Edition_ et _Enterprise Edition_.
+
+  
+
+PS : merci à mes collègues de [Vidal](http://www.vidalfrance.com/), notamment à Viviane, Marc et Jean-Christophe pour les échanges intéressants sur GraalVM et à Stéphane pour la relecture de cet article.
