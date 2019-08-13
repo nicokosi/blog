@@ -4,7 +4,6 @@ Tags: java clojure kotlin native graalvm jvm
 Slug: java-clojure-and-kotlin-go-native-with-graalvm
 Author: Nicolas Kosinski
 Summary: Générer des exécutables natifs via GraalVM pour des outils en ligne de commande implémentés en Java, Kotlin ou Clojure
-Status: draft
 Lang: fr
 
 [Audience présumée](https://v4.chriskrycho.com/2018/assumed-audiences.html) : développeurs.euses intéressés.ées par l'écosystème Java et plus particulièrement sur l'amélioration des performances et la génération d'exécutables.
