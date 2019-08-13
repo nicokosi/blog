@@ -19,7 +19,7 @@ Plan :
 
 ## Introduction
 
-In wrote about failures in my previous blog post [Clojure goes native with GraalVM](https://nicokosi.github.io/clojure-goes-native-with-graalvm-en.html). This post is about successful attempts to generate executables from small CLI tools, implemented in [Java](https://go.java/), [Kotlin](https://kotlinlang.org/) and [Clojure](https://clojure.org/), using [GraalVM](https://www.graalvm.org/) release (see the [release notes](https://www.graalvm.org/docs/release-notes/)).
+I wrote about failures in my previous blog post [Clojure goes native with GraalVM](https://nicokosi.github.io/clojure-goes-native-with-graalvm-en.html). This post is about successful attempts to generate executables from small CLI tools, implemented in [Java](https://go.java/), [Kotlin](https://kotlinlang.org/) and [Clojure](https://clojure.org/), using [GraalVM](https://www.graalvm.org/) release (see the [release notes](https://www.graalvm.org/docs/release-notes/)).
 
 ## Tools
 
@@ -42,7 +42,7 @@ Using java version 8.0.222.hs-adpt in this shell.
 $ time ./mvnw clean --quiet compile
 ./mvnw clean --quiet compile  6.24s user 0.31s system 323% cpu 2.022 total
 ```
-Note that the ellapsed time is at the end of the last line, in seconds: `2.022 total` means 2.002 seconds.
+Note that the ellapsed time is at the end of the last line, in seconds: `2.022 total` means 2.022 seconds.
 
 Now generate an executable via GraalVM native-image. It takes 42 seconds on my machine:
 ```sh
