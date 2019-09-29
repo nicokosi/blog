@@ -1,10 +1,10 @@
-Title: Java, Kotlin and Clojure go native with GraalVM
-Date: 2019-08-13
-Tags: java clojure kotlin native graalvm jvm
-Slug: java-clojure-and-kotlin-go-native-with-graalvm
-Author: Nicolas Kosinski
-Summary: Generate native executables via GraalVM for Java, Kotlin and Clojure CLI tools
-Lang: en
++++
+title = "Java, Kotlin and Clojure go native with GraalVM"
+date = "2019-08-13T1200"
+description = "Generate native executables via GraalVM for Java, Kotlin and Clojure CLI tools"
+slug = "java-clojure-and-kotlin-go-native-with-graalvm"
+tags = [ "java", "clojure", "kotlin", "native", "graalvm", "jvm" ]
++++
 
 [Presumed audience](https://v4.chriskrycho.com/2018/assumed-audiences.html) : developers interested in the Java ecosystem and more specifically on deploying executable programs that are fast and efficient.
 

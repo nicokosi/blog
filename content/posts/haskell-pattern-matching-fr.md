@@ -1,10 +1,10 @@
-Title: Jouons avec le pattern matching en Haskell
-Date: 2016-09-27 00:00
-Tags: haskell, pattern-matching
-Slug: haskell-pattern-matching
-Author: Nicolas Kosinski
-Summary: Découvrons par l'exemple le pattern matching en Haskell
-Lang: fr
++++
+date = "2016-09-27T00:00:00+01:00"
+title = "Jouons avec le pattern matching en Haskell"
+description = "Découvrons par l'exemple le pattern matching en Haskell"
+tags = [ "haskell", "pattern-matching" ]
+slug = "haskell-pattern-matching"
++++
 
 Découvrons le pattern matching en Haskell en reprenant l'exemple des cartes à jouer utilisé dans l'article ["Jouons avec le pattern matching en Scala"](https://nicokosi.github.io/scala-pattern-matching.html).
 

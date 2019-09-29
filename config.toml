@@ -3,15 +3,10 @@ title = "Nicokosi's blog"
 enableRobotsTXT = true
 enableEmoji = true
 
-hasCJKLanguage = false
-paginate = 3              # Number of articles displayed on the homepage
-rssLimit = 20             # Limit Entry Count to Rss file
-
 DefaultContentLanguage = "fr"
 DefaultContentLanguageInSubdir = false
 
-themesdir = "themes"
-theme = "jane"
+theme = "beautifulhugo"
 
 copyright = "&copy; <a href=\"https://github.com/nicokosi\">Nicolas Kosinski</a> 2016"
 disqusShortname = "nicokosi-blog"
@@ -78,31 +73,3 @@ defaultContentLanguage = "fr"
   weight = 40
   identifier = "categories"
   url = "/categories/"
-
-[params]
-  since = "2017"            # Site creation time
-  homeFullContent = false   # if false, show post summaries on home page. Othewise show full content.
-  rssFullContent = true     # if false, Rss feed instead of the summary
-
-  # site info (optional)
-  logoTitle = "Jane"
-  keywords = ["Hugo", "theme","jane"]
-  description = "Hugo theme jane example site."
-
-  # The date format to use; for a list of valid formats, see https://gohugo.io/functions/format/
-  dateFormatToUse = "2006-01-02"
-
-  # Some global options, you can also close or open something in front matter for a single post, see more information from `archetypes/default.md`.
-  toc = true
-  photoswipe = true         # see https://github.com/dimsemenov/PhotoSwipe
-  #contentCopyright = '<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a>'
-
-  # Link custom CSS and JS assets
-  #   (relative to /static/css and /static/js respectively)
-  customCSS = []            # if ['custom.css'], load '/static/css/custom.css' file
-  customJS = []             # if ['custom.js'], load '/static/js/custom.js' file
-
-[params.social]
-  c-twitter = "https://twitter.com/nicokosi"
-  e-linkedin = "https://www.linkedin.com/in/nicolas-kosinski-95184811"
-  g-github = "https://github.com/nicokosi"

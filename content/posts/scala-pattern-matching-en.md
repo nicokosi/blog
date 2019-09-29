@@ -1,11 +1,10 @@
-Title: Let's play with pattern matching in Scala
-Date: 2016-09-14 00:00
-Tags: scala, pattern-matching, console, repl
-Slug: scala-pattern-matching
-Author: Nicolas Kosinski
-Summary: Pattern matching is a powerful technique for filtering and testing variables. This article aims at illustrating pattern matching in Scala using a simple example.
-Lang: en
-
++++
+date = "2016-09-14T00:00:00+01:00"
+title = "Let's play with pattern matching in Scala"
+description = "Pattern matching is a powerful technique for filtering and testing variables. This article aims at illustrating pattern matching in Scala using a simple example."
+tags = [ "scala", "pattern-matching", "console", "repl" ]
+slug = "scala-pattern-matching"
++++
 
 Pattern matching is a powerful technique for filtering and testing variables. This article aims at illustrating pattern matching in Scala using a simple example.
 Let's say we want to return the color (red or black) of a playing card.

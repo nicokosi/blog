@@ -1,10 +1,10 @@
-Title: Du code Java/Kotlin/Clojure "natif" grâce à GraalVM
-Date: 2019-08-13
-Tags: java clojure kotlin native graalvm jvm
-Slug: java-clojure-and-kotlin-go-native-with-graalvm
-Author: Nicolas Kosinski
-Summary: Générer des exécutables natifs via GraalVM pour des outils en ligne de commande implémentés en Java, Kotlin ou Clojure
-Lang: fr
++++
+title = "Du code Java/Kotlin/Clojure \"natif\" grâce à GraalVM"
+date = "2019-08-13T1200"
+description = "Générer des exécutables natifs via GraalVM pour des outils en ligne de commande implémentés en Java, Kotlin ou Clojure"
+slug = "java-clojure-and-kotlin-go-native-with-graalvm"
+tags = [ "java", "clojure", "kotlin", "native", "graalvm", "jvm" ]
++++
 
 [Audience présumée](https://v4.chriskrycho.com/2018/assumed-audiences.html) : développeurs.euses intéressés.ées par l'écosystème Java et plus particulièrement sur l'amélioration des performances et la génération d'exécutables.
 

@@ -1,11 +1,10 @@
-Title: Clojure goes native with GraalVM
-Date: 2018-05-12 13:00
-Tags: clojure native graalvm
-Slug: clojure-goes-native-with-graalvm
-Author: Nicolas Kosinski
-Summary: Use GraalVM to generate native executable for 'hubstats', a Clojure project
-Lang: en
-
++++
+title = "Clojure goes native with GraalVM"
+date = "2018-05-12T1300"
+description = "Use GraalVM to generate native executable for 'hubstats', a Clojure project"
+slug = "clojure-goes-native-with-graalvm"
+tags = [ "clojure", "native", "graalvm" ]
++++
 
 ## What is GraalVM?
 

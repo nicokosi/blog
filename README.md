@@ -11,12 +11,6 @@ Install [Hugo](https://gohugo.io/). For instance, on macOS:
 brew install hugo
 ```
 
-Install the theme:
-
-```sh
-git clone https://github.com/xianmin/hugo-theme-jane.git --depth=1 themes/jane
-```
-
 ## Generate local site
 
 Generate and serve:

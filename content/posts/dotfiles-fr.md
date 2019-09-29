@@ -1,10 +1,10 @@
-Title: Versionner sa configuration système via des "dotfiles"
-Date: 2016-08-17 00:00
-Tags: tools
-Slug: dotfiles
-Author: Nicolas Kosinski
-Summary: pourquoi et comment versionner sa configuration système (système d'exploitation, shell et applications).
-Lang: fr
++++
+date        = "2016-08-18T08:18:20+02:00"
+title       = "Versionner sa configuration système via des 'dotfiles'"
+description = "pourquoi et comment versionner sa configuration système (système d'exploitation, shell et applications)."
+tags        = [ "tools" ]
+slug        = "dotfiles"
++++
 
 ## Introduction : la puissance du shell, avec ou sans maîtrise ?
 

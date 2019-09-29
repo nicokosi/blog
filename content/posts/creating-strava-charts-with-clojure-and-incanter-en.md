@@ -1,20 +1,19 @@
-Title: Creating Strava charts with Clojure and Incanter
-Date: 2017-04-09 17:37
-Tags: strava charts clojure incanter
-Slug: creating-strava-charts-with-clojure-and-incanter
-Author: Nicolas Kosinski
-Summary: Use Clojure Incanter to generate custom Strava charts
-Lang: en
++++
+date = "2017-04-09T00:00:00+02:00"
+title = "Creating Strava charts with Clojure and Incanter"
+Slug = "creating-strava-charts-with-clojure-and-incanter"
+tags = [ "strava", "charts", "clojure", "incanter" ]
+author = "Nicolas Kosinski"
++++
 
-#Creating Strava charts via Clojure and Incanter
+# Creating Strava charts via Clojure and Incanter
 
 I use [Strava](https://www.strava.com/) to record my jogging sessions: I can record my sessions via my smartphone and publish them. I can then review or share them.
 
 In addition to provided Strava dashboards, I wanted to generate my own charts in order to visualize my progress.
 
 
-<br/>
-##First attempt: via R
+## First attempt: via R
 In first tried to use [RStudio](https://www.rstudio.com/), an IDE for R. I know this tool is very well-suited but I don't know much about it. After a few hours, I was not able to load and transform JSON data.
 
 ![RStudio: an IDE for R platform](images/RStudio.png)
@@ -22,8 +21,7 @@ In first tried to use [RStudio](https://www.rstudio.com/), an IDE for R. I know 
 Note to myself: try again another time! 😅
 
 
-<br/>
-##Second attempt: via Clojure and Incanter
+## Second attempt: via Clojure and Incanter
 I then used another option: [Incanter](http://incanter.org), which is
 > Clojure-based, R-like platform for statistical computing and graphics.
 
@@ -35,8 +33,7 @@ Basically, I had to:
 
 So let's dive into it!
 
-<br/>
-###1. Retrieve data via Strava API
+### 1. Retrieve data via Strava API
 
 The following function:
 
@@ -50,8 +47,7 @@ The following function:
 {:query-params {:access_token token :per_page 200}}))))
 ```
 
-<br/>
-###2. Transform data
+### 2. Transform data
 
 We can operate some data transformation, defining the following functions:
 ```clojure
@@ -76,8 +72,7 @@ These functions can be applied on activities data via the "thread-last" operator
 ```
 
 
-<br/>
-###3. Display a chart via Incanter
+### 3. Display a chart via Incanter
 
 The final step is to use an Incanter function to display a chart:
 ```clojure
@@ -101,5 +96,4 @@ The final step is to use an Incanter function to display a chart:
 All this code displays this kind of chart:
 ![Chart: average speed over time](images/chart-average-speed-over-time.png)
 
-<br/>
 You can find the full code that generates several charts in [strava-activity-graphs GitHub repository](https://github.com/nicokosi/strava-activity-graphs/).

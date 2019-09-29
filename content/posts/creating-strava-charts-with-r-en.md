@@ -1,12 +1,10 @@
-Title: Creating Strava charts with R
-Date: 2017-04-14 12:10
-Tags: strava charts r rstudio
-Slug: creating-strava-charts-with-r
-Author: Nicolas Kosinski
-Summary: Use R to generate custom Strava charts
-Lang: en
-
-#Creating Strava charts with R
++++
+date = "2017-04-14T00:00:00+02:00"
+title = "Creating Strava charts with R"
+Slug = "creating-strava-charts-with-r"
+tags = [ "strava", "charts", "r", "rstudio"]
+author = "Nicolas Kosinski"
++++
 
 This article is the sequel of [Creating Strava charts with Clojure and Incanter](creating-strava-charts-with-clojure-and-incanter-en.html): I decided to have another try generating charts with R (even though I don't know much about it).
 
@@ -30,7 +28,7 @@ library(scales)
 ```
 
 <br/>
-###1. Retrieve data via Strava API
+## 1. Retrieve data via Strava API
 
 The following code calls the [Strava API for activities](http://strava.github.io/api/v3/activities/) with an authorization token to retrieve the 200 last activities (run/ride/swim), as a JSON string (`characters`):
 ```r
@@ -42,7 +40,7 @@ activities <- content(activities, "text") # Retrieve JSON content as string
 
 <br/>
 
-###2. Transform data
+## 2. Transform data
 
 We then need to transform our JSON content into tabular data, called `dataframes`:
 ```r
@@ -76,7 +74,7 @@ Nota bene: our dataframe contains `factors` (factors are data with all known val
 
 <br/>
 
-###3. Display a chart
+## 3. Display a chart
 
 The final step consists in using the `ggplot2` library to display a chart for "distance and moving time" and export it as a PNG image:
 ```r

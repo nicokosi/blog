@@ -1,10 +1,10 @@
-Title: Discovering GitHub APIs while learning Clojure
-Date: 2017-01-11 08:56
-Tags: clojure github
-Slug: discover-github-apis-with-clojure
-Author: Nicolas Kosinski
-Summary: Discovering GitHub APIs while learning Clojure
-Lang: en
++++
+date = "2017-01-11T00:00:00+02:00"
+title = "Discovering GitHub APIs while learning Clojure"
+Slug = "discover-github-apis-with-clojure"
+tags = [ "clojure", "github" ]
+author = "Nicolas Kosinski"
++++
 
 As a developer, it's important to keep on learning/discovering stuff. Quoting [The Pragmatic Programmer](https://pragprog.com/book/tpp/the-pragmatic-programmer) :
 > Invest Regularly in Your Knowledge Portfolio

@@ -1,20 +1,18 @@
-Title: Générer ses graphiques Strava avec Clojure et Incanter
-Date: 2017-04-09 17:37
-Tags: strava charts clojure incanter
-Slug: creating-strava-charts-with-clojure-and-incanter
-Author: Nicolas Kosinski
-Summary: Utilisation de la librairie Clojure Incanter pour générer des graphiques Strava personnalisés
-Lang: fr
++++
+date = "2017-04-09T00:00:00+02:00"
+title = "Générer ses graphiques Strava avec Clojure et Incanter"
+Slug = "creating-strava-charts-with-clojure-and-incanter"
+tags = [ "strava", "charts", "clojure", "incanter" ]
+author = "Nicolas Kosinski"
++++
 
-#Générer ses graphiques Strava avec Clojure et Incanter
+# Générer ses graphiques Strava avec Clojure et Incanter
 
 J'utilise [Strava](https://www.strava.com/) pour enregistrer mes sessions de jogging : après avoir enregistré une session avec mon smartphone, je la publie pour pouvoir la partager et la revoir plus tard.
 
 Strava fournit quelques tableaux de bord mais je voulais générer mes propres graphiques afin de visualiser ma progression.
 
-
-<br/>
-##Premier essai avec R
+## Premier essai avec R
 J'ai d'abord essayé d'utiliser [RStudio](https://www.rstudio.com/), un IDE pour le langage R. Je pense que c'est un outil adapté mais je le connais très peu. Après avoir essayé pendant quelques heures d'importer mes données et de les transformer, j'ai abandonné !
 
 ![RStudio : un IDE pour la plate-forme R](images/RStudio.png)
@@ -22,8 +20,7 @@ J'ai d'abord essayé d'utiliser [RStudio](https://www.rstudio.com/), un IDE pour
 J'essairai une autre fois ! 😅
 
 
-<br/>
-##Deuxième essai avec Clojure et Incanter
+## Deuxième essai avec Clojure et Incanter
 J'ai ensuite essayé d'utiliser [Incanter](incanter.org), une librairie Clojure inspirée de R :
 > Clojure-based, R-like platform for statistical computing and graphics.
 
@@ -36,8 +33,7 @@ J'avais besoin de faire 3 choses :
 Allons-y !
 
 
-<br/>
-###1. Récupérer les données Strava
+### 1. Récupérer les données Strava
 
 La fonction suivante appelle l'[API Strava "activities"](http://strava.github.io/api/v3/activities/) avec un jeton d'autorisation (access token) et récupère les 200 dernières sorties ("activities" = activité de course à pied, vélo ou natation) sous forme d'un tableau d'objets JSON :
 ```clojure
@@ -49,8 +45,7 @@ La fonction suivante appelle l'[API Strava "activities"](http://strava.github.io
 ```
 
 
-<br/>
-###2. Transformer les données
+### 2. Transformer les données
 
 On définit les fonctions suivantes pour transformer les données :
 ```clojure
@@ -76,8 +71,7 @@ Ces fonctions peuvent être appliquées aux données brutes, en utilisant par ex
 ```
 
 
-<br/>
-###3. Affichage d'un graphique avec Incanter
+### 3. Affichage d'un graphique avec Incanter
 
 La dernière étape consiste à utiliser l'une des fonctions de la librairie Incanter pour afficher un graphique. L'exemple de code suivant affiche l'évolution de la vitesse moyenne de chaque sortie en fonction de la date de la sortie :
 ```clojure

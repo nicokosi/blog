@@ -1,10 +1,10 @@
-Title: Générer ses graphiques Strava avec R
-Date: 2017-04-14 12:10
-Tags: strava charts r rstudio
-Slug: creating-strava-charts-with-r
-Author: Nicolas Kosinski
-Summary: Utilisation de R pour générer des graphiques Strava personnalisés
-Lang: fr
++++
+date = "2017-04-14T00:00:00+02:00"
+title = "Générer ses graphiques Strava avec R"
+Slug = "creating-strava-charts-with-r"
+tags = [ "strava", "charts", "r", "rstudio"]
+author = "Nicolas Kosinski"
++++
 
 #Générer ses graphiques Strava avec R
 
