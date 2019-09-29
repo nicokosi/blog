@@ -3,8 +3,12 @@ title = "Nicokosi's blog"
 enableRobotsTXT = true
 enableEmoji = true
 
+DefaultContentLanguage = "fr"
+DefaultContentLanguageInSubdir = false
+
 theme = "beautifulhugo"
 
+copyright = "&copy; <a href=\"https://github.com/nicokosi\">Nicolas Kosinski</a>"
 disqusShortname = "nicokosi-blog"
 googleAnalytics = "UA-11930016-2"
 
@@ -19,17 +23,39 @@ mainSections = ["post","posts"]
 style = "github"
 languages = ["java", "scala", "clojure", "haskell", "shell"]
 
-DefaultContentLanguage = "en"
-copyright = "&copy; <a href=\"https://github.com/nicokosi\">Nicolas Kosinski</a>"
+[Languages]
+[Languages.fr]
+weight = 1
+title = "Le blog de Nicokosi"
+languageName = "fr"
 
-[languages]
-  [languages.en]
-    title = "Nicokosi's blog"
-    weight = 1
-    [languages.en.params]
-  [languages.fr]
-    title = "Le blog de Nicokosi"
-    weight = 2
-    [languages.fr.params]
-      [languages.fr.params.navigation]
-        help = "Aide"
+[[languages.fr.menu.main]]
+url    = "/fr"
+name   = "fr"
+weight = 0
+
+[Languages.en]
+weight = 2
+title = "Nicokosi's blog"
+languageName = "en"
+
+[[languages.en.menu.main]]
+url    = "/en"
+name   = "en"
+weight = 0
+
+
+defaultContentLanguage = "fr"
+[languages.en]
+  languageCode = "en"
+
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+[[menu.main]]
+  name = "Tags"
+  weight = 30
+  identifier = "tags"
+  url = "/tags/"
