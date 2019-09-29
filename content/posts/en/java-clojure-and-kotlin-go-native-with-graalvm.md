@@ -8,7 +8,7 @@ tags = [ "java", "clojure", "kotlin", "native", "graalvm", "jvm" ]
 
 [Presumed audience](https://v4.chriskrycho.com/2018/assumed-audiences.html) : developers interested in the Java ecosystem and more specifically on deploying executable programs that are fast and efficient.
 
-Plan :
+Plan:
 
 1. Introduction
 2. Our tools
