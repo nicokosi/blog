@@ -8,15 +8,16 @@ DefaultContentLanguageInSubdir = false
 
 theme = "beautifulhugo"
 
-copyright = "&copy; <a href=\"https://github.com/nicokosi\">Nicolas Kosinski</a> 2016"
+copyright = "&copy; <a href=\"https://github.com/nicokosi\">Nicolas Kosinski</a>"
 disqusShortname = "nicokosi-blog"
 googleAnalytics = "UA-11930016-2"
 
 [author]
-name = "nicokosi"
+name = "Nicolas Kosinski"
 
-[params.logo]
-url="/images/nicokosi.jpg"
+[params]
+logo = "images/nicokosi.png"
+mainSections = ["post","posts"]
 
 [params.highlight]
 style = "github"

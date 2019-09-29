@@ -3,7 +3,6 @@ date = "2017-04-14T00:00:00+02:00"
 title = "Générer ses graphiques Strava avec R"
 Slug = "creating-strava-charts-with-r"
 tags = [ "strava", "charts", "r", "rstudio"]
-author = "Nicolas Kosinski"
 +++
 
 #Générer ses graphiques Strava avec R

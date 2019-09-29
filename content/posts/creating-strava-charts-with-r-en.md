@@ -3,7 +3,6 @@ date = "2017-04-14T00:00:00+02:00"
 title = "Creating Strava charts with R"
 Slug = "creating-strava-charts-with-r"
 tags = [ "strava", "charts", "r", "rstudio"]
-author = "Nicolas Kosinski"
 +++
 
 This article is the sequel of [Creating Strava charts with Clojure and Incanter](creating-strava-charts-with-clojure-and-incanter-en.html): I decided to have another try generating charts with R (even though I don't know much about it).

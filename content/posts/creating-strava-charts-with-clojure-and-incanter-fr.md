@@ -3,7 +3,6 @@ date = "2017-04-09T00:00:00+02:00"
 title = "Générer ses graphiques Strava avec Clojure et Incanter"
 Slug = "creating-strava-charts-with-clojure-and-incanter"
 tags = [ "strava", "charts", "clojure", "incanter" ]
-author = "Nicolas Kosinski"
 +++
 
 # Générer ses graphiques Strava avec Clojure et Incanter

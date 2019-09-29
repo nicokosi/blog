@@ -1,11 +1,10 @@
-Title: Discovering Rust
-Date: 2018-06-10 15:00
-Tags: rust
-Slug: discovering-rust
-Author: Nicolas Kosinski
-Summary: Discovering the Rust programming language, from a Java/Clojure programmer's point of view, via a small side project
-Lang: en
-
++++
+title = "Découvrons Rust"
+date = "2018-06-10T1500"
+description = "Découvrons le langage de programmation Rust en développant un petit projet personnel"
+slug = "discovering-rust"
+tags = [ "rust" ]
++++
 
 _As a Java developer, I want to learn bits of Rust, so that I can deeply understand this sentence quoted from [rust-lang.org](https://www.rust-lang.org)*:_
 > Rust is a systems programming language that runs blazingly **fast**, **prevents segfaults**, and **guarantees thread safety**

@@ -3,7 +3,6 @@ date = "2017-01-11T00:00:00+02:00"
 title = "A la découverte des API GitHub en apprenant Clojure"
 Slug = "discover-github-apis-with-clojure"
 tags = [ "clojure", "github" ]
-author = "Nicolas Kosinski"
 +++
 
 Il est toujours intéressant d'apprendre quelque chose, même si ça ne concerne pas directement le travail quotidien. Pour citer [The Pragmatic Programmer](https://pragprog.com/book/tpp/the-pragmatic-programmer) (note pour moi-même : relire ce livre 🤓) :
