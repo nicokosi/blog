@@ -75,7 +75,7 @@ The last positive thing about learning a programming language is that you can **
 
 In my case, my "Golang friends" have been:
 
-- [Jean-Christophe](https://github.com/jcgay/) who helped me fixing my JSON parsing issues. 😅
+- [Jean-Christophe](https://github.com/jcgay/) who helped me to fix my JSON parsing issues. 😅
 
 - [Florent](https://github.com/fbiville) who gave me pointers on cool libraries: [testing/quick](https://golang.org/pkg/testing/quick/) for property-based testing, [ginkgo](https://github.com/onsi/ginkgo) for BDD-style tests and [gomega](https://github.com/onsi/gomega) for test assertions. I have to try them out! 😎
 

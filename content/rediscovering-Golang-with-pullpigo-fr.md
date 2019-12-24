@@ -13,7 +13,7 @@ Pour ce faire, j'ai implémenté un petit outil en __ligne de commande (_CLI_)__
 J'ai créé ainsi un petit projet, versionné dans GitHub, [pullpigo](https://github.com/nicokosi/pullpigo). Son but 
 est d'afficher le nombre d'événements du type "tant d'événements créés par tel auteur GitHub (_commiter_)" en utilisant une API publique de GitHub.
 
-Notez que j'ai déjà implémenter un outil similaire dans d'autres langages (que je voulais aussi découvrir ou approfondir) : en __Clojure__ (cf. [hubstats](https://github.com/nicokosi/hubstats)), __Kotlin__ (cf. [pullpitoK](https://github.com/nicokosi/pullpitoK)) et __Rust__ (cf. [pullpito](https://github.com/nicokosi/pullpito)).
+Notez que j'ai déjà implémenté un outil similaire dans d'autres langages (que je voulais aussi découvrir ou approfondir) : en __Clojure__ (cf. [hubstats](https://github.com/nicokosi/hubstats)), __Kotlin__ (cf. [pullpitoK](https://github.com/nicokosi/pullpitoK)) et __Rust__ (cf. [pullpito](https://github.com/nicokosi/pullpito)).
 
 ## Les exécutables natifs sont rapides 🚀
 
