@@ -52,5 +52,3 @@ CSS_OVERRIDE = 'css/nicokosi.css'
 FOOTER_INCLUDE = 'custom-footer.html'
 IGNORE_FILES = [FOOTER_INCLUDE]
 THEME_TEMPLATES_OVERRIDES = ['templates']
-
-DISQUS_SITENAME = 'nicokosi-blog'
