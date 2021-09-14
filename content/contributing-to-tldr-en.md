@@ -1,9 +1,9 @@
-Title: Contributing to TLDR (collaborative cheatsheets for console commands)
+Title: My recent contributions to the "tldr" open-source project
 Date: 2021-09-14 08:00
 Tags: OSS cli
 Slug: contributing-to-tldr
 Author: Nicolas Kosinski
-Summary: my recent contributions to the open-source project 'tldr' (good/bad parts)
+Summary: my recent contributions to the open-source project "tldr": good/bad parts
 Lang: en
 
 Assumed audience: developers interested in Command-Line Interface tools and in contributing to Open Source Projects.
