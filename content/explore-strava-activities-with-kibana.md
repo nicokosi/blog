@@ -10,8 +10,7 @@ Assumed audience: people interested in data exploration.
 
 # Exploring my own Strava activities using Kibana
 
-I use strava.com to track my running/hike activities since a few years. Since Strava provides an API to export my activities, I had a try exploring
-them via a data visualization tool, Kibana. This article relates my first exploration.
+I use [strava.com](https://strava.com/) to track my running/hike activities since a few years. Since Strava provides an API to export my activities, I had a try exploring them via a data visualization tool, [Kibana](https://www.elastic.co/kibana/). This article relates my first exploration.
 
 
 ## Setup
