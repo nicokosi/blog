@@ -8,12 +8,9 @@ Lang: fr
 
 Public présumé : personnes intéressées par l’exploration de données.
 
-# Exploration de données Strava avec Kibana
-
 Cela fait quelques années que j'enregistre mes sorties sportives (essentiellement pour la course à pied et la marche) sur [strava.com](https://strava.com/).
 Comme les données sont accessibles par une API, j'ai voulu les explorer en utilisant un outil de visualisation de données, [Kibana](https://www.elastic.co/kibana/).
 Cet article décrit mon premier essai "d'exploration".
-
 
 ## Mise en place
 
