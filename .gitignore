@@ -2,3 +2,4 @@
 output/*
 pelican-themes
 *.pyc
+.vscode
