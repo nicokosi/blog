@@ -84,4 +84,12 @@ Ca ressemble à ça :
 
 ![Create Kibana dashboard"](images/explore-strava-dashboard.png "Create Kibana dashboard"")
 
+Quelques remarques / interprétations :
+
+- je ne pensais pas courir depuis si longtemps (5 ans) 😯
+
+- mes performances baissent dans le temps, c'est normal, je vieillis ! 🧓
+
+Et sinon, j'ai trouvé ça sympa de faire mon propre dashboard éphémère (non persisté) sans payer l'abonnement Strava. 😇
+
 C'est tout pour cette fois. J’essaierai d'aller plus loin dans un autre article. 🤓

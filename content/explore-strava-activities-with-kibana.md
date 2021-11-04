@@ -82,4 +82,12 @@ It looks like this:
 
 ![Create Kibana dashboard"](images/explore-strava-dashboard.png "Create Kibana dashboard"")
 
+A few remarks:
+
+- I just realized that I have been running for 5 years! 😯
+
+- my running performance are slowing down... I guess I am getting older! 🧓
+
+Anyway, it was cool to make my custom (but ephemeral) dashboard without paying for Strava. 😇
+
 That's all! I'll try to go further an other time. 🤓
