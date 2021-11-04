@@ -12,16 +12,15 @@ Assumed audience: people interested in data exploration.
 
 I use [strava.com](https://strava.com/) to track my running/hike activities since a few years. Since Strava provides an API to export my activities, I had a try exploring them via a data visualization tool, [Kibana](https://www.elastic.co/kibana/). This article relates my first exploration.
 
-
 ## Setup
 
-Note that the code shown below uses `zsh` Unix shell. 
+Note that the code shown below uses `zsh` Unix shell.
 
 ### Grab Strava activities
 
-1. First step, create a [Strava developer account](https://developers.strava.com/docs/getting-started/#account), then create a Strava API OAuth2 access token (I have used the [mgryszko/strava-access-token generator](https://github.com/mgryszko/strava-access-token)).
+First step, create a [Strava developer account](https://developers.strava.com/docs/getting-started/#account), then create a Strava API OAuth2 access token (I have used the [mgryszko/strava-access-token generator](https://github.com/mgryszko/strava-access-token)).
 
-2. Second step, use [the Strava API to grab my Strava activities](https://developers.strava.com/docs/reference/#api-Activities-getLoggedInAthleteActivities), exporting all activities into separate JSON files:
+Second step, use [the Strava API to grab my Strava activities](https://developers.strava.com/docs/reference/#api-Activities-getLoggedInAthleteActivities), exporting all activities into separate JSON files:
 
 ```zsh
 for page in {1..10}; http GET "https://www.strava.com/api/v3/athlete/activities?include_all_efforts=&per_page=200&page=${page}" "Authorization: Bearer $TOKEN" > strava-activities-${page}.json
@@ -45,7 +44,7 @@ wc -c strava-activities-*.json
   767026 total
 ```
 
-3. Third step, aggregate files into a single "Newline Delimited JSON" file (`ndjson` extension):
+Third step, aggregate files into a single "Newline Delimited JSON" file (`ndjson` extension):
 
 ```zsh
 for n in {1..3}; cat strava-activities-${n}.json | jq -c '.[]' > strava-activities-${n}.ndjson
@@ -56,7 +55,7 @@ cat strava-activities-1.ndjson strava-activities-2.ndjson strava-activities-3.nd
 
 We will run Elastic and Kibana using the [official Docker images](https://www.elastic.co/guide/en/kibana/current/docker.html).
 
-1. Start Elastic and Kibana:
+Start Elastic and Kibana:
 
 ```sh
 docker network create elastic
@@ -67,22 +66,22 @@ docker run --name es-dataviz --net elastic --publish 9200:9200 --publish 9300:93
 docker run --name kb-dataviz --net elastic --publish 5601:5601 --env "ELASTICSEARCH_HOSTS=http://es-dataviz:9200" --env "xpack.security.enabled=false" docker.elastic.co/kibana/kibana:7.15.1
 ```
 
-2. Upload `ndjson` file [http://localhost:5601/app/home#/tutorial_directory] into a `strava` index:
+Upload `ndjson` file [http://localhost:5601/app/home#/tutorial_directory] into an index named "strava":
 
 Open Kibana's "discover" view for the last 6 years:
-<img alt="Discover Kibana" src="images/explore-strava-discover.png">
+
+![Discover Kibana](images/explore-strava-discover.png "Discover Kibana")
 
 ## Explore data / create dashboards
 
 ### Average speed per activity
 
-
 Let's create a dashboard to visualize the activities' average speed by activity type (run, hike etc.):
 
-<img alt="Create Kibana dashboard" src="images/explore-strava-create-dashboard.png">
+![Create Kibana dashboard](images/explore-strava-create-dashboard.png "Create Kibana dashboard")
 
 It looks like this:
 
-<img width="1436" alt="Create Kibana dashboard" src="images/explore-strava-dashboard.png">
+![Create Kibana dashboard"](images/explore-strava-dashboard.png "Create Kibana dashboard"")
 
 That's all! I'll try to go further an other time. 🤓
