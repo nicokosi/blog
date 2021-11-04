@@ -1,4 +1,4 @@
-Title: Exploratation des données sportives Strava avec Kibana
+Title: Exploration des données sportives Strava avec Kibana
 Date: 2021-11-03 13:00
 Tags: dataviz data visualisation
 Slug: explore-strava-activities-with-kibana
