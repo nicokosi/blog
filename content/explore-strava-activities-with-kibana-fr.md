@@ -90,6 +90,6 @@ Quelques remarques / interprétations :
 
 - mes performances baissent dans le temps, c'est normal, je vieillis ! 🧓
 
-Et sinon, j'ai trouvé ça sympa de faire mon propre dashboard éphémère (non persisté) sans payer l'abonnement Strava. 😇
+Et sinon, j'ai trouvé ça sympa de faire mon propre dashboard éphémère sans payer l'abonnement Strava. 😇
 
 C'est tout pour cette fois. J’essaierai d'aller plus loin dans un autre article. 🤓
