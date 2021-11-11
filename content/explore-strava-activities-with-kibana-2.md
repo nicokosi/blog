@@ -33,3 +33,6 @@ Here is a preview of the final dashboard: 🎉
 The same dashboard when clicking on "Run" activity type:
 
 ![dashboard on "Run" activity type](images/explore-strava-activities-with-kibana-2-view-dashboard-run.png "dashboard on 'Run' activity type").
+
+
+The dashboard with its charts can be imported via the upper left button / "Management" / "Stack Management" / "Saved Objects" / "Import" with [this file]({static}/misc/strava-dashboard.ndjson).

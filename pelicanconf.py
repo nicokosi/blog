@@ -22,6 +22,7 @@ AUTHOR_FEED_RSS = None
 STATIC_PATHS = [
 	'css',
 	'images',
+  'misc',
 	'extra/favicon.ico']
 EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'}

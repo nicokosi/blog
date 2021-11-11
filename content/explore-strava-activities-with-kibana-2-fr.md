@@ -34,3 +34,6 @@ Et voila le dashboard final : 🎉
 Le même dashboard après avoir cliqué sur le type d'activité "Run" (course à pied) :
 
 ![dashboard "Run"](images/explore-strava-activities-with-kibana-2-view-dashboard-run.png "dashboard 'Run'").
+
+
+Le dashboard et ses graphiques peuvent être importés via le bouton en haut à gauche (avec trois traits horizontaux) / "Management" / "Stack Management" / "Saved Objects" / "Import" avec ce [fichier d'import du dashboard]({static}/misc/strava-dashboard.ndjson).
