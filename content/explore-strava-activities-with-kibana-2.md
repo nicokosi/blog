@@ -8,7 +8,7 @@ Lang: en
 
 Assumed audience: people interested in data exploration.
 
-Please read the [first part on this article](./explore-strava-activities-with-kibana-en.md) about the Kibana setup and Strava data injection.
+Please read the [first part on this article](./explore-strava-activities-with-kibana-en.html) about the Kibana setup and Strava data injection.
 
 My colleague Franck gave me a cool Kibana tip: try the "vertical bar" with a "count" operator.
 

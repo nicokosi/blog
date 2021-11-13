@@ -8,7 +8,7 @@ Lang: fr
 
 Public présumé : personnes intéressées par l’exploration de données.
 
-Cet article fait suite à [ce premier article](./explore-strava-activities-with-kibana.md) pour la mise en place de Kibana et l'import des données Strava.
+Cet article fait suite à [ce premier article](./explore-strava-activities-with-kibana.html) pour la mise en place de Kibana et l'import des données Strava.
 
 Franck, un collègue qui connaît bien Kibana, m'a conseillé d'essayer un graphique  de type "vertical bar" avec un opérateur "count".
 J'ai notamment voulu essayer ce type de graphique, tout en en testant d'autres, en créant un "dashboard" plus complet que celui détaillé dans mon premier article.
