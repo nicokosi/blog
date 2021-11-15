@@ -47,7 +47,7 @@ RELATIVE_URLS = True
 
 THEME = "pelican-clean-blog"
 NO_HEADER_STYLE = True
-SITESUBTITLE = '#SoftwareDevelopment #WhatElse?;-)'
+SITESUBTITLE = 'Code explorations (🧑‍💻 + 🧪 = ⁉️)'
 HEADER_TITLE_LOGO = 'images/nicokosi.png'
 CSS_OVERRIDE = 'css/nicokosi.css'
 FOOTER_INCLUDE = 'custom-footer.html'
