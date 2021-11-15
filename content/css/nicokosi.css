@@ -1,6 +1,9 @@
+div#header-with-navigation {
+  background: linear-gradient(rgb(32, 151, 208), rgb(185, 214, 228));
+}
+
 .intro-header .page-heading {
   padding: 20px 0 20px;
-  color: white;
 }
 
 @media only screen and (min-width: 768px) {
