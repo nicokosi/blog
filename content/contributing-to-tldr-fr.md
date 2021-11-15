@@ -1,4 +1,4 @@
-Title: Contributing to TLDR (collaborative cheatsheets for console commands)
+Title: Mes contributions à TLDR (anti-sèche collaborative pour les outils en ligne de commande)
 Date: 2021-09-14 08:00
 Tags: OSS cli
 Slug: contributing-to-tldr
