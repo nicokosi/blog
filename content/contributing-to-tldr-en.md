@@ -3,7 +3,7 @@ Date: 2021-09-14 08:00
 Tags: OSS cli
 Slug: contributing-to-tldr
 Author: Nicolas Kosinski
-Summary: my recent contributions to the open-source project 'tldr' (good/bad parts)
+Summary: Some thoughts about my recent contributions to the open-source project 'tldr'.
 Lang: en
 
 Assumed audience: developers interested in Command-Line Interface tools and in contributing to Open Source Projects.

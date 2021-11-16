@@ -3,7 +3,7 @@ Date: 2019-12-24 07:00
 Tags: golang native
 Slug: rediscovering-Golang-with-pullpigo
 Author: Nicolas Kosinski
-Summary: Learn basics of the Go programming language coding a CLI tool, "pullpigo"
+Summary: How I discovered Go (the programming language) basics while coding a CLI tool named "pullpigo".
 Lang: en
 
 # Rediscovering Golang with "pullpigo", a small hobby-project

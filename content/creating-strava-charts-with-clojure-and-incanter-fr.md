@@ -3,7 +3,7 @@ Date: 2017-04-09 17:37
 Tags: strava charts clojure incanter
 Slug: creating-strava-charts-with-clojure-and-incanter
 Author: Nicolas Kosinski
-Summary: Utilisation de la librairie Clojure Incanter pour générer des graphiques Strava personnalisés
+Summary: Utilisation de la librairie Clojure Incanter pour générer des graphiques Strava personnalisés.
 Lang: fr
 
 #Générer ses graphiques Strava avec Clojure et Incanter

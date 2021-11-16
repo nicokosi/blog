@@ -3,7 +3,7 @@ Date: 2021-11-03 13:00
 Tags: dataviz data visualisation
 Slug: explore-strava-activities-with-kibana
 Author: Nicolas Kosinski
-Summary: Utilisation de Kibana pour explorer mes sorties sportives strava.com
+Summary: Comment j'ai importé mes données strava.com dans Kibana pour les explorer visuellement.
 Lang: fr
 
 Public présumé : personnes intéressées par l’exploration de données.

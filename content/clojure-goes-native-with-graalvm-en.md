@@ -3,7 +3,7 @@ Date: 2018-05-12 13:00
 Tags: clojure native graalvm
 Slug: clojure-goes-native-with-graalvm
 Author: Nicolas Kosinski
-Summary: Use GraalVM to generate native executable for 'hubstats', a Clojure project
+Summary: Use GraalVM to generate native executable for 'hubstats', a Clojure project.
 Lang: en
 
 

@@ -3,7 +3,7 @@ Date: 2018-06-10 15:00
 Tags: rust
 Slug: discovering-rust
 Author: Nicolas Kosinski
-Summary: Découvrons le langage de programmation Rust en développant un petit projet personnel
+Summary: Découvrons le langage de programmation Rust en développant un petit projet personnel.
 Lang: fr
 
 

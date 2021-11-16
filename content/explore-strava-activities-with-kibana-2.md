@@ -3,7 +3,7 @@ Date: 2021-11-09 07:00
 Tags: dataviz data visualization
 Slug: explore-strava-activities-with-kibana-2
 Author: Nicolas Kosinski
-Summary: Use Kibana to explore my personal Sport activities from strava.com (part 2) - create a better dashboard
+Summary: How I created a Kibana detailed and interactive dashboard to explore my personal Sport activities from strava.com.
 Lang: en
 
 Assumed audience: people interested in data exploration.

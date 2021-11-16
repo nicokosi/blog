@@ -3,7 +3,7 @@ Date: 2017-04-14 12:10
 Tags: strava charts r rstudio
 Slug: creating-strava-charts-with-r
 Author: Nicolas Kosinski
-Summary: Use R to generate custom Strava charts
+Summary: Use R to generate custom Strava charts.
 Lang: en
 
 #Creating Strava charts with R

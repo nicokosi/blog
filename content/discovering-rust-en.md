@@ -3,7 +3,7 @@ Date: 2018-06-10 15:00
 Tags: rust
 Slug: discovering-rust
 Author: Nicolas Kosinski
-Summary: Discovering the Rust programming language, from a Java/Clojure programmer's point of view, via a small side project
+Summary: Discovering the Rust programming language, from a Java/Clojure programmer's point of view, via a small side project.
 Lang: en
 
 

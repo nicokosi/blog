@@ -3,7 +3,7 @@ Date: 2016-08-17 00:00
 Tags: tools
 Slug: dotfiles
 Author: Nicolas Kosinski
-Summary: pourquoi et comment versionner sa configuration système (système d'exploitation, shell et applications).
+Summary: Pourquoi et comment versioner sa configuration système (système d'exploitation, shell et applications).
 Lang: fr
 
 ## Introduction : la puissance du shell, avec ou sans maîtrise ?

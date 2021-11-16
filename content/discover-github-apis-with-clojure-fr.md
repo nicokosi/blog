@@ -3,7 +3,7 @@ Date: 2017-01-11 08:56
 Tags: clojure github
 Slug: discover-github-apis-with-clojure
 Author: Nicolas Kosinski
-Summary: A la découverte des API GitHub en apprenant Clojure
+Summary: A la découverte des API GitHub en apprenant Clojure.
 Lang: fr
 
 Il est toujours intéressant d'apprendre quelque chose, même si ça ne concerne pas directement le travail quotidien. Pour citer [The Pragmatic Programmer](https://pragprog.com/book/tpp/the-pragmatic-programmer) (note pour moi-même : relire ce livre 🤓) :

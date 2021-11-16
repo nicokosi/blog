@@ -3,7 +3,7 @@ Date: 2019-12-24 07:00
 Tags: golang native
 Slug: rediscovering-Golang-with-pullpigo
 Author: Nicolas Kosinski
-Summary: (Re)découvrir le langage de programmation Go avec un petit outil en ligne de commande, "pullpigo"
+Summary: Une rétrospective sur mon expérimentation avec le langage de programmation Go pour un (modeste) outil en ligne de commande, "pullpigo".
 Lang: fr
 
 # Re-découvrons le langage Go avec "pullpigo", un petit projet d'expérimentation
