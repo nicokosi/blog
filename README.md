@@ -1,13 +1,13 @@
-# README
+# nicokosi's blog ✍️
 
-This is my blog content, in markdown format, and the configuration for static
+This is my [blog](https://nicokosi.github.io) content, in markdown format, and its configuration for static
 site generation.
-
 
 ## Install static site generator
 
-- Install Pelican static page generator, see http://docs.getpelican.com/en/latest/install.html.
-On Mac OS, with `Homebrew`:
+- [Install Pelican](http://docs.getpelican.com/en/latest/install.html) static page generator.
+
+On Mac OS, with [Homebrew](https://brew.sh):
 
 ```sh
 brew install python
@@ -24,21 +24,24 @@ git clone git@github.com:nicokosi/pelican-clean-blog.git
 If needed, all themes can be installed this way:
 
 ```sh
-git clone --recursive https://github.com/getpelican/pelican-themes pelican-themes
+git clone \
+    --recursive https://github.com/getpelican/pelican-themes \
+    pelican-themes
 ```
 
 ## Generate local site
 
-Uncomment `RELATIVE_URLS = True` in `pelicanconf.py` in order to have relative links for CSS/images/articles.
+Serve content on http://localhost:8000/:
 
-Generate content:
+```sh
+pelican content \
+    --listen \
+    --extra-settings RELATIVE_URLS=False \
+    --autoreload
+```
+
+## Generate content (before publishing)
 
 ```sh
 pelican content
-```
-
-Serve content of http://localhost:8000/:
-
-```sh
-pelican --listen
 ```
