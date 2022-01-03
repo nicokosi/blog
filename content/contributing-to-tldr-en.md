@@ -22,7 +22,7 @@ This blog post lists the good and bad parts of these contributions.
 
 ### Share my "local knowledge" 🎁
 
-Many commands that were only in my Unix shell history or in my head are now shared to all `tldr` users... and to my-self!
+Many commands that were only in my Unix shell history or in my head are now shared to all `tldr` users… and to my-self!
 
 I can now retrieve my favorite commands typing `tldr <command_name>`, i.e. `tldr espanso` since [my contribution #5662](https://github.com/tldr-pages/tldr/pull/5662) :
 
@@ -63,7 +63,7 @@ $ history | grep espanso
 
 ### A welcoming community 🤗
 
-I was very well received by the contributors who encourage without putting pressure. My feelings are mainly related to comments on _pull requests_ / _issues_, for example this kind [comment](https://github.com/tldr-pages/tldr/pull/5662#issuecomment-812137443):
+Contributors were welcoming and encouraged me without putting any pressure. My feelings are mainly related to the comments on _pull requests_ / _issues_, for example this kind [comment](https://github.com/tldr-pages/tldr/pull/5662#issuecomment-812137443):
 > Welcome to tldr-pages, @nicokosi! ⚡ 🎉
  
 However, I hardly used [the Gitter discussion board](https://gitter.im/tldr-pages/tldr). I think I'm not active enough (I contribute a few minutes / hours per week) to be able to keep up with the flow of trade!
@@ -88,7 +88,7 @@ Example: using the term `slug` in an authentication context for [this post](http
 
 ### Time-consuming ⏳
 
-Contributors on OSS project do this on their free time. Morever, when collaborating on _pull requests_, everything is done writing in English, but we are not all bilingual. So collaboration/contribution is not always easy and can take time.
+Contributors on OSS project do this on their free time. Moreover, when collaborating on _pull requests_, everything is done writing in English, but we are not all bilingual. So collaboration/contribution is not always easy and can take time.
 
 Example of misunderstanding ([link](https://github.com/tldr-pages/tldr/pull/6269#issuecomment-888351398)):
 > Yes, it does seem that only common is shown, anyway that can be fixed since a user might think we have a lack of pages if we only show them.
