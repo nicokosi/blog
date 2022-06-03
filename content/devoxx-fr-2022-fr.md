@@ -34,6 +34,6 @@ Cf. ce dépôt GitHub : [github.com/mikemybytes/the-unknowns-of-junit5](https://
 * Le plaisir de revoir des anciens collègues et des connaissances, voire de discuter avec des inconnus. 😎
 * C’est sympa de voir ses collègues dans un contexte différent. 😎
 * L’apéro convivial du jeudi soir, toujours aussi sympa : bière, bretzel, fromage, petits canapés, vin blanc… 🍺
-* Lors des sessions du jeudi soir (“Bird Of Feather”), c’était cool de voir les organisateurs donner retour / raconter des anecdotes historiques dans [10 ans déjà ! Devoxx France , l'envers du décors](https://cfp.devoxx.fr/2022/talk/BIT-5819/10_ans_deja_!_Devoxx_France_,_l'envers_du_decors) 😎
+* Lors des sessions du jeudi soir (“Bird Of Feather”), c’était cool de voir les organisateurs demander l'avis des orateurs / participants et raconter des anecdotes historiques dans [10 ans déjà ! Devoxx France , l'envers du décors](https://cfp.devoxx.fr/2022/talk/BIT-5819/10_ans_deja_!_Devoxx_France_,_l'envers_du_decors) 😎
 
 PS : merci à ma société, Vidal, à mon chef et à mon directeur de m’avoir payé ces deux jours de conférence ! ❤️
