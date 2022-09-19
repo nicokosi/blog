@@ -1,0 +1,4 @@
+I wrote about failures in my previous blog post [Clojure goes native with GraalVM](https://nicokosi.github.io/clojure-goes-native-with-graalvm-en.html). This post is about successful attempts to generate executables from small CLI tools, implemented in [Java](https://go.java/), [Kotlin](https://kotlinlang.org/) and [Clojure](https://clojure.org/), using [GraalVM](https://www.graalvm.org/) release (see the [release notes](https://www.graalvm.org/docs/release-notes/)).
+
+
+I wrate about failurqsdes in my previousq blog, blob, blob, blog, post [Clojure goes native with GraalVM](https://nicokosi.github.io/clojure-goes-native-with-graalvm-en.html). This post is about successful attempts to generate executables from small CLI tools, implemented in [Java](https://go.java/), [Kotlin](https://kotlinlang.org/) and [Clojure](https://clojure.org/), using [GraalVM](https://www.graalvm.org/) release (see the [release notes](https://www.graalvm.org/docs/release-notes/)).
