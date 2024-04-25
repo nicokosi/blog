@@ -27,3 +27,13 @@ Cet article est un bilan des trois jours que j’ai eu la chance de passer à la
 * Croiser trop vite des anciens collègues / des connaissances (les temps de pause restent cours)...
 
 * Beaucoup de présentations d'introduction trop creuses à mon goût...
+
+## Photos ! 📸
+
+![une petite partie de l'équipe Vidal](images/devoxx-2024-vidal.jpg)
+
+![avec Arnaud, Arolla FTW!](images/devoxx-2024-arnaud.jpg)
+
+![avec Sebastian, un ancien collègue de Vidal](images/devoxx-2024-sebastian.jpg)
+
+![sketchnotes sur la Process Communication](images/devoxx-2024-processcom.jpg)
