@@ -1,5 +1,6 @@
-Title: Quelques astuces shell *nix que j'utilise dans mon terminal 🧙
+Title: Quelques astuces shell "unix-like" que j'utilise dans mon terminal 🧙
 Date: 2024-11-28 06:52
+Modified: 2024-12-13 07:00
 Tags: nix shell terminal cli tui
 Slug: nix-terminal-tricks
 Author: Nicolas Kosinski
@@ -7,65 +8,65 @@ Summary: Quelques commandes shell "unix-like" que j'utilise souvent
 Lang: fr
 # Quelques astuces shell *nix que j'utilise dans mon terminal 🧙
 
-Public présumé : dévelopeurs.ses utilisant leur terminal pour diverses tâches
+Public présumé : dévelopeurs.ses utilisant leur terminal pour diverses tâches.
 
-Je suis un développeur qui utilise mon terminal. Voici quelques commandes / utilitaires que j'utilise régulièrement. Peut-être que ça peut vous être utile ou que vous pourrez me donner votre avis ?
+Voici quelques commandes / utilitaires que j'utilise régulièrement, peut-être que ça peut vous être utile ou que vous pourrez me donner votre avis ?
 
 
 ## l'anti-sèche `tldr` 📝
 
-On ne peut retenir les options de toutes les commandes. Personnellement, j'aime avoir une sorte d'anti-sèches directement dans mon terminal, sans utiliser ni mon navigateur web, ni un outil d'intelligence artificielle comme ChatGPT. 
-
+Ca m'est impossible de retenir toutes les options des commandes que j'utilise. Personnellement, j'aime avoir une sorte d'anti-sèches directement dans mon terminal, sans utiliser ni mon navigateur web, ni un outil d'intelligence artificielle comme ChatGPT.
 
 Pour ça, j'utilise souvent [tldr](https://tldr.sh) comme une anti-sèche, c'est très pratique !
 
-Par exemple, la commande `tldr npm` affiche :
+Par exemple, la commande `tldr --language fr git` affiche les 8 options les plus courantes de `git`, avec une description courte (pour information, on peut avoir les informations en plusieurs langues) :
 
 ```
-  JavaScript and Node.js package manager.
-  Manage Node.js projects and their module dependencies.
-  More information: <https://www.npmjs.com>.
+Système de gestion de versions décentralisé.
+Certaines commandes comme `git commit` ont leur propre documentation.
+Plus d'informations : <https://git-scm.com/>.
 
-  Create a `package.json` file with default values (omit `--yes` to do it interactively):
+Exécuter une sous-commande Git :
 
-      npm init -y|--yes
+    git sous_commande
 
-  Download all the packages listed as dependencies in `package.json`:
+Exécuter une sous-commande Git sur un répertoire personnalisé :
 
-      npm install
+    git -C chemin/vers/repertoire sous_commande
 
-  Download a specific version of a package and add it to the list of dependencies in `package.json`:
+Exécuter une sous-commande Git avec un paramètre de configuration spécifique :
 
-      npm install package_name@version
+    git -c 'cle_param_config=valeur' sous_commande
 
-  Download the latest version of a package and add it to the list of dev dependencies in `package.json`:
+Afficher l'aide générale :
 
-      npm install package_name -D|--save-dev
+    git --help
 
-  Download the latest version of a package and install it globally:
+Afficher l'aide sur une sous-commande Git :
 
-      npm install -g|--global package_name
+    git help sous_commande
 
-  Uninstall a package and remove it from the list of dependencies in `package.json`:
+Obtenir la version de Git :
 
-      npm uninstall package_name
-
-  List all locally installed dependencies:
-
-      npm list
-
-  List all top-level globally installed packages:
-
-      npm list -g|--global --depth 0
+    git --version
 ```
 
 ### aliases 📛
 
-### aliases à la demande
-
-TODO
-
 ## alias permanents
+
+Cas d'utilisation : taper plus vite les commandes souvent utilisées.
+
+Par exemple, comme j'utilise souvent la commande Maven `mvn`, j'ai défini cet aliax Unix dans ma configuration de shell :
+
+```sh
+alias mcist="mvn clean install -DskipTests"
+```
+
+Ainsi, je n'ai qu'à taper `mvncist` pour reconstruire un projet Maven sans avoir à attendre l'exécution des tests.
+
+
+### aliases à la demande
 
 Cas d'utilisation : éviter de taper de nombreuses fois la même commande que j'utilise de façon intensive pendant une période donnée.
 
@@ -94,18 +95,26 @@ Quand je ne sais pas précisement quoi chercher, j'utilise souvent [fzf, the "co
 
 Par exemple, quand je veux connaître la liste des environnements Java (_Java Development Kits_) que j'ai installés, je lance peux taper la commande `sdk list java | fzf` :
 
-![Utilisation de 'fzf' pour filtrer la commande 'sdk'](images/nix-terminal-tricks-fzf-sdk.gif")
+![Utilisation de 'fzf' pour filtrer la commande 'sdk'](images/nix-terminal-tricks-fzf-sdk.gif)
 
 Et pour copier plusieurs lignes, l'option `--multi` (ou sa version courte `-m`) est pratique.
 
 Par exemple, `eza ~ | fzf -m` affiche :
 
-![Utilisation de 'fzf' pour filtrer et selectionner plusieurs lignes de la commande 'eza'](images/nix-terminal-tricks-fzf-m-eza.gif")
+![Utilisation de 'fzf' pour filtrer et selectionner plusieurs lignes de la commande 'eza'](images/nix-terminal-tricks-fzf-m-eza.gif)
 
 ## les _TUIs_, pour aller plus vite ! ⚡️
 
 J'utilise plusieurs commandes de type [_Text-based User Interfaces_ (ou _Terminal-based_)](https://en.wikipedia.org/wiki/Text-based_user_interface), souvent désignées par le sigle _TUI_ :
+
 - [tig](https://jonas.github.io/tig/) pour explorer rapidement les commits Git (même si j'utilise aussi la commande `git` dans mon terminal, ainsi que l'intégration Git de mon environnement de développement (_IDE_).)
+
 - [lazydocker](https://github.com/jesseduffield/lazydocker) pour manipuler des containers Docker rapidement (même j'utilise aussi la commande `docker` directement)
+
 - [diskonaut](https://github.com/imsnif/diskonaut) pour faire du ménage sur mon disque dur
+
 - [l'extension GitHub CLI `user-stars`]([url](https://github.com/korosuke613/gh-user-stars?tab=readme-ov-file)) pour retrouver des dépôts GitHub auxquels j'ai mis une "étoile" (sorte de favori)
+
+Avant de finir, un remerciement à mes collègues qui m'ont aidé à apprendre ces astuces. Je pense notamment à Amazigh, Alexis, Stéphane, Yoann, Jean-Christophe... et je suis sûr d'en oublier (ne m'en veuillez pas) ! 🤗
+
+Et voilà, c'est terminé ! 🤓

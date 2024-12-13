@@ -1,5 +1,6 @@
-Title: A few *nix terminal tricks 🧙
+Title: A few "unix-like" terminal tricks 🧙
 Date: 2024-11-28 06:52
+Modified: 2024-12-13 07:00
 Tags: nix shell terminal cli tui
 Slug: nix-terminal-tricks
 Author: Nicolas Kosinski
@@ -65,7 +66,7 @@ Use case: speed-up typing for frequently used commands.
 
 For instance, since I often use Maven's `mvn` commands in my terminal, I have defined this alias in my shell configuration:
 ```sh
-alias mcist="mvn clean install -DskipTests"          
+alias mcist="mvn clean install -DskipTests"
 ```
 Then I can just type `mvncist` to build any Maven project without running tests.
 
@@ -93,25 +94,31 @@ For instance, I often run the `df -h | grep disk1s1` command to know available s
 
 ### with `fzf`, the "command-line fuzzy finder"
 
-When I don't exactly know out to filter the output, I use [fzf, the "command-line fuzzy finder"](https://junegunn.github.io/fzf/). 
+When I don't exactly know out to filter the output, I use [fzf, the "command-line fuzzy finder"](https://junegunn.github.io/fzf/).
 
 For instance, when I want to know Java Development Kits that I have installed, I run `sdk list java | fzf`.
 
-![Using 'fzf' to filter the 'sdk' command](images/nix-terminal-tricks-fzf-sdk.gif")
+![Using 'fzf' to filter the 'sdk' command](images/nix-terminal-tricks-fzf-sdk.gif)
 
 When I want to filter then copy several lines from command's output, the `--multi` (short `-m`) option is neat.
 
 For instance, `eza ~ | fzf -m`.
 
-![Using 'fzf' to filter and select multiple lines from the 'eza' command](images/nix-terminal-tricks-fzf-m-eza.gif")
+![Using 'fzf' to filter and select multiple lines from the 'eza' command](images/nix-terminal-tricks-fzf-m-eza.gif)
 
 
 ## TUIs for speed! ⚡️
 
 I often use the following [Text-based User Interfaces (or Terminal-based)](https://en.wikipedia.org/wiki/Text-based_user_interface), aka TUIs:
+
 - [tig](https://jonas.github.io/tig/) to navigate git commits quickly (even if I usually use `git` in my terminal or within my favorite IDE)
+
 - [lazydocker](https://github.com/jesseduffield/lazydocker) for managing docker containers quickly (even if usually use the `docker` command directly)
+
 - [diskonaut](https://github.com/imsnif/diskonaut) for identifying big files on my hard disk drive
+
 - [user-stars GitHub CLI extension]([url](https://github.com/korosuke613/gh-user-stars?tab=readme-ov-file)) to search my GitHub stars
+
+Thanks to my colleagues who helped me learning these tricks: Amazigh, Alexis, Stéphane, Yoann, Jean-Christophe...and all the others I forget (please forgive me)! 🤗
 
 That's all I got, nerds! 🤓
