@@ -60,7 +60,7 @@ Cas d'utilisation : taper plus vite les commandes souvent utilisées.
 Par exemple, comme j'utilise souvent la commande Maven `mvn`, j'ai défini cet aliax Unix dans ma configuration de shell :
 
 ```sh
-alias mcist="mvn clean install -DskipTests"
+alias mvncist="mvn clean install -DskipTests"
 ```
 
 Ainsi, je n'ai qu'à taper `mvncist` pour reconstruire un projet Maven sans avoir à attendre l'exécution des tests.

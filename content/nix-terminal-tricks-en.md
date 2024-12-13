@@ -66,7 +66,7 @@ Use case: speed-up typing for frequently used commands.
 
 For instance, since I often use Maven's `mvn` commands in my terminal, I have defined this alias in my shell configuration:
 ```sh
-alias mcist="mvn clean install -DskipTests"
+alias mvncist="mvn clean install -DskipTests"
 ```
 Then I can just type `mvncist` to build any Maven project without running tests.
 
