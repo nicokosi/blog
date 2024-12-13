@@ -36,7 +36,7 @@ Serve content on http://localhost:8000/:
 ```sh
 pelican content \
     --listen \
-    --extra-settings RELATIVE_URLS=false \
+    --extra-settings RELATIVE_URLS=true \
     --autoreload
 ```
 
