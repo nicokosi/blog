@@ -1,5 +1,2 @@
-*.pid
-output/*
-pelican-themes
-*.pyc
-.vscode
+/.idea/
+public

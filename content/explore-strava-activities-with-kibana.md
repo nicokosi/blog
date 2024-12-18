@@ -1,10 +1,11 @@
-Title: Exploring my own Strava activities using Kibana
-Date: 2021-11-03 09:00
-Tags: dataviz data visualization
-Slug: explore-strava-activities-with-kibana
-Author: Nicolas Kosinski
-Summary: How I imported my personal Sport strava.com activities into Kibana in order to explore them.
-Lang: en
++++
+title = "Exploring my own Strava activities using Kibana"
+description = "How I imported my personal Sport strava.com activities into Kibana in order to explore them."
+date = 2018-06-10
+[taxonomies]
+tags = ["dataviz", "data", "visualization"]
++++
+# Exploring my own Strava activities using Kibana
 
 Assumed audience: people interested in data exploration.
 
@@ -68,7 +69,7 @@ Upload `ndjson` file [http://localhost:5601/app/home#/tutorial_directory] into a
 
 Open Kibana's "discover" view for the last 6 years:
 
-![Discover Kibana](images/explore-strava-discover.png "Discover Kibana")
+![Discover Kibana](explore-strava-discover.png "Discover Kibana")
 
 ## Explore data / create dashboards
 
@@ -76,11 +77,11 @@ Open Kibana's "discover" view for the last 6 years:
 
 Let's create a dashboard to visualize the activities' average speed by activity type (run, hike etc.):
 
-![Create Kibana dashboard](images/explore-strava-create-dashboard.png "Create Kibana dashboard")
+![Create Kibana dashboard](explore-strava-create-dashboard.png "Create Kibana dashboard")
 
 It looks like this:
 
-![Create Kibana dashboard"](images/explore-strava-dashboard.png "Create Kibana dashboard"")
+![Create Kibana dashboard"](explore-strava-dashboard.png "Create Kibana dashboard"")
 
 A few remarks:
 

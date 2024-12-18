@@ -1,10 +1,11 @@
-Title: Exploring my own Strava activities using Kibana (part 2): a better dashboard
-Date: 2021-11-09 07:00
-Tags: dataviz data visualization
-Slug: explore-strava-activities-with-kibana-2
-Author: Nicolas Kosinski
-Summary: How I created a Kibana detailed and interactive dashboard to explore my personal Sport activities from strava.com.
-Lang: en
++++
+title = "Exploring my own Strava activities using Kibana (part 2): a better dashboard"
+description = "How I created a Kibana detailed and interactive dashboard to explore my personal Sport activities from strava.com."
+date = 2021-11-09
+[taxonomies]
+tags = ["dataviz", "data", "visualization"]
++++
+# Exploring my own Strava activities using Kibana (part 2): a better dashboard
 
 Assumed audience: people interested in data exploration.
 
@@ -27,12 +28,12 @@ In order to give it a try, I created a dashboard with the following charts:
 
 Here is a preview of the final dashboard: 🎉
 
-![the final dashboard](images/explore-strava-activities-with-kibana-2-view-dashboard.png "The final dashboard").
+![the final dashboard](explore-strava-activities-with-kibana-2-view-dashboard.png "The final dashboard").
 
 
 The same dashboard when clicking on "Run" activity type:
 
-![dashboard on "Run" activity type](images/explore-strava-activities-with-kibana-2-view-dashboard-run.png "dashboard on 'Run' activity type").
+![dashboard on "Run" activity type](explore-strava-activities-with-kibana-2-view-dashboard-run.png "dashboard on 'Run' activity type").
 
 
 The dashboard with its charts can be imported via the upper left button / "Management" / "Stack Management" / "Saved Objects" / "Import" with [this file]({static}/misc/strava-dashboard.ndjson).
