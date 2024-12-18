@@ -1,10 +1,10 @@
 Title: Quelques astuces shell "unix-like" que j'utilise dans mon terminal 🧙
 Date: 2024-11-28 06:52
-Modified: 2024-12-13 07:00
-Tags: nix shell terminal cli tui
+Modified: 2024-12-18 07:00
+Tags: shell terminal cli tui
 Slug: nix-terminal-tricks
 Author: Nicolas Kosinski
-Summary: Quelques commandes shell "unix-like" que j'utilise souvent
+Summary: astuces shell "unix-like"
 Lang: fr
 # Quelques astuces shell *nix que j'utilise dans mon terminal 🧙
 

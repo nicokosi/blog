@@ -1,12 +1,12 @@
 Title: A few "unix-like" terminal tricks 🧙
 Date: 2024-11-28 06:52
-Modified: 2024-12-13 07:00
-Tags: nix shell terminal cli tui
+Modified: 2024-12-18 07:00
+Tags: shell terminal cli tui
 Slug: nix-terminal-tricks
 Author: Nicolas Kosinski
-Summary: Some unix-like shell commands I often use
+Summary: unix-like shell tricks
 Lang: en
-# A few *nix terminal tricks 🧙
+# A few "unix-like" terminal tricks 🧙
 
 Assumed audience: developers interested in using the terminal for various tasks.
 
