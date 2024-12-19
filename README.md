@@ -1,47 +1,26 @@
-# nicokosi's blog ✍️
+#
 
-This is my [blog](https://nicokosi.github.io) content, in markdown format, and its configuration for static
-site generation.
+## Install
 
-## Install static site generator
-
-- [Install Pelican](http://docs.getpelican.com/en/latest/install.html) static page generator.
-
-On Mac OS, with [Homebrew](https://brew.sh):
-
+Install Zola:
 ```sh
-brew install python
-pip install pelican
-pip install markdown
+brew install zola
+```
+or:
+```sh
+sudo port install zola
 ```
 
-- Install Pelican theme:
+## Check the content
 
 ```sh
-git clone git@github.com:nicokosi/pelican-clean-blog.git
+zola check
 ```
 
-If needed, all themes can be installed this way:
+## Serve the content locally
 
 ```sh
-git clone \
-    --recursive https://github.com/getpelican/pelican-themes \
-    pelican-themes
+zola serve
 ```
 
-## Generate local site
-
-Serve content on http://localhost:8000/:
-
-```sh
-pelican content \
-    --listen \
-    --extra-settings RELATIVE_URLS=true \
-    --autoreload
-```
-
-## Generate content (before publishing)
-
-```sh
-pelican content
-```
+The browse http://127.0.0.1:1111.

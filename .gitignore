@@ -1,5 +1,0 @@
-*.pid
-output/*
-pelican-themes
-*.pyc
-.vscode
