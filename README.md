@@ -11,7 +11,13 @@ or:
 sudo port install zola
 ```
 
-## Serve
+## Check the content
+
+```sh
+zola check
+```
+
+## Serve the content locally
 
 ```sh
 zola serve
