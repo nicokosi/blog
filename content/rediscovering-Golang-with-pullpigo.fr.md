@@ -2,6 +2,7 @@
 title = "Re-découvrons le langage Go avec \"pullpigo\", un petit projet d'expérimentation"
 description = "Une rétrospective sur mon expérimentation avec le langage de programmation Go pour un (modeste) outil en ligne de commande, \"pullpigo\"."
 date = 2019-12-24
+update = 2024-12-30
 [taxonomies]
 tags = ["golang", "native"]
 +++
@@ -63,7 +64,8 @@ J'ai également apprécié l'outillage (notez mon _background_ Java) :
 
 - pour __formatter le code__, il sufffit de lancer la commande `go fmt`, sans aucune configuration.
 
-- pour analyser statiquement son code, un __code linter__ est également inclus. Il suffit d'installer [https://github.com/golang/linttype]([golang/linttype) et de lancer la commande `golint`, sans configuration (pour être franc, ce _linter_ ne m'a pas aidé pour coder pullpigo mais je trouve ça génial que cet outil existe).
+- pour analyser statiquement son code, un __code linter__ est également inclus. ~Il suffit d'installer `golang/linttype` et de lancer la commande `golint`, sans configuration (pour être franc, ce _linter_ ne m'a pas aidé pour coder pullpigo mais je trouve ça génial que cet outil existe).~
+[mise à jour, 2024-12-30 : `golang/linttype` n'existe plus, voir la commande [go vet](https://pkg.go.dev/cmd/vet)).
 
 ## Opportunités "annexes" 😎
 

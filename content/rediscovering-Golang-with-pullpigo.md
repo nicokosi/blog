@@ -2,6 +2,7 @@
 title = "Rediscovering Golang with \"pullpigo\", a small hobby-project"
 description = "How I discovered Go (the programming language) basics while coding a CLI tool named \"pullpigo\"."
 date = 2019-12-24
+update = 2024-12-30
 [taxonomies]
 tags = ["golang", "native"]
 +++
@@ -60,7 +61,8 @@ Other goodies have I appreciated from by Java background:
 
 - __code formatting__ is included! Its' simple as `go fmt`. No need to find and configure an external code formatting tools.
 
-- __code linter__ is included! Just install [https://github.com/golang/linttype]([golang/linttype) and run the `golint` command. No need to find and configure an external code formatting tools. (to be honest, the linter did not help when coding pullpigo but it's so cool that code linter is provided).
+- __code linter__ is included! ~Just install `golang/linttype` and run the `golint` command. No need to find and configure an external code formatting tools (to be honest, the linter did not help when coding pullpigo but it's so cool that code linter is provided).~
+[Edit from 2024-12-30: golang/linttype does not exists anymore, other tools like [go vet](https://pkg.go.dev/cmd/vet) exist).
 
 ## Other opportunities 😎
 

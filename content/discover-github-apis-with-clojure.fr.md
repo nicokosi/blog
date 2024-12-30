@@ -2,6 +2,7 @@
 title = "A la découverte des API GitHub en apprenant Clojure"
 description = "A la découverte des API GitHub en apprenant Clojure."
 date = 2017-01-11
+update = 2024-12-30
 [taxonomies]
 tags = ["clojure", "github"]
 +++
@@ -13,7 +14,7 @@ Il est toujours intéressant d'apprendre quelque chose, même si ça ne concerne
 
 Mon dernier projet personnel "pour apprendre" a été de créer un outil en ligne de commande, nommé [hubstats](https://github.com/nicokosi/hubstats), permettant d'afficher un résumé statistique concernant les [pull requests GitHub](https://help.github.com/articles/github-glossary/#pull-request), afin d'avoir quelques métriques sur leur utilisation par mon équipe, au travail.
 
-Ce modeste projet m'a permis de mettre en pratique le langage de programmation [Clojure](https://clojure.org/) (que je connaissais un tout petit peu), mais aussi de découvrir les [API REST](https://developer.github.com/v3/) et [GraphQL](https://developer.github.com/early-access/graphql/) de GitHub.
+Ce modeste projet m'a permis de mettre en pratique le langage de programmation [Clojure](https://clojure.org/) (que je connaissais un tout petit peu), mais aussi de découvrir les [API REST](https://developer.github.com/v3/) et [GraphQL](https://docs.github.com/en/graphql) de GitHub.
 
 J'ai en plus eu la chance d'échanger régulièrement avec un collègue connaissant bien Clojure. Ce fut appréciable et motivant, merci Jérôme aka [@jprudent](https://github.com/jprudent) !
 
@@ -77,9 +78,10 @@ Ce que j'ai moins aimé :
 
 Cet projet m'a donné envie d'explorer d'autres pistes :
 
-* utiliser les API [GraphQL de GitHub](https://developer.github.com/early-access/graphql/)
+* utiliser les API [GraphQL de GitHub](https://docs.github.com/en/graphql)
 * transformer la ligne de commande _hubstats_ en application web (via [ClojureScript](https://clojurescript.org/) ?)
 * faire un autre outil en ligne de commande
 * essayer un autre langage (par exemple : [Go](https://golang.org/) ou [Rust](https://www.rust-lang.org/))
+[mise à jour, 2024-12-30 : le lien GitHub GraphQL, étant cassé, a été mis à jour]
 
 La suite au prochain épisode ! 😉

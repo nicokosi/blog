@@ -2,6 +2,7 @@
 title = "Java, Kotlin and Clojure go native with GraalVM"
 description = "Generate native executables via GraalVM for Java, Kotlin and Clojure CLI tools."
 date = 2019-08-13
+update = 2024-12-30
 [taxonomies]
 tags = ["java", "clojure", "kotlin", "native", "graalvm", "jvm"]
 +++
@@ -20,7 +21,7 @@ Plan :
 
 ## Introduction
 
-I wrote about failures in my previous blog post [Clojure goes native with GraalVM](https://nicokosi.github.io/clojure-goes-native-with-graalvm-en.html). This post is about successful attempts to generate executables from small CLI tools, implemented in [Java](https://go.java/), [Kotlin](https://kotlinlang.org/) and [Clojure](https://clojure.org/), using [GraalVM](https://www.graalvm.org/) release (see the [release notes](https://www.graalvm.org/docs/release-notes/)).
+I wrote about failures in my previous blog post [Clojure goes native with GraalVM](https://nicokosi.github.io/clojure-goes-native-with-graalvm-en.html). This post is about successful attempts to generate executables from small CLI tools, implemented in [Java](https://go.java/), [Kotlin](https://kotlinlang.org/) and [Clojure](https://clojure.org/), using [GraalVM](https://www.graalvm.org/) release (see the [release notes](https://www.graalvm.org/release-notes/)).
 
 ## Tools
 
@@ -142,7 +143,8 @@ So, 2 kilobytes for the native version versus 33 megabytes for the JVM version.
 
 ## An "not-fully optimized" executable for a `Clojure` CLI tool
 
-When I wrote my previous article [Clojure goes native with GraalVM](https://nicokosi.github.io/clojure-goes-native-with-graalvm-en.html), GraalVM was still experimental (_release candidates_). Moreover, I was stuck with the [Native Image limitations](https://github.com/oracle/graal/blob/master/substratevm/LIMITATIONS.md) with dynamic class loading, the refection API (`java.lang.reflect`).
+When I wrote my previous article [Clojure goes native with GraalVM](https://nicokosi.github.io/clojure-goes-native-with-graalvm-en.html), GraalVM was still experimental (_release candidates_). Moreover, I was stuck with the Native Image limitations with dynamic class loading, the refection API (`java.lang.reflect`).
+[edit from 2024-12-30: Native Image limitations link was broken has been removed]
 
 Let's try again with GraalVM release for a Clojure CLI tool: [hubstats](https://github.com/nicokosi/hubstats/) (200 lines of code, with third-party libraries).
 
