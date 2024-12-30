@@ -2,6 +2,7 @@
 title = "Du code Java/Kotlin/Clojure \"natif\" grâce à GraalVM"
 description = "Générer des exécutables natifs via GraalVM pour des outils en ligne de commande implémentés en Java, Kotlin ou Clojure."
 date = 2019-08-13
+update = 2024-12-30
 [taxonomies]
 tags = ["java", "clojure", "kotlin", "native", "graalvm", "jvm"]
 +++
@@ -20,7 +21,7 @@ Plan :
 
 ## Introduction
 
-Suite à mes premiers essais infructueux l'an dernier (lire mon article précédent [Du Clojure "natif" grâce à GraalVM](https://nicokosi.github.io/clojure-goes-native-with-graalvm.html)), voici un compte rendu plus positif de mes expérimentations avec les versions _release_ de [GraalVM](https://www.graalvm.org/) sorties à partir de mai 2019 (cf. les [_release notes_](https://www.graalvm.org/docs/release-notes/)), en utilisant des applications en ligne de commandes implémentée en [Java](https://go.java/), [Kotlin](https://kotlinlang.org/) et [Clojure](https://clojure.org/).
+Suite à mes premiers essais infructueux l'an dernier (lire mon article précédent [Du Clojure "natif" grâce à GraalVM](https://nicokosi.github.io/clojure-goes-native-with-graalvm.html)), voici un compte rendu plus positif de mes expérimentations avec les versions _release_ de [GraalVM](https://www.graalvm.org/) sorties à partir de mai 2019 (cf. les [_release notes_](https://www.graalvm.org/release-notes/)), en utilisant des applications en ligne de commandes implémentée en [Java](https://go.java/), [Kotlin](https://kotlinlang.org/) et [Clojure](https://clojure.org/).
 
 ## Outillage
 
@@ -144,7 +145,8 @@ Soit 2 kilooctets avec la version native contre 33 mégaoctets pour la version J
 Dans mon billet [Du Clojure "natif" grâce à GraalVM](https://nicokosi.github.io/clojure-goes-native-with-graalvm.html), je me suis heurté à deux problèmes :
 
 - GraalVM était encore expérimental (_release candidates_) à l'époque
-- l'outil Native Image possède des [limitations](https://github.com/oracle/graal/blob/master/substratevm/LIMITATIONS.md) qui concernent notamment le chargement de classes dynamiques, l'utilisation de la réflexion (API java.lang.reflect) etc.
+- l'outil Native Image possède des limitations qui concernent notamment le chargement de classes dynamiques, l'utilisation de la réflexion (API java.lang.reflect) etc.
+[mise à jour, 2024-12-30 : le lien vers les limitations, étant cassé, a été supprimé]
 
 Essayons de refaire l'essai avec une version _release_ de GraalVM pour l'application [hubstats](https://github.com/nicokosi/hubstats/) (200 lignes de codes, utilisation de librairies tierces pour appeler les API HTTP GitHub).
 

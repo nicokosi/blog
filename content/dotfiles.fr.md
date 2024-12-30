@@ -2,6 +2,7 @@
 title = "Versionner sa configuration système via des \"dotfiles\""
 description = "Pourquoi et comment versioner sa configuration système (système d'exploitation, shell et applications)."
 date = 2016-08-17
+update = 2024-12-30
 [taxonomies]
 #tags = ["tools"]
 +++
@@ -39,7 +40,7 @@ J'ai pour ma part utilisé [https://github.com/holman/dotfiles](https://github.c
 
 - création de liens symboliques ("symlinks") pointant vers les scripts de démarrage du shell (exemple : le fichier `$HOME/.zshrc` pour le shell `ZSH`).
 
-Après avoir "forké" [https://github.com/holman/dotfiles](https://github.com/holman/dotfile), j'ai créé deux branches :
+Après avoir "forké" [https://github.com/holman/dotfiles](https://github.com/holman/dotfiles), j'ai créé deux branches :
 
 - une pour mon ordinateur personnel sous Mac : [https://github.com/nicokosi/dotfiles](https://github.com/nicokosi/dotfiles)
 
@@ -59,3 +60,5 @@ Même si la mise en place et la maintenance de ses dotfiles prend du temps, l'in
 :
 
 PS : merci à Jean-Christophe Gay pour l'inspiration et les "bons tuyaux". Voici son blog : [https://jeanchristophegay.com/](https://jeanchristophegay.com/).
+
+[mise à jour, 2024-12-30 : correction d'une coquille dans un des liens vers https://github.com/holman/dotfiles]

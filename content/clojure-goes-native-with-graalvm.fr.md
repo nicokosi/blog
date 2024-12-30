@@ -2,6 +2,7 @@
 title = "Du Clojure \"natif\" grâce à GraalVM"
 description = "Générer un programme exécutable natif via GraalVM pour un projet Clojure, 'hubstats'."
 date = 2018-05-12
+update = 2024-12-30
 [taxonomies]
 tags = ["clojure", "native", "graalvm"]
 +++
@@ -16,7 +17,8 @@ GraalVM permet également de générer des exécutables natifs à partir du code
 For JVM-based languages, GraalVM offers a mechanism to create precompiled native images with instant start up and low memory footprint.
 ```
 
-Oracle labs a annoncé en avril 2018 la sortie de [GraalVM 1.0 release candidate](https://blogs.oracle.com/developers/announcing-graalvm), donc c'est parti pour un essai !
+Oracle labs a annoncé en avril 2018 la sortie de [GraalVM 1.0 release candidate](https://www.infoq.com/news/2018/04/oracle-graalvm-v1/), donc c'est parti pour un essai !
+[mise à jour, 2024-12-30 : le lien original vers le blog Oracle, étant cassé, a été remplacé par un lien équivalent vers InfoQ]
 
 
 ## Construire un exécutable à partir d'un projet Clojure
@@ -87,7 +89,8 @@ Caused by: java.lang.NullPointerException
 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
 Error: Processing image build request failed
 ```
-Le problème ressemble fortement à [issue#385](https://github.com/oracle/graal/issues/385) et [issue#375](https://github.com/oracle/graal/issues/375). Si je comprends bien, il est lié à l'une des limitations de GraalVM : ["static initializers" limitation](https://github.com/oracle/graal/blob/master/substratevm/LIMITATIONS.md#static-initializers). 😢
+Le problème ressemble fortement à [issue#385](https://github.com/oracle/graal/issues/385) et [issue#375](https://github.com/oracle/graal/issues/375). Si je comprends bien, il est lié à l'une des limitations de GraalVM : "static initializers" limitation. 😢
+[mise à jour, 2024-12-30 : le lien vers les limitations, étant cassé, a été supprimé]
 
 
 ### Essai n°2

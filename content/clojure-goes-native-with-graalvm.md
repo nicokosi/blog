@@ -2,6 +2,7 @@
 title = "Clojure goes native with GraalVM"
 description = "Use GraalVM to generate native executable for 'hubstats', a Clojure project."
 date = 2018-05-12
+update = 2024-12-30
 [taxonomies]
 tags = ["clojure", "native", "graalvm"]
 +++
@@ -14,8 +15,8 @@ tags = ["clojure", "native", "graalvm"]
 For JVM-based languages, GraalVM offers a mechanism to create precompiled native images with instant start up and low memory footprint.
 ```
 
-[Oracle labs announced in April 2018](https://blogs.oracle.com/developers/announcing-graalvm) GraalVM 1.0 release candidate, so let's have a try!
-
+[Oracle labs announced in April 2018](https://www.infoq.com/news/2018/04/oracle-graalvm-v1/) GraalVM 1.0 release candidate, so let's have a try!
+[edit from 2024-12-30: original Oracle blog post link is broken, it has been replaced with an equivalent link from InfoQ]
 
 ## Build a native executable for a Clojure project
 
@@ -86,8 +87,8 @@ Caused by: java.lang.NullPointerException
 Error: Processing image build request failed
 ```
 
-I visibly hit a similar issue than [issue#385](https://github.com/oracle/graal/issues/385) and [issue#375](https://github.com/oracle/graal/issues/375). It seems to be related to the ["static initializers" limitation](https://github.com/oracle/graal/blob/master/substratevm/LIMITATIONS.md#static-initializers). 😢
-
+I visibly hit a similar issue than [issue#385](https://github.com/oracle/graal/issues/385) and [issue#375](https://github.com/oracle/graal/issues/375). It seems to be related to the "static initializers" limitation. 😢
+[edit from 2024-12-30: Native Image limitations link was broken has been removed]
 
 ### Attempt #2
 

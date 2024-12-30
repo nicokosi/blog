@@ -2,6 +2,7 @@
 title = "Discovering GitHub APIs while learning Clojure"
 description = "Discovering GitHub APIs while learning Clojure."
 date = 2017-01-11
+update = 2024-12-30
 [taxonomies]
 tags = ["clojure", "github"]
 +++
@@ -13,7 +14,7 @@ As a developer, it's important to keep on learning/discovering stuff. Quoting [T
 
 My last project "for learning" was to create a command-line tool, named [hubstats](https://github.com/nicokosi/hubstats), that outputs a summary for [pull requests GitHub](https://help.github.com/articles/github-glossary/#pull-request). This tool aims at giving some metrics for me and my team.
 
-The real purposes were to practice [Clojure](https://clojure.org/) (which I knew little) but also to discover [REST](https://developer.github.com/v3/) and [GraphQL](https://developer.github.com/early-access/graphql/) GitHub APIs.
+The real purposes were to practice [Clojure](https://clojure.org/) (which I knew little) but also to discover [REST](https://developer.github.com/v3/) and [GraphQL](https://docs.github.com/en/graphql) GitHub APIs.
 
 Moreover, I was lucky to interact with a colleague of mine who is an advanced Clojure developer. That was really cool, thanks Jérôme aka [@jprudent](https://github.com/jprudent)!
 
@@ -77,9 +78,11 @@ What I did not like:
 
 Some ideas for some evolutions (or an other project, maybe?):
 
-* use [GitHub GraphQL](https://developer.github.com/early-access/graphql/)
+* use [GitHub GraphQL](https://docs.github.com/en/graphql)
 * make a web app for _hubstats_ (via [ClojureScript](https://clojurescript.org/)?)
 * build another CLI tool
 * learn another language (for example: [Go](https://golang.org/) or [Rust](https://www.rust-lang.org/))
+
+[edit from 2024-12-30: GitHub GraphQL link has been updated]
 
 That's all folk! 😉
