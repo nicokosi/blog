@@ -1,14 +1,14 @@
 +++
-title = "Migration de Pelican à Zola, comme générateur de pages statiques pour mon blog"
+title = "Utilisation du générateur de pages statiques Zola pour mon blog, à la place de Pelican"
 description = "Comment j'ai mis au goût du jour le visuel de mon blog en utilisant le générateur de pages statiques Zola à la place de Pelican"
 date = 2024-12-31
 [taxonomies]
 #tags = ["blog", "static-page-generator", "migration"]
 +++
-# Migration de Pelican à Zola comme générateur de pages statiques
+# Utilisation du générateur de pages statiques Zola pour mon blog, à la place de Pelican
 
 Lectorat présumé : personnes intéressées par les générateurs de pages statiques, par exemple pour écrire leur blog
-personnel et le publier en ligne.
+personnel et le publier en ligne, et par les détails de migration d'un générateur (Pelican) à un autre (Zola).
 
 ## Pourquoi migrer ?
 
