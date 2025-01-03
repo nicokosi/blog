@@ -87,10 +87,10 @@ Et je m'attends à ce que le binaire `zola`, qui n'a pas de dépendances, ne cas
 ## Les compromis
 
 1. Les **liens cassés** : ayant choisi de changer la langue par défaut qui est maintenant l'anglais (au lieu du français), 
-les anciens liens sont cassés / différents (exemple : https://nicokosi.github.io/nix-terminal-tricks/ est l'article en
-anglais dont l'ancienne URL était https://nicokosi.github.io/nix-terminal-tricks-en).
-Je pense que ça n'est pas un problème très grave, ça se résout pour un humain (en repassant pas la page de garde) et
-l'optimisation pour les moteurs de recherche aka Search Engine Optimisation n'est pas ma préoccupation principale...
+les anciens liens sont cassés / différents. Par exemple, [https://nicokosi.github.io/nix-terminal-tricks/](https://nicokosi.github.io/nix-terminal-tricks/)
+est le lien vers l'article en anglais dont l'ancienne URL était [https://nicokosi.github.io/nix-terminal-tricks-en](https://nicokosi.github.io/nix-terminal-tricks-en).
+Je pense que ça n'est pas un problème très grave, ça se résout pour un humain (en "repassant" pas la page de garde) et
+l'optimisation pour les moteurs de recherche aka _Search Engine Optimisation_ n'est pas ma préoccupation principale...
 
 2. impossible d'ajouter des **tags** sur les articles qui n'existent qu'en français (que je n'ai pas traduit en anglais).
 J'ai ouvert [ce ticket (_GitHub issue_)](https://github.com/getzola/zola/issues/2757) pour savoir comment résoudre ça.
