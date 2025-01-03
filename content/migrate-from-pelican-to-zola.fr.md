@@ -17,8 +17,8 @@ générateur de pages statiques open source assez utilisé : [Pelican](https://d
 
 J'avais trois "problèmes" :
 1. L'aspect **visuel démodé**, je vous laisse juge :
-![liste des articles en français](before-french-landing-page.png)
-![un article en anglais](before-english-article.png)
+![liste des articles en français avant migration](before-french-landing-page.png)
+![un article en anglais avant migration](before-english-article.png)
 2. les liens vers mes **profils de réseaux sociaux** n'étaient **pas à jour** : je voulais remplacer le lien Twitter/X par des
    liens vers mon profil Mastodon et Bluesky.
 3. Pelican est un outil Python et il m'est arrivé plusieurs fois qu'il **ne fonctionne plus** (j'avais probablement
@@ -40,7 +40,7 @@ Zola étant plus récent, je me suis dit que les **thèmes** seront encore plus 
 
 Dans tous les cas, je pense que l'un comme l'autre peuvent faire l'affaire, comme de nombreux autres outils similaires.
 
-Par curiosité, voici une liste de générateurs similaires, filtrable par langage d'implémentation, type de patron (_templating_), popularité GitHub (nombre d'étoiles aka _stars_) et type de licence : https://jamstack.org/generators/.
+Par curiosité, voici une liste de générateurs similaires, filtrable par langage d'implémentation, type de patron (_templating_), popularité GitHub (nombre d'étoiles aka _stars_) et type de licence : [https://jamstack.org/generators](https://jamstack.org/generators).
 
 ## La migration
 
@@ -48,7 +48,7 @@ L'interface (options de lignes de commande et méta-données) étant très proch
 
 1. **choisi un thème**, ça peut prendre un certain temps (les goûts et les couleurs)... 😅 j'en ai essayé quelques-uns et j'ai choisi [Apollo](https://github.com/not-matthias/apollo) : je le trouve simple et joli, il semble maintenu et il gère les liens vers les réseaux sociaux Mastodon et Bluesky.
 2. **migré un seul article** multilingue (versions française et anglaise) contenant des images ; ça m'a pris plus d'une heure, surtout pour comprendre comme gérer la version multilingue et les images.
-En dehors de la configuration globale, il a fallu transformer les méta-données qui était de ce type :
+En dehors de la configuration globale, il a fallu transformer les méta-données qui étaient de ce type :
 ```
 Title: Quelques astuces shell "unix-like" que j'utilise dans mon terminal 🧙
 Date: 2024-11-28 06:52
@@ -59,7 +59,7 @@ Author: Nicolas Kosinski
 Summary: astuces shell "unix-like"
 Lang: fr
 ```
-à ce format (ce qui ce fait rapidement en copiant-collant) :
+à ce format :
 ```
 +++
 title = "Quelques astuces shell \"unix-like\" que j'utilise dans mon terminal 🧙"
@@ -70,17 +70,15 @@ updated = 2024-12-18
 tags = ["shell", "terminal", "cli", "tui"]
 +++
 ```
-3. **migré toutes les pages** (une trentaine) en modifiant "à la main" nom des fichiers et les méta-données (environ une heure)
+3. **migré toutes les pages** (une trentaine) en modifiant "à la main" le nom des fichiers et les méta-données (ça a dû me prendre environ une heure)
 
-Aperçu avant la migration (le générateur de pages statique est Pelican avec le thème) :
-
-Pour plus d'information, les détails de la migration sont dans cette _pull request GitHub_ : https://github.com/nicokosi/blog/pull/11
+Pour plus d'informations, les détails de la migration sont dans cette [_pull request GitHub_](https://github.com/nicokosi/blog/pull/11).
 
 ## Résultat
 
 Le look est quand même plus moderne :
-![liste des articles en anglais](now-english-articles.png)
-![Un article en anglais](now-english-articles.png)
+![liste des articles en anglais après migration](now-english-articles.png)
+![Un article en anglais après migration](now-english-articles.png)
 
 On peut voir en haut à gauche les liens vers mes profils Mastodon et Bluesky (et la suppression du profil X/Twitter).
 
