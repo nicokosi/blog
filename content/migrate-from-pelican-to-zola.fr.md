@@ -27,7 +27,7 @@ J'avais trois "problèmes" :
 
 ## Comment choisir ?
 
-Un peu au feeling, pour être honnête, en tout cas, ne façon pas totalement scientifique... 😇
+Un peu au feeling, pour être honnête. En tout cas, de façon pas totalement scientifique... 😇
 
 Il y a quelques années (en 2021), j'avais commencé à utiliser [Hugo](https://gohugo.io/) dans [cette migration Pelican vers Hugo](https://github.com/nicokosi/blog/pull/1) que je n'ai pas terminée.
 
@@ -94,7 +94,7 @@ l'optimisation pour les moteurs de recherche aka _Search Engine Optimisation_ n'
 
 2. impossible d'ajouter des **tags** sur les articles qui n'existent qu'en français (que je n'ai pas traduit en anglais).
 J'ai ouvert [ce ticket (_GitHub issue_)](https://github.com/getzola/zola/issues/2757) pour savoir comment résoudre ça.
-A suivre...
+À suivre...
 
 ## Bonus
 
