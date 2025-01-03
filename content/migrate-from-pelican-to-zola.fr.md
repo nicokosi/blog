@@ -3,7 +3,7 @@ title = "Migration de Pelican à Zola, comme générateur de pages statiques pou
 description = "Comment j'ai mis au goût du jour le visuel de mon blog en utilisant le générateur de pages statiques Zola à la place de Pelican"
 date = 2024-12-31
 [taxonomies]
-tags = ["blog", "static-page-generator", "migration"]
+#tags = ["blog", "static-page-generator", "migration"]
 +++
 # Migration de Pelican à Zola comme générateur de pages statiques
 
@@ -15,10 +15,13 @@ personnel et le publier en ligne.
 Même si je ne publie que deux billets de blog par an, en moyenne, j'ai créé ce blog il y a 8 ans en utilisant un
 générateur de pages statiques open source assez utilisé : [Pelican](https://docs.getpelican.com/).
 
-J'avais deux "problèmes" :
-1. Pelican est un outil Python et il m'est arrivé plusieurs fois qu'il ne fonctionne plus (j'avais probablement
+J'avais trois "problèmes" :
+1. L'aspect visuel était démodé, je vous laisse juge :
+![The French landing page](before-french-landing-page.png)
+![an English article](before-english-article.png)
+2. Pelican est un outil Python et il m'est arrivé plusieurs fois qu'il ne fonctionne plus (j'avais probablement
 "cassé" mon environnement de développement Python)
-2. les liens vers mes profils de réseaux sociaux n'étaient pas à jour : je voulais remplacer le lien Twitter/X par des
+3. les liens vers mes profils de réseaux sociaux n'étaient pas à jour : je voulais remplacer le lien Twitter/X par des
 liens vers mon profil Mastodon et Bluesky.
 
 ## Comment choisir ?
