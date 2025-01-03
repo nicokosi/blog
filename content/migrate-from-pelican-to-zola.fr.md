@@ -16,12 +16,12 @@ Même si je ne publie que deux billets de blog par an, en moyenne, j'ai créé c
 générateur de pages statiques open source assez utilisé : [Pelican](https://docs.getpelican.com/).
 
 J'avais trois "problèmes" :
-1. L'aspect visuel était démodé, je vous laisse juge :
+1. L'aspect **visuel** était **démodé**, je vous laisse juge :
 ![liste des articles en français](before-french-landing-page.png)
 ![un article en anglais](before-english-article.png)
-2. Pelican est un outil Python et il m'est arrivé plusieurs fois qu'il ne fonctionne plus (j'avais probablement
+2. Pelican est un **outil Python** et il m'est arrivé plusieurs fois qu'il **ne fonctionne plus** (j'avais probablement
 "cassé" mon environnement de développement Python)
-3. les liens vers mes profils de réseaux sociaux n'étaient pas à jour : je voulais remplacer le lien Twitter/X par des
+3. les liens vers mes **profils de réseaux sociaux** n'étaient **pas à jour** : je voulais remplacer le lien Twitter/X par des
 liens vers mon profil Mastodon et Bluesky.
 
 ## Comment choisir ?
@@ -33,9 +33,9 @@ Il y a quelques années (en 2021), j'avais commencé à utiliser [Hugo](https://
 Cette année (2024), je me suis reposé la question. Au hasard de ma veille technique, j'ai entendu parler de [Zola](https://www.getzola.org/), qui
 est similaire à Hugo.
 
-Hugo comme Zola (vous voyez les références 😉) sont gratuits et "à code ouvert" (leur code est _open source_, disponible sur GitHub et ouverts aux contributions externes).
+Hugo comme Zola (vous voyez les références 😉) sont **gratuits** et **"à code ouvert"** (leur code est _open source_, disponible sur GitHub et ouverts aux contributions externes).
 
-Zola étant plus récent, je me suis dit que les thèmes seront encore plus modernes et peut-être davantage maintenus... 🤷
+Zola étant plus récent, je me suis dit que les **thèmes** seront encore plus **modernes** et peut-être davantage maintenus... 🤷
 
 Dans tous les cas, je pense que l'un comme l'autre peuvent faire l'affaire, comme de nombreux autres outils similaires.
 
@@ -45,8 +45,8 @@ Par curiosité, voici une liste de générateurs similaires, filtrable par langa
 
 L'interface (options de lignes de commande et méta-données) étant très proche, j'ai :
 
-1. choisi un thème, ça peut prendre un certain temps (les goûts et les couleurs)... 😅 j'en ai essayé quelques-uns et j'ai choisi [Apollo](https://github.com/not-matthias/apollo) : je le trouve simple et joli, il semble maintenu et il gère les liens vers les réseaux sociaux Mastodon et Bluesky.
-2. migré un seul article multilingue (versions française et anglaise) contenant des images ; ça m'a pris plus d'une heure, surtout pour comprendre comme gérer la version multilingue et les images.
+1. choisi un **thème**, ça peut prendre un certain temps (les goûts et les couleurs)... 😅 j'en ai essayé quelques-uns et j'ai choisi [Apollo](https://github.com/not-matthias/apollo) : je le trouve simple et joli, il semble maintenu et il gère les liens vers les réseaux sociaux Mastodon et Bluesky.
+2. **migré un seul article** multilingue (versions française et anglaise) contenant des images ; ça m'a pris plus d'une heure, surtout pour comprendre comme gérer la version multilingue et les images.
 En dehors de la configuration globale, il a fallu transformer les méta-données qui était de ce type :
 ```
 Title: Quelques astuces shell "unix-like" que j'utilise dans mon terminal 🧙
@@ -69,13 +69,21 @@ updated = 2024-12-18
 tags = ["shell", "terminal", "cli", "tui"]
 +++
 ```
-3. migré toutes les pages (une trentaine) en modifiant "à la main" nom des fichiers et les méta-données (environ une heure)
+3. **migré toutes les pages** (une trentaine) en modifiant "à la main" nom des fichiers et les méta-données (environ une heure)
 
 Aperçu avant la migration (le générateur de pages statique est Pelican avec le thème) :
 
-Aperçu après la migration :
-
 Pour plus d'information, les détails de la migration sont dans cette _pull request GitHub_ : https://github.com/nicokosi/blog/pull/11
+
+## Résultat
+
+Le look est quand même plus moderne :
+![liste des articles en anglais](now-english-articles.png)
+![Un article en anglais](now-english-articles.png)
+
+On peut voir en haut à gauche les liens vers mes profils Mastodon et Bluesky (et la suppression du profil X/Twitter).
+
+Et je m'attends à ce que le binaire `zola`, qui n'a pas de dépendances, ne casse jamais !
 
 ## Les compromis
 
@@ -88,17 +96,6 @@ l'optimisation pour les moteurs de recherche aka Search Engine Optimisation n'es
 2. impossible d'ajouter des **tags** sur les articles qui n'existent qu'en français (que je n'ai pas traduit en anglais).
 J'ai ouvert [ce ticket (_GitHub issue_)](https://github.com/getzola/zola/issues/2757) pour savoir comment résoudre ça.
 A suivre...
-
-## Résultat
-
-Le look est quand même plus moderne :
-![liste des articles en anglais](now-english-articles.png)
-![Un article en anglais](now-english-articles.png)
-
-On peut voir en haut à gauche les liens vers mes profils Mastodon et Bluesky (et la suppression du profil X/Twitter).
-
-Et je m'attends à ce que le binaire `zola`, qui n'a pas de dépendances, ne casse jamais !
-
 
 ## Bonus
 
