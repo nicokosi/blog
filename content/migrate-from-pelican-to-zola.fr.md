@@ -16,17 +16,18 @@ Même si je ne publie que deux billets de blog par an, en moyenne, j'ai créé c
 générateur de pages statiques open source assez utilisé : [Pelican](https://docs.getpelican.com/).
 
 J'avais trois "problèmes" :
-1. L'aspect **visuel** était **démodé**, je vous laisse juge :
+1. L'aspect **visuel démodé**, je vous laisse juge :
 ![liste des articles en français](before-french-landing-page.png)
 ![un article en anglais](before-english-article.png)
-2. Pelican est un **outil Python** et il m'est arrivé plusieurs fois qu'il **ne fonctionne plus** (j'avais probablement
+2. les liens vers mes **profils de réseaux sociaux** n'étaient **pas à jour** : je voulais remplacer le lien Twitter/X par des
+   liens vers mon profil Mastodon et Bluesky.
+3. Pelican est un outil Python et il m'est arrivé plusieurs fois qu'il **ne fonctionne plus** (j'avais probablement
 "cassé" mon environnement de développement Python)
-3. les liens vers mes **profils de réseaux sociaux** n'étaient **pas à jour** : je voulais remplacer le lien Twitter/X par des
-liens vers mon profil Mastodon et Bluesky.
+
 
 ## Comment choisir ?
 
-Un peu au flair, pour être honnête... 😇
+Un peu au feeling, pour être honnête, en tout cas, ne façon pas totalement scientifique... 😇
 
 Il y a quelques années (en 2021), j'avais commencé à utiliser [Hugo](https://gohugo.io/) dans [cette migration Pelican vers Hugo](https://github.com/nicokosi/blog/pull/1) que je n'ai pas terminée.
 
@@ -45,7 +46,7 @@ Par curiosité, voici une liste de générateurs similaires, filtrable par langa
 
 L'interface (options de lignes de commande et méta-données) étant très proche, j'ai :
 
-1. choisi un **thème**, ça peut prendre un certain temps (les goûts et les couleurs)... 😅 j'en ai essayé quelques-uns et j'ai choisi [Apollo](https://github.com/not-matthias/apollo) : je le trouve simple et joli, il semble maintenu et il gère les liens vers les réseaux sociaux Mastodon et Bluesky.
+1. **choisi un thème**, ça peut prendre un certain temps (les goûts et les couleurs)... 😅 j'en ai essayé quelques-uns et j'ai choisi [Apollo](https://github.com/not-matthias/apollo) : je le trouve simple et joli, il semble maintenu et il gère les liens vers les réseaux sociaux Mastodon et Bluesky.
 2. **migré un seul article** multilingue (versions française et anglaise) contenant des images ; ça m'a pris plus d'une heure, surtout pour comprendre comme gérer la version multilingue et les images.
 En dehors de la configuration globale, il a fallu transformer les méta-données qui était de ce type :
 ```
