@@ -1,4 +1,4 @@
-theme = "apollo"
+theme = "linkita"
 
 # The URL the site will be built for
 base_url = "https://nicokosi.github.io"
@@ -26,13 +26,18 @@ generate_feeds = true
 taxonomies = [{ name = "tags" }]
 
 [extra]
-theme = "auto"
-menu = [
-    { name = "/posts", url = "/", weight = 1 },
-    { name = "/tags", url = "/tags", weight = 2 },
-]
-socials = [
-    { name = "mastodon", url = "https://fosstodon.org/@nicokosi", icon = "mastodon" },
-    { name = "bluesky", url = "https://bsky.app/profile/nicokosi.bsky.social", icon = "bluesky" },
-    { name = "github", url = "https://github.com/nicokosi/", icon = "github" },
-]
+# comment = true
+# math = true
+# mermaid = true
+# page_info = []
+[extra.cover]
+# image = ""
+# alt = ""
+
+[[extra.profiles.your_username.social]]
+name = "github"
+url = "https://github.com/nicokosi"
+
+[[extra.profiles.your_username.social]]
+name = "bluesky"
+url = "https://bsky.app/profile/nicokosi"
