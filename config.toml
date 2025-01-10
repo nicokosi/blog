@@ -1,5 +1,10 @@
 theme = "linkita"
 
+title = "nicokosi's blog"
+description = "About software development, with topics like: exploring programming langages, experimenting with data visualisation, productivity improvements etc."
+author = "nicokosi"
+
+
 # The URL the site will be built for
 base_url = "https://nicokosi.github.io"
 
@@ -20,8 +25,11 @@ generate_feeds = true
 
 [[taxonomies]]
 name = "tags"
+authors = ["nicokosi"]
 
 [languages.fr]
+title = "Le blog de nicokosi"
+description = "A propos de développement logiciel : explorations diverses, découverte de langages de programmation, personnalisation de l'environnement de développement etc."
 generate_feeds = true
 taxonomies = [{ name = "tags" }]
 
@@ -34,10 +42,34 @@ taxonomies = [{ name = "tags" }]
 # image = ""
 # alt = ""
 
-[[extra.profiles.your_username.social]]
-name = "github"
-url = "https://github.com/nicokosi"
+[extra.profiles]
 
-[[extra.profiles.your_username.social]]
-name = "bluesky"
-url = "https://bsky.app/profile/nicokosi"
+# Your profile
+[extra.profiles.nicoskosi]
+avatar_url = "icons/github.svg"
+avatar_invert = true
+# avatar_alt = "Default alt text"
+# name = "Default name"
+# bio = "Default bio"
+social = [
+    { name = "github", url = "https://github.com/nicokosi" },
+    { name = "rss", url = "$BASE_URL/atom.xml" },
+]
+[extra.profiles.nicokosi.languages]
+[extra.profiles.nicokosi.languages.en]
+name = "Nicokosi's blog"
+bio = "a developer"
+avatar_alt = "?"
+
+[extra.profiles.nicokosi.languages.fr]
+name = "Le blog de nicokosi"
+bio = "un développeur"
+
+# My profile
+[extra.profiles.nicokosi]
+name = "Nicolas Kosinski"
+social = [
+    { name = "github", url = "https://github.com/nicoksi" },
+    { name = "bluesky", url = "https://bsky.app/profile/nicokosi.bsky.social" },
+    { name = "rss", url = "$BASE_URL/atom.xml" },
+]
