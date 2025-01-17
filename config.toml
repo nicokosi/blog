@@ -31,16 +31,23 @@ authors = ["nicokosi"]
 title = "Le blog de nicokosi"
 description = "A propos de développement logiciel : explorations diverses, découverte de langages de programmation, personnalisation de l'environnement de développement etc."
 generate_feeds = true
-taxonomies = [{ name = "tags" }]
+taxonomies = [{ name = "tags", authors = ["nicokosi"] }]
 
 [extra]
 # comment = true
 # math = true
 # mermaid = true
 # page_info = []
+header_menu_name = "main"
+disable_javascript = false
+
 [extra.cover]
 # image = ""
 # alt = ""
+
+[extra.menus]
+main = [{ url = "$BASE_URL/tags/", name = "Tags", names_i18n = "common_tags" }]
+main_fr = [{ url = "$BASE_URL/tags/", name = "Tags" }]
 
 [extra.profiles]
 
