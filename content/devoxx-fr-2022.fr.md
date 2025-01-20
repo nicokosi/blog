@@ -4,7 +4,7 @@ description = "Mon résumé des deux jours passés à la conférence Devoxx Fran
 date = 2022-04-23
 update = 2024-12-30
 [taxonomies]
-#tags = ["conference", "devoxx"]
+tags = ["conference", "devoxx"]
 +++
 # Mon Devoxx France 2022
 

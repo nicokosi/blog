@@ -4,7 +4,7 @@ description = "Pourquoi et comment versioner sa configuration système (système
 date = 2016-08-17
 update = 2024-12-30
 [taxonomies]
-#tags = ["tools"]
+tags = ["tools"]
 +++
 # Versionner sa configuration système via des "dotfiles"
 
