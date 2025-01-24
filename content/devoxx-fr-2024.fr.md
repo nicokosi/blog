@@ -29,12 +29,12 @@ Cet article est un bilan des trois jours que j’ai eu la chance de passer à la
 
 ## Photos ! 📸
 
-![une petite partie de l'équipe Vidal](devoxx-2024-vidal.jpg)
+![une petite partie de l'équipe Vidal](/devoxx-fr-2024/devoxx-2024-vidal.jpg)
 
-![avec Arnaud, Arolla FTW!](devoxx-2024-arnaud.jpg)
+![avec Arnaud, Arolla FTW!](/devoxx-fr-2024/devoxx-2024-arnaud.jpg)
 
-![avec Sebastian, un ancien collègue de Vidal](devoxx-2024-sebastian.jpg)
+![avec Sebastian, un ancien collègue de Vidal](/devoxx-fr-2024/devoxx-2024-sebastian.jpg)
 
-![sketchnotes sur la Process Communication](devoxx-2024-processcom.jpg)
+![sketchnotes sur la Process Communication](/devoxx-fr-2024/devoxx-2024-processcom.jpg)
 
 [mise à jour, 2024-12-30 : les liens vers les CFP, étant cassés, ont été remplacé par les liens des vidéos youtube]
