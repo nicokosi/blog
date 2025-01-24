@@ -28,8 +28,10 @@ taxonomies = [{ name = "tags" }]
 [extra]
 theme = "auto"
 menu = [
-    { name = "/posts", url = "/", weight = 1 },
-    { name = "/tags", url = "/tags", weight = 2 },
+    { name = "posts", url = "/", weight = 1 },
+    { name = "tags", url = "/tags", weight = 2 },
+    { name = "🌐 fr", url = "/fr", weight = 3 },
+    { name = "🌐 en", url = "/", weight = 4 },
 ]
 socials = [
     { name = "mastodon", url = "https://fosstodon.org/@nicokosi", icon = "mastodon" },
