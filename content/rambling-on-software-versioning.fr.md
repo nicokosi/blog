@@ -6,7 +6,6 @@ updated = 2025-12-17
 [taxonomies]
 tags = ["version", "semver", "calver"]
 +++
-
 # Quelques façons de versionner le logiciel
 
 En tant que développeur.se, on connaît plusieurs façons de versionner le logiciel. Ca fait du bien de se les remémorer, de leur donner un nom et aussi de trouver quelques exemples au travers de logiciels connus.
@@ -24,15 +23,13 @@ Exemple : Docker tag `latest`.
 
 Elle change régulièrement, par exemple en s'incrémentant de 1 à chaque nouvelle version.
 
-Sûre, mais ne reflète pas l'impact des changements.
-
 Exemples : Java `25`, `26` etc.
 
 ## version par identifiant #️⃣
 
 Elle consiste en un identifiant de commit Git (empreinte SHA-1), un identifiant de type UUID, etc.
 
-Sûre, elle permet une "infinité" de versions, mais ne reflète pas l'impact des changements.
+Elle permet une "infinité" de versions.
 
 Exemple : commit Git `a3f9c2e`.
 
@@ -61,8 +58,6 @@ AKA _calendar versioning_ ou [_calver_](https://calver.org).
 
 Correspond à une année, une version dans l'année, un mois dans l'année etc.
 
-Facile, mais opaque.
-
 Exemples :
 - IntelliJ IDEE `2025.1` : première version de l'année 2025)
 - Ubuntu `24.04` : version sortie en avril 2024
@@ -71,7 +66,7 @@ Exemples :
 
 Correspond à un nom aléatoire généré à partir d'un dictionnaire.
 
-Pratique pour nous, les humains (😊), mais opaque.
+Pratique pour nous, les humains (😊).
 
 Exemple : container Docker nommé `sad_tesla`.
 

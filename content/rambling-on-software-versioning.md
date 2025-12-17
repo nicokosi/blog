@@ -1,88 +1,84 @@
 +++
-title = "Several ways to "
-description = "A propos de la gestion sémantique de version ('semver') et autres façons de versionner nos logiciels"
+title = "Several ways to version software"
+description = "About sofware versioning practises like 'semver', 'calver' etc."
 date = 2025-12-17
 updated = 2025-12-17
 [taxonomies]
 tags = ["version", "semver", "calver"]
 +++
+# Several ways to version software
 
-# Quelques façons de versionner le logiciel
+As developers, we know several ways to version software. Let's review them and also find some examples through well-known software.
 
-En tant que développeur.se, on connaît plusieurs façons de versionner le logiciel. Ca fait du bien de se les remémorer, de leur donner un nom et aussi de trouver quelques exemples au travers de logiciels connus.
+## Constant version 🟰
 
-## version constante 🟰
+It never changes.
 
-Elle ne change jamais.
+It's "practical": we don't need to know which version to use... but it's also risky, YOLO!
 
-C'est "pratique" : on n'a pas besoin de savoir quelle version utiliser... mais c'est aussi casse-figure, YOLO!
+Example: Docker tag `latest`.
 
+## Incremental version ±
 
-Exemple : Docker tag `latest`.
+It changes regularly, for example by incrementing by 1 for each new version.
 
-## version incrémentale ±
+Safe and easy.
 
-Elle change régulièrement, par exemple en s'incrémentant de 1 à chaque nouvelle version.
+Examples: Java `25`, `26` etc.
 
-Sûre, mais ne reflète pas l'impact des changements.
+## Version by identifier #️⃣
 
-Exemples : Java `25`, `26` etc.
+It can consist of a Git commit identifier (SHA-1 hash), a UUID type identifier, etc.
 
-## version par identifiant #️⃣
+Safe, it allows for an "infinity" of versions.
 
-Elle consiste en un identifiant de commit Git (empreinte SHA-1), un identifiant de type UUID, etc.
+Example: Git commit `a3f9c2e`.
 
-Sûre, elle permet une "infinité" de versions, mais ne reflète pas l'impact des changements.
+## Semantic versioning 🤓
 
-Exemple : commit Git `a3f9c2e`.
+AKA _semantic versioning_ or [_semver_](https://semver.org).
 
-## version sémantique 🤓
+It introduces the concepts of:
+ - major version: non-backward compatible change
+ - minor version: backward compatible evolution
+ - patch version: bug fixes
+ - development phase: alpha, beta, release candidate, release etc.
 
-AKA _semantic versioning_ ou [_semver_](https://semver.org).
+Essential for a library, less obvious for an application.
+It is precise, but therefore requires rigor and is more fragile.
 
-Elle introduit les concepts de :
- - version majeure : changement non rétro-compatible
- - version mineure : évolution rétro-compatible
- - version de correctif (_patch_)
- - phase de développement : alpha, beta, release candidate, release etc.
+Examples: 
+- Jackson `2.20.1`: the first patch of minor version 20 of major version 2
+- Jackson `3.0.1`: the first patch of minor version 0 of major version 3 (which is not backward compatible with major version 2)
 
-Incontournable pour une librairie, moins évidente pour une application.
-Elle est précise, mais demande donc de la rigueur et est plus fragile.
+Anecdote: "the joys" of _npm version range_: [semver.npmjs.com](https://semver.npmjs.com) 😅
 
-Exemples : 
-- Jackson `2.20.1` : le premier patch de la version mineure 20 de la version majeur 2
-- Jackson `3.0.1` : le premier patch de la version mineure 0 de la version majeur 3 (qui n'est pas rétro-compatible avec la version majeur 2)
+## Calendar versioning 🗓️
 
-Anectode : "les joies" de _npm version range_ : [semver.npmjs.com](https://semver.npmjs.com) 😅
+AKA [_calver_](https://calver.org).
 
-## version temporelle 🗓️
+Corresponds to a year, a version within the year, a month in the year etc.
 
-AKA _calendar versioning_ ou [_calver_](https://calver.org).
+Examples:
+- IntelliJ IDEA `2025.1`: first version of the year 2025
+- Ubuntu `24.04`: version released in April 2024
 
-Correspond à une année, une version dans l'année, un mois dans l'année etc.
+## Semi-random names 🎲
 
-Facile, mais opaque.
+Corresponds to a random name generated from a dictionary.
 
-Exemples :
-- IntelliJ IDEE `2025.1` : première version de l'année 2025)
-- Ubuntu `24.04` : version sortie en avril 2024
+Practical for us humans (😊).
 
-## noms semi-aléatoires 🎲
+Example: Docker container named `sad_tesla`.
 
-Correspond à un nom aléatoire généré à partir d'un dictionnaire.
+See [Docker documentation](https://pkg.go.dev/github.com/docker/docker/pkg/namesgenerator) ([source code](https://github.com/moby/moby/blob/master/internal/namesgenerator/names-generator.go)).
 
-Pratique pour nous, les humains (😊), mais opaque.
+## "Summary" 💡
 
-Exemple : container Docker nommé `sad_tesla`.
-
-Cf. [documentation Docker](https://pkg.go.dev/github.com/docker/docker/pkg/namesgenerator) ([code source](https://github.com/moby/moby/blob/master/internal/namesgenerator/names-generator.go)).
-
-## "récapitulatif" 💡
-
-Revoyons une partie de ces types de version au moyen d'une seule commande \*nix :
+Let's review some of these version types using a single \*nix command:
 
 ```sh
-# Lister toutes les applications installées sur mon Mac via Homebrew 🍺
+# List all applications installed on my Mac via Homebrew 🍺
 brew list --versions
 
 ca-certificates 2025-12-02
@@ -117,9 +113,5 @@ sublime-text 4169
 textmate 2.0.23
 visual-studio-code 1.27.2,f46c4c469d6e6d8c46f268d1553c5dc4b475840f
 vlc 3.0.0
-warp 0.2025.07.09.08.11.stable_01
-xmind 26.01.07153-202512110349
-zed 0.119.18
+warp
 ```
-
-Noter que certaines sont combinées / multiples.
