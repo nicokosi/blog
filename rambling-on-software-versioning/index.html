@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         Several ways to version software
+        
+    </title>
+
+        
+            <meta property="og:title" content="Several ways to version software" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="About sofware versioning practises like &#x27;semver&#x27;, &#x27;calver&#x27; etc." />
+         
+     
+
+     
+         
+             <meta name="description" content="About sofware versioning practises like &#x27;semver&#x27;, &#x27;calver&#x27; etc." />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    <script defer src="https://nicokosi.github.io/search_index.en.js?h=a9ca6989408ef98463ba"></script>
+        <script defer src="https://nicokosi.github.io/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script></head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+        <button 
+            id="search-button"
+            class="search-button"
+            title="$SHORTCUT to open search"
+        >
+            <img 
+                src="https://nicokosi.github.io/search.svg" 
+                alt="Search" 
+                class="search-icon"
+            >
+        </button>
+
+        <div id="searchModal" class="search-modal js" role="dialog" aria-labelledby="modalTitle">
+            <div id="modal-content">
+                <h1 id="modalTitle" class="page-header">Search</h1>
+                <div id="searchBar">
+                    <input 
+                        id="searchInput" 
+                        role="combobox" 
+                        autocomplete="off" 
+                        spellcheck="false" 
+                        aria-expanded="false" 
+                        aria-controls="results-container" 
+                        placeholder="Search..."
+                    />
+                    <button 
+                        id="clear-search" 
+                        class="clear-button"
+                        title="Clear search"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div id="results-container">
+                    <div id="results-info">
+                        <span id="zero_results" style="display: none;">No results</span>
+                        <span id="one_result" style="display: none;">1 result</span>
+                        <span id="many_results" style="display: none;">$NUMBER results</span>
+                    </div>
+                    <div id="results" role="listbox"></div>
+                </div>
+            </div>
+        </div>
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Several ways to version software<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2025-12-17</time>
+                    
+
+                    
+                        :: Updated on <time>2025-12-17</time>
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/tags/version/" class="post-tag">version</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/tags/semver/" class="post-tag">semver</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/tags/calver/" class="post-tag">calver</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="several-ways-to-version-software">Several ways to version software</h1>
+<p>As developers, we know several ways to version software. Let's review them and also find some examples through well-known software.</p>
+<h2 id="constant-version">Constant version 🟰</h2>
+<p>It never changes.</p>
+<p>It's "practical": we don't need to know which version to use... but it's also risky, YOLO!</p>
+<p>Example: Docker tag <code>latest</code>.</p>
+<h2 id="incremental-version">Incremental version ±</h2>
+<p>It changes regularly, for example by incrementing by 1 for each new version.</p>
+<p>Safe and easy.</p>
+<p>Examples: Java <code>25</code>, <code>26</code> etc.</p>
+<h2 id="version-by-identifier">Version by identifier #️⃣</h2>
+<p>It can consist of a Git commit identifier (SHA-1 hash), a UUID type identifier, etc.</p>
+<p>Safe, it allows for an "infinity" of versions.</p>
+<p>Example: Git commit <code>a3f9c2e</code>.</p>
+<h2 id="semantic-versioning-nerd">Semantic versioning 🤓</h2>
+<p>AKA <em>semantic versioning</em> or <a href="https://semver.org"><em>semver</em></a>.</p>
+<p>It introduces the concepts of:</p>
+<ul>
+<li>major version: non-backward compatible change</li>
+<li>minor version: backward compatible evolution</li>
+<li>patch version: bug fixes</li>
+<li>development phase: alpha, beta, release candidate, release etc.</li>
+</ul>
+<p>Essential for a library, less obvious for an application.
+It is precise, but therefore requires rigor and is more fragile.</p>
+<p>Examples:</p>
+<ul>
+<li>Jackson <code>2.20.1</code>: the first patch of minor version 20 of major version 2</li>
+<li>Jackson <code>3.0.1</code>: the first patch of minor version 0 of major version 3 (which is not backward compatible with major version 2)</li>
+</ul>
+<p>Anecdote: "the joys" of <em>npm version range</em>: <a href="https://semver.npmjs.com">semver.npmjs.com</a> 😅</p>
+<h2 id="calendar-versioning-calendar">Calendar versioning 🗓️</h2>
+<p>AKA <a href="https://calver.org"><em>calver</em></a>.</p>
+<p>Corresponds to a year, a version within the year, a month in the year etc.</p>
+<p>Examples:</p>
+<ul>
+<li>IntelliJ IDEA <code>2025.1</code>: first version of the year 2025</li>
+<li>Ubuntu <code>24.04</code>: version released in April 2024</li>
+</ul>
+<h2 id="semi-random-names-game-die">Semi-random names 🎲</h2>
+<p>Corresponds to a random name generated from a dictionary.</p>
+<p>Practical for us humans (😊).</p>
+<p>Example: Docker container named <code>sad_tesla</code>.</p>
+<p>See <a href="https://pkg.go.dev/github.com/docker/docker/pkg/namesgenerator">Docker documentation</a> (<a href="https://github.com/moby/moby/blob/master/internal/namesgenerator/names-generator.go">source code</a>).</p>
+<h2 id="summary-bulb">"Summary" 💡</h2>
+<p>Let's review some of these version types using a single *nix command:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;"># List all applications installed on my Mac via Homebrew 🍺
+</span><span style="color:#bf616a;">brew</span><span> list</span><span style="color:#bf616a;"> --versions
+</span><span>
+</span><span style="color:#bf616a;">ca-certificates</span><span> 2025-12-02
+</span><span style="color:#bf616a;">cargo-audit</span><span> 0.22.0
+</span><span style="color:#bf616a;">clj-kondo</span><span> 2025.10.23
+</span><span style="color:#bf616a;">cowsay</span><span> 3.8.4
+</span><span style="color:#bf616a;">gist</span><span> 6.0.0
+</span><span style="color:#bf616a;">gitlogue</span><span> 0.6.0
+</span><span style="color:#bf616a;">mas</span><span> 4.1.0
+</span><span style="color:#bf616a;">openssl@3</span><span> 3.6.0
+</span><span style="color:#bf616a;">trash</span><span> 0.9.2
+</span><span style="color:#bf616a;">calibre</span><span> 8.16.2
+</span><span style="color:#bf616a;">firefox</span><span> 82.0.3
+</span><span style="color:#bf616a;">firefox@nightly</span><span> latest
+</span><span style="color:#bf616a;">ghostty</span><span> 1.0.1
+</span><span style="color:#bf616a;">gimp</span><span> 3.0.6
+</span><span style="color:#bf616a;">google-chrome</span><span> 137.0.7151.56
+</span><span style="color:#bf616a;">grandperspective</span><span> 3.6
+</span><span style="color:#bf616a;">handy</span><span> 0.6.8
+</span><span style="color:#bf616a;">iterm2</span><span> 3.4.8
+</span><span style="color:#bf616a;">jetbrains-toolbox</span><span> 1.24,1.24.12080
+</span><span style="color:#bf616a;">keepingyouawake</span><span> 1.6.8
+</span><span style="color:#bf616a;">kobo</span><span> latest
+</span><span style="color:#bf616a;">libreoffice</span><span> 25.8.3
+</span><span style="color:#bf616a;">molotov</span><span> 7.0.0
+</span><span style="color:#bf616a;">openemu</span><span> 2.3.3
+</span><span style="color:#bf616a;">podman-desktop</span><span> 1.15.0
+</span><span style="color:#bf616a;">postman</span><span> 9.5.0
+</span><span style="color:#bf616a;">rectangle</span><span> 0.41,46
+</span><span style="color:#bf616a;">slack</span><span> 4.11.3
+</span><span style="color:#bf616a;">sublime-text</span><span> 4169
+</span><span style="color:#bf616a;">textmate</span><span> 2.0.23
+</span><span style="color:#bf616a;">visual-studio-code</span><span> 1.27.2,f46c4c469d6e6d8c46f268d1553c5dc4b475840f
+</span><span style="color:#bf616a;">vlc</span><span> 3.0.0
+</span><span style="color:#bf616a;">warp
+</span></code></pre>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         A la découverte des API GitHub en apprenant Clojure
+        
+    </title>
+
+        
+            <meta property="og:title" content="A la découverte des API GitHub en apprenant Clojure" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="A la découverte des API GitHub en apprenant Clojure." />
+         
+     
+
+     
+         
+             <meta name="description" content="A la découverte des API GitHub en apprenant Clojure." />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    </head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        A la découverte des API GitHub en apprenant Clojure<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2017-01-11</time>
+                    
+
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/fr/tags/clojure/" class="post-tag">clojure</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/github/" class="post-tag">github</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="a-la-decouverte-des-api-github-en-apprenant-clojure">A la découverte des API GitHub en apprenant Clojure</h1>
+<p>Il est toujours intéressant d'apprendre quelque chose, même si ça ne concerne pas directement le travail quotidien. Pour citer <a href="https://pragprog.com/book/tpp/the-pragmatic-programmer">The Pragmatic Programmer</a> (note pour moi-même : relire ce livre 🤓) :</p>
+<blockquote>
+<p>Invest Regularly in Your Knowledge Portfolio</p>
+</blockquote>
+<p>Mon dernier projet personnel "pour apprendre" a été de créer un outil en ligne de commande, nommé <a href="https://github.com/nicokosi/hubstats">hubstats</a>, permettant d'afficher un résumé statistique concernant les <a href="https://help.github.com/articles/github-glossary/#pull-request">pull requests GitHub</a>, afin d'avoir quelques métriques sur leur utilisation par mon équipe, au travail.</p>
+<p>Ce modeste projet m'a permis de mettre en pratique le langage de programmation <a href="https://clojure.org/">Clojure</a> (que je connaissais un tout petit peu), mais aussi de découvrir les <a href="https://developer.github.com/v3/">API REST</a> et <a href="https://docs.github.com/en/graphql">GraphQL</a> de GitHub.</p>
+<p>J'ai en plus eu la chance d'échanger régulièrement avec un collègue connaissant bien Clojure. Ce fut appréciable et motivant, merci Jérôme aka <a href="https://github.com/jprudent">@jprudent</a> !</p>
+<br/>
+## A quoi ça sert, _hubstats_ ?
+<p><em>hubstats</em> est un outil en ligne de commandes qui permet de connaître, pour un <a href="https://help.github.com/articles/github-glossary/#repository">repository GitHub</a> donné, le nombre de pull requests ouvertes / commentées / mergées par auteur sur une période donnée (dernière semaine, deux dernières semaines, depuis une date donnée etc.).</p>
+<p>Voici un exemple de rapport fourni par <em>hubstats</em> :</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">lein</span><span> run</span><span style="color:#bf616a;"> --organization</span><span> softwarevidal</span><span style="color:#bf616a;"> --repository</span><span> arthur</span><span style="color:#bf616a;"> --token </span><span>$</span><span style="color:#bf616a;">token
+</span><span style="color:#bf616a;">pull</span><span> requests for softwarevidal/arthur -&gt;
+</span><span>    </span><span style="color:#bf616a;">since</span><span> 1 week(s)</span><span style="color:#96b5b4;">:
+</span><span>        </span><span style="color:#bf616a;">9</span><span> opened / 56 commented / 5 closed
+</span><span>        </span><span style="color:#bf616a;">opened</span><span> per author: {&quot;</span><span style="color:#a3be8c;">cmahalin</span><span>&quot; 5, &quot;</span><span style="color:#a3be8c;">jcgay</span><span>&quot; 2, &quot;</span><span style="color:#a3be8c;">AElMehdiVidal</span><span>&quot; 2}
+</span><span>        </span><span style="color:#bf616a;">commented</span><span> per author: {&quot;</span><span style="color:#a3be8c;">vidal-rm</span><span>&quot; 30, &quot;</span><span style="color:#a3be8c;">jcgay</span><span>&quot; 17, &quot;</span><span style="color:#a3be8c;">cmahalin</span><span>&quot; 9}
+</span><span>        </span><span style="color:#bf616a;">closed</span><span> per author: {&quot;</span><span style="color:#a3be8c;">cmahalin</span><span>&quot; 2, &quot;</span><span style="color:#a3be8c;">AElMehdiVidal</span><span>&quot; 2, &quot;</span><span style="color:#a3be8c;">jprudent</span><span>&quot; 1}
+</span></code></pre>
+<br/>
+## Comment ça marche ?
+<p>J'ai choisi d'utiliser Clojure, un langage très différent de Java que j'utilise au quotidien.
+Les particularités suivantes ont notamment retenu mon attention :</p>
+<ul>
+<li>développement dynamique et interactif : code plus simple, notamment pour un petit outil "interne" ; le <a href="https://clojure.org/about/dynamic#_the_repl">REPL</a> est un outil de base et son utilisation est particulièrement adaptée pour un projet de "découverte"</li>
+<li>programmation fonctionnelle : l'approche fonctionnelle, bien qu'encouragée dans les langages "mainstream" tel Java, est obligatoire en Clojure. Les fonctions sont reines ("<em>first-class citizen</em>"), l'immutabilité et la récursivité sont de mise.</li>
+<li>Lisp : Clojure étant un Lisp, le code s'écrit un peu différemment : il s'apparente à de la donnée et peut se transformer facilement via des commandes de type <a href="https://www.emacswiki.org/emacs/ParEdit">paredit</a>.</li>
+<li>simplicité : Clojure est un langage simple dont la philosophie est d'utiliser des petites librairies plutôt que des gros frameworks.</li>
+</ul>
+<p>Se référer à <a href="https://clojure.org/about/rationale">Clojure Rationale</a> pour plus d'informations sur les apports de Clojure.</p>
+<p>Mon environnement de développement a été :</p>
+<ul>
+<li><a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> avec le <a href="https://cursive-ide.com/">plugin Cursive</a></li>
+<li><a href="https://cursive-ide.com/userguide/paredit.html">mode <em>paredit</em> de Cursive</a></li>
+<li><a href="https://leiningen.org/">Leiningen</a> comme outil de build</li>
+<li><a href="https://travis-ci.org/">Travis CI</a> pour l'intégration continue</li>
+</ul>
+<br/>
+## Et alors ?
+<p>Ce que j'ai aimé :</p>
+<ul>
+<li>cet aparté qui m'a changé de mes "habitudes en Java"</li>
+<li>l'utilisation de <em>paredit</em> pour manipuler son code (créer, déplacer ou supprimer du code) est un peu déroutante au début mais très plaisante ensuite</li>
+<li>l'utilisation du REPL qui m'a servi :
+<ul>
+<li>de "brouillon" pour écrire mon code</li>
+<li>pour diagnostiquer et corriger des bug</li>
+</ul>
+</li>
+<li>les tests unitaires faciles à écrire (par exemple, la macro <a href="https://clojuredocs.org/clojure.core/with-redefs"><code>with-redefs</code></a> peut être utilisée pour "mocker" des functions)</li>
+</ul>
+<p>Ce que j'ai moins aimé :</p>
+<ul>
+<li>la découverte de certaines erreurs à l'exécution, sans comprendre directement la cause de l'erreur (du genre : stack trace obscure)</li>
+<li>la documentation intégrée dans le langage ne contient pas assez d'exemples à mon goût. J'ai dû souvent avoir recourt à internet et notamment à <a href="https://clojuredocs.org/">Clojure Docs</a> où les exemples sont nombreux et utiles.</li>
+</ul>
+<br/>
+## Et ensuite ?
+<p>Cet projet m'a donné envie d'explorer d'autres pistes :</p>
+<ul>
+<li>utiliser les API <a href="https://docs.github.com/en/graphql">GraphQL de GitHub</a></li>
+<li>transformer la ligne de commande <em>hubstats</em> en application web (via <a href="https://clojurescript.org/">ClojureScript</a> ?)</li>
+<li>faire un autre outil en ligne de commande</li>
+<li>essayer un autre langage (par exemple : <a href="https://golang.org/">Go</a> ou <a href="https://www.rust-lang.org/">Rust</a>)
+[mise à jour, 2024-12-30 : le lien GitHub GraphQL, étant cassé, a été mis à jour]</li>
+</ul>
+<p>La suite au prochain épisode ! 😉</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>

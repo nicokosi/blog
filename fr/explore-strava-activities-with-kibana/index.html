@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         Exploration des données sportives Strava avec Kibana
+        
+    </title>
+
+        
+            <meta property="og:title" content="Exploration des données sportives Strava avec Kibana" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="Comment j&#x27;ai importé mes données strava.com dans Kibana pour les explorer visuellement." />
+         
+     
+
+     
+         
+             <meta name="description" content="Comment j&#x27;ai importé mes données strava.com dans Kibana pour les explorer visuellement." />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    </head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Exploration des données sportives Strava avec Kibana<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2021-11-03</time>
+                    
+
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/fr/tags/dataviz/" class="post-tag">dataviz</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/data/" class="post-tag">data</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/visualization/" class="post-tag">visualization</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="exploration-des-donnees-sportives-strava-avec-kibana">Exploration des données sportives Strava avec Kibana</h1>
+<p>Public présumé : personnes intéressées par l’exploration de données.</p>
+<p>Cela fait quelques années que j'enregistre mes sorties sportives (essentiellement pour la course à pied et la marche) sur <a href="https://strava.com/">strava.com</a>.
+Comme les données sont accessibles par une API, j'ai voulu les explorer en utilisant un outil de visualisation de données, <a href="https://www.elastic.co/kibana/">Kibana</a>.
+Cet article décrit mon premier essai "d'exploration".</p>
+<h2 id="mise-en-place">Mise en place</h2>
+<p>Noter que le code ci-dessous utilise le shell Unix <code>zsh</code>.</p>
+<h3 id="recuperation-des-activites-strava">Récupération des activités Strava</h3>
+<p>Il faut d'abord créer <a href="https://developers.strava.com/docs/getting-started/#account">un compte développeur Strava</a> puis créer un jeton OAuth2 (j'ai utilisé <a href="https://github.com/mgryszko/strava-access-token">le générateur mgryszko/strava-access-token</a>).</p>
+<p>Ensuite, on peut utiliser <a href="https://developers.strava.com/docs/reference/#api-Activities-getLoggedInAthleteActivities">l'API Strava API pour récupérer les activités</a> pour générer plusieurs fichiers JSON :</p>
+<pre data-lang="zsh" style="background-color:#2b303b;color:#c0c5ce;" class="language-zsh "><code class="language-zsh" data-lang="zsh"><span style="color:#b48ead;">for</span><span> page </span><span style="color:#b48ead;">in </span><span>{1..10}; </span><span style="color:#bf616a;">http</span><span> GET &quot;</span><span style="color:#a3be8c;">https://www.strava.com/api/v3/athlete/activities?include_all_efforts=&amp;per_page=200&amp;page=</span><span>$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">page</span><span style="color:#a3be8c;">}</span><span>&quot; &quot;</span><span style="color:#a3be8c;">Authorization: Bearer </span><span>$</span><span style="color:#bf616a;">TOKEN</span><span>&quot; &gt; strava-activities-${</span><span style="color:#bf616a;">page</span><span>}.json
+</span></code></pre>
+<p>Ayant un historique d'environ 300 sorties, seuls 3 fichiers ont du contenu (les autres contient un tableau vide : <code>[]</code>), comme on peut le voir avec la commande <code>wc</code> :</p>
+<pre data-lang="zsh" style="background-color:#2b303b;color:#c0c5ce;" class="language-zsh "><code class="language-zsh" data-lang="zsh"><span style="color:#bf616a;">wc -c</span><span> strava-activities-*.json
+</span><span>
+</span><span>  </span><span style="color:#bf616a;">421462</span><span> strava-activities-1.json
+</span><span>       </span><span style="color:#bf616a;">2</span><span> strava-activities-10.json
+</span><span>  </span><span style="color:#bf616a;">288391</span><span> strava-activities-2.json
+</span><span>   </span><span style="color:#bf616a;">57159</span><span> strava-activities-3.json
+</span><span>       </span><span style="color:#bf616a;">2</span><span> strava-activities-4.json
+</span><span>       </span><span style="color:#bf616a;">2</span><span> strava-activities-5.json
+</span><span>       </span><span style="color:#bf616a;">2</span><span> strava-activities-6.json
+</span><span>       </span><span style="color:#bf616a;">2</span><span> strava-activities-7.json
+</span><span>       </span><span style="color:#bf616a;">2</span><span> strava-activities-8.json
+</span><span>       </span><span style="color:#bf616a;">2</span><span> strava-activities-9.json
+</span><span>  </span><span style="color:#bf616a;">767026</span><span> total
+</span></code></pre>
+<p>Pour finir, agrégeons ces fichiers dans un fichier unique au format "Newline Delimited JSON" (extension <code>ndjson</code>) :</p>
+<pre data-lang="zsh" style="background-color:#2b303b;color:#c0c5ce;" class="language-zsh "><code class="language-zsh" data-lang="zsh"><span style="color:#b48ead;">for</span><span> n </span><span style="color:#b48ead;">in </span><span>{1..3}; </span><span style="color:#bf616a;">cat</span><span> strava-activities-${</span><span style="color:#bf616a;">n</span><span>}.json | </span><span style="color:#bf616a;">jq -c </span><span>&#39;</span><span style="color:#a3be8c;">.[]</span><span>&#39; &gt; strava-activities-${</span><span style="color:#bf616a;">n</span><span>}.ndjson
+</span><span style="color:#bf616a;">cat</span><span> strava-activities-1.ndjson strava-activities-2.ndjson strava-activities-3.ndjson &gt;&gt; strava-activities.ndjson
+</span></code></pre>
+<h3 id="import-des-donnees">Import des données</h3>
+<p>Nous allons utiliser les <a href="https://www.elastic.co/guide/en/kibana/current/docker.html">images officielles Docker</a>.</p>
+<p>Démarrons les services Elastic et Kibana :</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">docker</span><span> network create elastic
+</span><span style="color:#bf616a;">docker</span><span> run</span><span style="color:#bf616a;"> --name</span><span> es-dataviz</span><span style="color:#bf616a;"> --net</span><span> elastic</span><span style="color:#bf616a;"> --publish</span><span> 9200:9200</span><span style="color:#bf616a;"> --publish</span><span> 9300:9300</span><span style="color:#bf616a;"> --env </span><span>&quot;</span><span style="color:#a3be8c;">discovery.type=single-node</span><span>&quot;</span><span style="color:#bf616a;"> --env </span><span>&quot;</span><span style="color:#a3be8c;">xpack.security.enabled=false</span><span>&quot; docker.elastic.co/elasticsearch/elasticsearch:7.15.1
+</span></code></pre>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">docker</span><span> run</span><span style="color:#bf616a;"> --name</span><span> kb-dataviz</span><span style="color:#bf616a;"> --net</span><span> elastic</span><span style="color:#bf616a;"> --publish</span><span> 5601:5601</span><span style="color:#bf616a;"> --env </span><span>&quot;</span><span style="color:#a3be8c;">ELASTICSEARCH_HOSTS=http://es-dataviz:9200</span><span>&quot;</span><span style="color:#bf616a;"> --env </span><span>&quot;</span><span style="color:#a3be8c;">xpack.security.enabled=false</span><span>&quot; docker.elastic.co/kibana/kibana:7.15.1
+</span></code></pre>
+<p>Puis importons les données ("upload") en sélectionnant le fichier <code>ndjson</code> [http://localhost:5601/app/home#/tutorial_directory] que nous importons dans un index nommé "strava" :</p>
+<p>Ouvrons ensuite la vue "discover" pour les 6 dernières années :</p>
+<p><img src="https://nicokosi.github.io/fr/explore-strava-activities-with-kibana/explore-strava-discover.png" alt="Discover Kibana" title="Discover Kibana" /></p>
+<h2 id="exploration-des-donnees">Exploration des données</h2>
+<h3 id="vitesse-moyenne-par-sortie">Vitesse moyenne par sortie</h3>
+<p>Créons un <em>dashboard</em> pour visualiser l'évolution dans le temps de la vitesse moyenne par type d'activité (course, marche etc.) :</p>
+<p><img src="https://nicokosi.github.io/fr/explore-strava-activities-with-kibana/explore-strava-create-dashboard.png" alt="Create Kibana dashboard" title="Create Kibana dashboard" /></p>
+<p>Ca ressemble à ça :</p>
+<p>![Create Kibana dashboard"](explore-strava-dashboard.png "Create Kibana dashboard"")</p>
+<p>Quelques remarques / interprétations :</p>
+<ul>
+<li>
+<p>je ne pensais pas courir depuis si longtemps (5 ans) 😯</p>
+</li>
+<li>
+<p>mes performances baissent dans le temps, c'est normal, je vieillis ! 🧓</p>
+</li>
+</ul>
+<p>Et sinon, j'ai trouvé ça sympa de faire mon propre dashboard éphémère sans payer l'abonnement Strava. 😇</p>
+<p>C'est tout pour cette fois. J’essaierai d'aller plus loin dans un autre article. 🤓</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>

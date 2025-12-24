@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         Contributing to TLDR (collaborative cheatsheets for console commands)
+        
+    </title>
+
+        
+            <meta property="og:title" content="Contributing to TLDR (collaborative cheatsheets for console commands)" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="Some thoughts about my recent contributions to the open-source project &#x27;tldr&#x27;." />
+         
+     
+
+     
+         
+             <meta name="description" content="Some thoughts about my recent contributions to the open-source project &#x27;tldr&#x27;." />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    <script defer src="https://nicokosi.github.io/search_index.en.js?h=a9ca6989408ef98463ba"></script>
+        <script defer src="https://nicokosi.github.io/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script></head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+        <button 
+            id="search-button"
+            class="search-button"
+            title="$SHORTCUT to open search"
+        >
+            <img 
+                src="https://nicokosi.github.io/search.svg" 
+                alt="Search" 
+                class="search-icon"
+            >
+        </button>
+
+        <div id="searchModal" class="search-modal js" role="dialog" aria-labelledby="modalTitle">
+            <div id="modal-content">
+                <h1 id="modalTitle" class="page-header">Search</h1>
+                <div id="searchBar">
+                    <input 
+                        id="searchInput" 
+                        role="combobox" 
+                        autocomplete="off" 
+                        spellcheck="false" 
+                        aria-expanded="false" 
+                        aria-controls="results-container" 
+                        placeholder="Search..."
+                    />
+                    <button 
+                        id="clear-search" 
+                        class="clear-button"
+                        title="Clear search"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div id="results-container">
+                    <div id="results-info">
+                        <span id="zero_results" style="display: none;">No results</span>
+                        <span id="one_result" style="display: none;">1 result</span>
+                        <span id="many_results" style="display: none;">$NUMBER results</span>
+                    </div>
+                    <div id="results" role="listbox"></div>
+                </div>
+            </div>
+        </div>
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Contributing to TLDR (collaborative cheatsheets for console commands)<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2021-09-14</time>
+                    
+
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/tags/oss/" class="post-tag">OSS</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/tags/cli/" class="post-tag">CLI</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="contributing-to-tldr-collaborative-cheatsheets-for-console-commands">Contributing to TLDR (collaborative cheatsheets for console commands)</h1>
+<p>Assumed audience: developers interested in Command-Line Interface tools and in contributing to Open Source Projects.</p>
+<h1 id="my-first-contributions-to-the-tldr-open-source-project">My first contributions to the <code>tldr</code> open-source project</h1>
+<p>Since a few months, I occasionally contribute to <a href="https://github.com/tldr-pages/tldr"><code>tldr</code></a> (also known as <code>tldr-pages</code>) which describes as:</p>
+<blockquote>
+<p>Collaborative cheat-sheets for console commands</p>
+</blockquote>
+<p>See my <a href="https://github.com/tldr-pages/tldr/pulls?q=is%3Apr+author%3Anicokosi">contributions</a>).</p>
+<p>This blog post lists the good and bad parts of these contributions.</p>
+<h2 id="the-good-parts-1">The good parts 👍</h2>
+<h3 id="share-my-local-knowledge-gift">Share my "local knowledge" 🎁</h3>
+<p>Many commands that were only in my Unix shell history or in my head are now shared to all <code>tldr</code> users… and to my-self!</p>
+<p>I can now retrieve my favorite commands typing <code>tldr &lt;command_name&gt;</code>, i.e. <code>tldr espanso</code> since <a href="https://github.com/tldr-pages/tldr/pull/5662">my contribution #5662</a> :</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> tldr espanso
+</span><span>
+</span><span style="color:#bf616a;">espanso
+</span><span>
+</span><span style="color:#bf616a;">Cross-platform</span><span> Text Expander written in Rust.
+</span><span style="color:#bf616a;">More</span><span> information: &lt;https://espanso.org&gt;.
+</span><span>
+</span><span style="color:#bf616a;">-</span><span> Check status:
+</span><span>    </span><span style="color:#bf616a;">espanso</span><span> status
+</span><span>
+</span><span style="color:#bf616a;">-</span><span> Edit the configuration:
+</span><span>    </span><span style="color:#bf616a;">espanso</span><span> edit config
+</span><span>
+</span><span style="color:#bf616a;">-</span><span> Install a package from the hub store (&lt;https://hub.espanso.org/&gt;)</span><span style="color:#96b5b4;">:
+</span><span>    </span><span style="color:#bf616a;">espanso</span><span> install package_name
+</span><span>
+</span><span style="color:#bf616a;">-</span><span> Restart (required after installing a package, useful in case of failure)</span><span style="color:#96b5b4;">:
+</span><span>    </span><span style="color:#bf616a;">espanso</span><span> restart
+</span></code></pre>
+<p>And it's easier that searching my shell history:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> history | </span><span style="color:#bf616a;">grep</span><span> espanso
+</span><span> </span><span style="color:#bf616a;">4998</span><span>  brew tap federico-terzi/espanso
+</span><span> </span><span style="color:#bf616a;">4999</span><span>  brew install espanso
+</span><span> </span><span style="color:#bf616a;">5000</span><span>  espanso register
+</span><span> </span><span style="color:#bf616a;">5001</span><span>  mkdir espanso
+</span><span> </span><span style="color:#bf616a;">5002</span><span>  cd espanso
+</span><span> </span><span style="color:#bf616a;">5013</span><span>  espanso stop
+</span><span> </span><span style="color:#bf616a;">5014</span><span>  espanso start
+</span><span> </span><span style="color:#bf616a;">5015</span><span>  espanso path
+</span></code></pre>
+<h3 id="a-welcoming-community-hugs">A welcoming community 🤗</h3>
+<p>Contributors were welcoming and encouraged me without putting any pressure. My feelings are mainly related to the comments on <em>pull requests</em> / <em>issues</em>, for example this kind <a href="https://github.com/tldr-pages/tldr/pull/5662#issuecomment-812137443">comment</a>:</p>
+<blockquote>
+<p>Welcome to tldr-pages, @nicokosi! ⚡ 🎉</p>
+</blockquote>
+<p>However, I hardly used <a href="https://gitter.im/tldr-pages/tldr">the Gitter discussion board</a>. I think I'm not active enough (I contribute a few minutes / hours per week) to be able to keep up with the flow of trade!</p>
+<h3 id="learn-new-commands-man-mortar-board">Learn new commands 👨‍🎓</h3>
+<p>While reviewing the contributions (<a href="https://github.com/tldr-pages/tldr/pulls"><em>pull requests</em></a>), I sometimes discovered new commands/discovered new options.</p>
+<p>For example, I learned that it was possible to format the return of the GitHub CLI command <code>gh</code> as JSON via [this <em>pull request</em><code> gh-formatting: add page # 6290</code>] (https://github.com / tldr-pages / tldr / pull / 6290 / files? short_path = 193df31 # diff-193df31fff2a4e88a95b3bd8732bead1fbbe8343eb8617ed1b727e4d1ba4d751):</p>
+<blockquote>
+<p>Formatting options for JSON data exported from gh GitHub CLI command. More information: https://cli.github.com/manual/gh_help_formatting.
+Display help about formatting JSON output from gh using jq:
+gh formatting</p>
+</blockquote>
+<h3 id="learn-to-compromise-scales">Learn to compromise ⚖️</h3>
+<p>I have learned to accept feedback from others and sometimes to accept a majority opinion that is not mine.</p>
+<p>Example: using the term <code>slug</code> in an authentication context for <a href="https://github.com/tldr-pages/tldr/pull/6108#discussion_r648835227">this post</a>.</p>
+<h2 id="the-bad-parts-1">The bad parts 👎</h2>
+<h3 id="time-consuming-hourglass-flowing-sand">Time-consuming ⏳</h3>
+<p>Contributors on OSS project do this on their free time. Moreover, when collaborating on <em>pull requests</em>, everything is done writing in English, but we are not all bilingual. So collaboration/contribution is not always easy and can take time.</p>
+<p>Example of misunderstanding (<a href="https://github.com/tldr-pages/tldr/pull/6269#issuecomment-888351398">link</a>):</p>
+<blockquote>
+<p>Yes, it does seem that only common is shown, anyway that can be fixed since a user might think we have a lack of pages if we only show them.</p>
+<blockquote>
+<p>Sorry, I don't understand after "anyway".</p>
+</blockquote>
+</blockquote>
+<p>Example of slowness: it took a little less to integrate <a href="https://github.com/tldr-pages/tldr.jsx-fork/pull/3">this contribution, <code>Prevent search misses via input's placeholder / tooltip</code></a>.</p>
+<h3 id="no-user-feedback-adult-probing-cane">No user feedback 🧑‍🦯</h3>
+<p>Only contributors give feedback via <em>pull requests</em> or <em>issues</em> GitHub.
+There are no metrics such as "number of views", "rating" etc. therefore we do not really know the use of examples (which is a good thing for confidentiality)..</p>
+<h2 id="what-s-next-soon">What's next? 🔜</h2>
+<p>Contribute on code rather than documentation? 🧑‍💻</p>
+<p>On this project or on another? To be continued! 🔮</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>

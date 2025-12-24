@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         Discovering GitHub APIs while learning Clojure
+        
+    </title>
+
+        
+            <meta property="og:title" content="Discovering GitHub APIs while learning Clojure" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="Discovering GitHub APIs while learning Clojure." />
+         
+     
+
+     
+         
+             <meta name="description" content="Discovering GitHub APIs while learning Clojure." />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    <script defer src="https://nicokosi.github.io/search_index.en.js?h=a9ca6989408ef98463ba"></script>
+        <script defer src="https://nicokosi.github.io/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script></head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+        <button 
+            id="search-button"
+            class="search-button"
+            title="$SHORTCUT to open search"
+        >
+            <img 
+                src="https://nicokosi.github.io/search.svg" 
+                alt="Search" 
+                class="search-icon"
+            >
+        </button>
+
+        <div id="searchModal" class="search-modal js" role="dialog" aria-labelledby="modalTitle">
+            <div id="modal-content">
+                <h1 id="modalTitle" class="page-header">Search</h1>
+                <div id="searchBar">
+                    <input 
+                        id="searchInput" 
+                        role="combobox" 
+                        autocomplete="off" 
+                        spellcheck="false" 
+                        aria-expanded="false" 
+                        aria-controls="results-container" 
+                        placeholder="Search..."
+                    />
+                    <button 
+                        id="clear-search" 
+                        class="clear-button"
+                        title="Clear search"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div id="results-container">
+                    <div id="results-info">
+                        <span id="zero_results" style="display: none;">No results</span>
+                        <span id="one_result" style="display: none;">1 result</span>
+                        <span id="many_results" style="display: none;">$NUMBER results</span>
+                    </div>
+                    <div id="results" role="listbox"></div>
+                </div>
+            </div>
+        </div>
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Discovering GitHub APIs while learning Clojure<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2017-01-11</time>
+                    
+
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/tags/clojure/" class="post-tag">clojure</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/tags/github/" class="post-tag">github</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="discovering-github-apis-while-learning-clojure">Discovering GitHub APIs while learning Clojure</h1>
+<p>As a developer, it's important to keep on learning/discovering stuff. Quoting <a href="https://pragprog.com/book/tpp/the-pragmatic-programmer">The Pragmatic Programmer</a> :</p>
+<blockquote>
+<p>Invest Regularly in Your Knowledge Portfolio</p>
+</blockquote>
+<p>My last project "for learning" was to create a command-line tool, named <a href="https://github.com/nicokosi/hubstats">hubstats</a>, that outputs a summary for <a href="https://help.github.com/articles/github-glossary/#pull-request">pull requests GitHub</a>. This tool aims at giving some metrics for me and my team.</p>
+<p>The real purposes were to practice <a href="https://clojure.org/">Clojure</a> (which I knew little) but also to discover <a href="https://developer.github.com/v3/">REST</a> and <a href="https://docs.github.com/en/graphql">GraphQL</a> GitHub APIs.</p>
+<p>Moreover, I was lucky to interact with a colleague of mine who is an advanced Clojure developer. That was really cool, thanks Jérôme aka <a href="https://github.com/jprudent">@jprudent</a>!</p>
+<br/>
+## What is _hubstats_?
+<p><em>hubstats</em> is a simple command line tool that outputs, for a given <a href="https://help.github.com/articles/github-glossary/#repository">GitHub repository</a>, the number of opened/commented/merged pull requests by author for a given period (last week, since a given date, etc.).</p>
+<p>Here is an output example:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">lein</span><span> run</span><span style="color:#bf616a;"> --organization</span><span> softwarevidal</span><span style="color:#bf616a;"> --repository</span><span> arthur</span><span style="color:#bf616a;"> --token </span><span>$</span><span style="color:#bf616a;">token
+</span><span style="color:#bf616a;">pull</span><span> requests for softwarevidal/arthur -&gt;
+</span><span>    </span><span style="color:#bf616a;">since</span><span> 1 week(s)</span><span style="color:#96b5b4;">:
+</span><span>        </span><span style="color:#bf616a;">9</span><span> opened / 56 commented / 5 closed
+</span><span>        </span><span style="color:#bf616a;">opened</span><span> per author: {&quot;</span><span style="color:#a3be8c;">cmahalin</span><span>&quot; 5, &quot;</span><span style="color:#a3be8c;">jcgay</span><span>&quot; 2, &quot;</span><span style="color:#a3be8c;">AElMehdiVidal</span><span>&quot; 2}
+</span><span>        </span><span style="color:#bf616a;">commented</span><span> per author: {&quot;</span><span style="color:#a3be8c;">vidal-rm</span><span>&quot; 30, &quot;</span><span style="color:#a3be8c;">jcgay</span><span>&quot; 17, &quot;</span><span style="color:#a3be8c;">cmahalin</span><span>&quot; 9}
+</span><span>        </span><span style="color:#bf616a;">closed</span><span> per author: {&quot;</span><span style="color:#a3be8c;">cmahalin</span><span>&quot; 2, &quot;</span><span style="color:#a3be8c;">AElMehdiVidal</span><span>&quot; 2, &quot;</span><span style="color:#a3be8c;">jprudent</span><span>&quot; 1}
+</span></code></pre>
+<br/>
+## How does it work?
+<p>I have chosen Clojure, a language that is different from the language that I use every day (Java).</p>
+<p>The following characteristics appealed to me:</p>
+<ul>
+<li>dynamic and interactive development: code is short and simple, which seems cool for an internal tool; what's more, the <a href="https://clojure.org/about/dynamic#_the_repl">REPL</a> is a base tool that greatly fit to a discovery mindset.</li>
+<li>functional programming: functions are <em>first-class citizen</em>, immutability and function recursion are basics</li>
+<li>Lisp: Clojure is a Lisp, so writing code is a bit different from C-like languages ; Code is data and can be edited via <a href="https://www.emacswiki.org/emacs/ParEdit">paredit</a> (emacs-like mode for editing code while keeping parentheses balanced).</li>
+<li>simplicity: Clojure encourages too use small libraries instead of huge frameworks.</li>
+</ul>
+<p>See <a href="https://clojure.org/about/rationale">Clojure Rationale</a>.</p>
+<p>My dev setup:</p>
+<ul>
+<li><a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> with <a href="https://cursive-ide.com/">Cursive plugin</a></li>
+<li><a href="https://cursive-ide.com/userguide/paredit.html">Cursive <em>paredit</em> mode</a></li>
+<li><a href="https://leiningen.org/">Leiningen</a> as build tool</li>
+<li><a href="https://travis-ci.org/">Travis CI</a> for continuous integration</li>
+</ul>
+<br/>
+## So what?
+<p>What I liked:</p>
+<ul>
+<li>a "parenthesis" (haha!) with my daily Java routines/habits</li>
+<li><em>paredit</em> is confusing at first, then pleasant to use</li>
+<li>REPL rocks for
+<ul>
+<li>shaping code (acts as a draft for new code)</li>
+<li>troubleshooting bugs (example: incorrect GitHub pagination traversing that led to out-of-memory crash)</li>
+</ul>
+</li>
+<li>unit tests are easy to write (example: <a href="https://clojuredocs.org/clojure.core/with-redefs"><code>with-redefs</code></a> macro can be used to mock functions: https://clojuredocs.org/clojure.core/with-redefs)</li>
+</ul>
+<p>What I did not like:</p>
+<ul>
+<li>WTFs when runtime bugs occurred (obscure stack traces)</li>
+<li>integrated documentation lacks examples. I often had to browse <a href="https://clojuredocs.org/">Clojure Docs</a> to understand Clojure base functions via useful examples.</li>
+</ul>
+<br/>
+## What's next?
+<p>Some ideas for some evolutions (or an other project, maybe?):</p>
+<ul>
+<li>use <a href="https://docs.github.com/en/graphql">GitHub GraphQL</a></li>
+<li>make a web app for <em>hubstats</em> (via <a href="https://clojurescript.org/">ClojureScript</a>?)</li>
+<li>build another CLI tool</li>
+<li>learn another language (for example: <a href="https://golang.org/">Go</a> or <a href="https://www.rust-lang.org/">Rust</a>)</li>
+</ul>
+<p>[edit from 2024-12-30: GitHub GraphQL link has been updated]</p>
+<p>That's all folk! 😉</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>

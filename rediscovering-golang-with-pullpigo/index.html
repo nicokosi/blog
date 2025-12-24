@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         Rediscovering Golang with &quot;pullpigo&quot;, a small hobby-project
+        
+    </title>
+
+        
+            <meta property="og:title" content="Rediscovering Golang with &quot;pullpigo&quot;, a small hobby-project" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="How I discovered Go (the programming language) basics while coding a CLI tool named &quot;pullpigo&quot;." />
+         
+     
+
+     
+         
+             <meta name="description" content="How I discovered Go (the programming language) basics while coding a CLI tool named &quot;pullpigo&quot;." />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    <script defer src="https://nicokosi.github.io/search_index.en.js?h=a9ca6989408ef98463ba"></script>
+        <script defer src="https://nicokosi.github.io/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script></head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+        <button 
+            id="search-button"
+            class="search-button"
+            title="$SHORTCUT to open search"
+        >
+            <img 
+                src="https://nicokosi.github.io/search.svg" 
+                alt="Search" 
+                class="search-icon"
+            >
+        </button>
+
+        <div id="searchModal" class="search-modal js" role="dialog" aria-labelledby="modalTitle">
+            <div id="modal-content">
+                <h1 id="modalTitle" class="page-header">Search</h1>
+                <div id="searchBar">
+                    <input 
+                        id="searchInput" 
+                        role="combobox" 
+                        autocomplete="off" 
+                        spellcheck="false" 
+                        aria-expanded="false" 
+                        aria-controls="results-container" 
+                        placeholder="Search..."
+                    />
+                    <button 
+                        id="clear-search" 
+                        class="clear-button"
+                        title="Clear search"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div id="results-container">
+                    <div id="results-info">
+                        <span id="zero_results" style="display: none;">No results</span>
+                        <span id="one_result" style="display: none;">1 result</span>
+                        <span id="many_results" style="display: none;">$NUMBER results</span>
+                    </div>
+                    <div id="results" role="listbox"></div>
+                </div>
+            </div>
+        </div>
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Rediscovering Golang with &quot;pullpigo&quot;, a small hobby-project<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2019-12-24</time>
+                    
+
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/tags/golang/" class="post-tag">golang</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/tags/native/" class="post-tag">native</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="rediscovering-golang-with-pullpigo-a-small-hobby-project">Rediscovering Golang with "pullpigo", a small hobby-project</h1>
+<p>I wanted to <strong>learn <a href="https://golang.org/">Go (the programming language)</a></strong>. My plan was to implement a <strong>CLI tool</strong> for displaying information on GitHub pull requests. I thus created a small project in GitHub: <a href="https://github.com/nicokosi/pullpigo">pullpigo</a>, in order to display event counters about GitHub pull requests via GitHub's public API.</p>
+<p>Note that I have already implemented this CLI tool in other programming languages that I wanted to learn: in <strong>Clojure</strong> (see <a href="https://github.com/nicokosi/hubstats">hubstats</a>), <strong>Kotlin</strong> (see <a href="https://github.com/nicokosi/pullpitoK">pullpitoK</a>) and <strong>Rust</strong> (see <a href="https://github.com/nicokosi/pullpito">pullpito</a>).</p>
+<h2 id="native-executables-are-fast-rocket">Native executables are fast 🚀</h2>
+<p>Let's compile pullpigo:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">go</span><span> clean
+</span><span style="color:#bf616a;">time</span><span> go build
+</span><span style="color:#bf616a;">go</span><span> build  1.05s user 0.58s system 105% cpu 1.559 total
+</span></code></pre>
+<p>Then run it:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">time</span><span> ./pullpigo</span><span style="color:#bf616a;"> -repo</span><span>=vidal-community/atom-jaxb
+</span><span style="color:#bf616a;">GitHub</span><span> repository &#39;</span><span style="color:#a3be8c;">vidal-community/atom-jaxb</span><span>&#39;
+</span><span>  </span><span style="color:#bf616a;">2</span><span> events created by amairi
+</span><span>  </span><span style="color:#bf616a;">1</span><span> events created by fchetouani
+</span><span>  </span><span style="color:#bf616a;">6</span><span> events created by AElMehdiVidal
+</span><span>  </span><span style="color:#bf616a;">3</span><span> events created by jcgay
+</span><span style="color:#bf616a;">./pullpigo -repo</span><span>=vidal-community/atom-jaxb  0.07s user 0.03s system 20% cpu 0.482 total
+</span></code></pre>
+<p>Now compare these build &amp; run times with a similar Kotlin project (<a href="https://github.com/nicokosi/pullpitoK/">pullpitoK</a>):</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">./gradlew</span><span> clean
+</span><span style="color:#bf616a;">time</span><span> ./gradlew build</span><span style="color:#bf616a;"> --quiet
+</span><span style="color:#bf616a;">./gradlew</span><span> build</span><span style="color:#bf616a;"> --quiet</span><span>  1.37s user 0.17s system 39% cpu 3.932 total
+</span><span style="color:#bf616a;">time</span><span> ./gradlew run</span><span style="color:#bf616a;"> --quiet --args </span><span>&quot;</span><span style="color:#a3be8c;">vidal-community/atom-jaxb</span><span>&quot;
+</span><span>
+</span><span style="color:#bf616a;">pull</span><span> requests for &quot;</span><span style="color:#a3be8c;">vidal-community/atom-jaxb</span><span>&quot; -&gt;
+</span><span>            </span><span style="color:#bf616a;">opened</span><span> per author
+</span><span>                </span><span style="color:#bf616a;">amairi:</span><span> 1
+</span><span>            </span><span style="color:#bf616a;">commented</span><span> per author
+</span><span>                </span><span style="color:#bf616a;">AElMehdiVidal:</span><span> 1
+</span><span>                </span><span style="color:#bf616a;">jcgay:</span><span> 1
+</span><span>            </span><span style="color:#bf616a;">closed</span><span> per author
+</span><span>
+</span><span style="color:#bf616a;">./gradlew</span><span> run</span><span style="color:#bf616a;"> --quiet --args </span><span>&quot;</span><span style="color:#a3be8c;">vidal-community/atom-jaxb</span><span>&quot;  1.37s user 0.18s system 62% cpu 2.473 total
+</span></code></pre>
+<p>Fast compilation + fast runtime = ❤️</p>
+<h2 id="golang-sdk-already-includes-many-common-utilities-package">Golang SDK already includes many common utilities 📦</h2>
+<p>In order to call <a href="https://developer.github.com/v3/activity/events/">GitHub's REST API v3 'events' API</a>, all I needed was: a HTTP client, a JSON parser and a test framework. Good news, all are included in the Golang SDK: <a href="https://golang.org/pkg/testing/">testing</a>, <a href="https://golang.org/pkg/net/http/">HTTP client</a> and <a href="https://golang.org/pkg/encoding/json/">JSON parsing</a>.</p>
+<p>As a consequence, I implemented my project with zero dependencies!</p>
+<p>Other goodies have I appreciated from by Java background:</p>
+<ul>
+<li>
+<p><strong>code formatting</strong> is included! Its' simple as <code>go fmt</code>. No need to find and configure an external code formatting tools.</p>
+</li>
+<li>
+<p><strong>code linter</strong> is included! <del>Just install <code>golang/linttype</code> and run the <code>golint</code> command. No need to find and configure an external code formatting tools (to be honest, the linter did not help when coding pullpigo but it's so cool that code linter is provided).</del>
+[Edit from 2024-12-30: golang/linttype does not exists anymore, other tools like <a href="https://pkg.go.dev/cmd/vet">go vet</a> exist).</p>
+</li>
+</ul>
+<h2 id="other-opportunities-sunglasses">Other opportunities 😎</h2>
+<p>Coding this small hobby project has also been an opportunity to <strong>try and learn other tools</strong>. In my case, I could:</p>
+<ul>
+<li>
+<p>Use <a href="https://code.visualstudio.com/">Visual Studio Code</a>, an Integrated Development Environment that I don't use at work.</p>
+</li>
+<li>
+<p>Use <a href="https://github.com/features/actions">GitHub Actions</a> for Continuous Integration: every git commit pushed on GitHub triggers a compilation &amp; test check. It was the first time I used GitHub Actions, it was very easy (it only took a few minutes) to use it for my needs, and it's free.</p>
+</li>
+</ul>
+<p>The last positive thing about learning a programming language is that you can <strong>discuss and learn with people</strong> you know.</p>
+<p>In my case, my "Golang friends" have been:</p>
+<ul>
+<li>
+<p><a href="https://github.com/jcgay/">Jean-Christophe</a> who helped me to fix my JSON parsing issues. 😅</p>
+</li>
+<li>
+<p><a href="https://github.com/fbiville">Florent</a> who gave me pointers on cool libraries: <a href="https://golang.org/pkg/testing/quick/">testing/quick</a> for property-based testing, <a href="https://github.com/onsi/ginkgo">ginkgo</a> for BDD-style tests and <a href="https://github.com/onsi/gomega">gomega</a> for test assertions. I have to try them out! 😎</p>
+</li>
+</ul>
+<h3 id="what-s-next-crystal-ball">What's next? 🔮</h3>
+<p>Some ideas:</p>
+<ul>
+<li>
+<p>Make pullpigo's output more useful. For example, I could make it display counters for events like "pull request created", "pull request merged" etc.</p>
+</li>
+<li>
+<p>Retrieve data from <a href="https://developer.github.com/v4/">GitHub's GraphQL API v4</a> in order to by-pass the limitation of number of events (GitHub's REST API v3 'events' API only returns the last 300 events).</p>
+</li>
+<li>
+<p>Use some dependencies for testing (easier assertions, property-based-testing etc.) and take this opportunity to discover dependencies in Golang.</p>
+</li>
+</ul>
+<p>We'll see!</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>

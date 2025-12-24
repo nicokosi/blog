@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         Versionner sa configuration système via des &quot;dotfiles&quot;
+        
+    </title>
+
+        
+            <meta property="og:title" content="Versionner sa configuration système via des &quot;dotfiles&quot;" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="Pourquoi et comment versioner sa configuration système (système d&#x27;exploitation, shell et applications)." />
+         
+     
+
+     
+         
+             <meta name="description" content="Pourquoi et comment versioner sa configuration système (système d&#x27;exploitation, shell et applications)." />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    </head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Versionner sa configuration système via des &quot;dotfiles&quot;<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2016-08-17</time>
+                    
+
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/fr/tags/tools/" class="post-tag">tools</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="versionner-sa-configuration-systeme-via-des-dotfiles">Versionner sa configuration système via des "dotfiles"</h1>
+<h2 id="introduction-la-puissance-du-shell-avec-ou-sans-maitrise">Introduction : la puissance du shell, avec ou sans maîtrise ?</h2>
+<p>Cela fait environ deux ans que je développe sur un poste "*nix" (Linux et Mac) après avoir développé de nombreuses années sur un poste Windows. La puissance du shell est indéniable : combiner des lignes de commandes simples, bénéficier de l'historique des commandes lancées, etc. Pourquoi ne pas en profiter pour maîtriser davantage son système en <strong>versionnant sa configuration</strong> ?</p>
+<h2 id="presentation-dotfiles-quezako">Présentation : Dotfiles, quezako ?</h2>
+<p>Pour un système *nix (Linux, Mac, etc.), la configuration du shell et des applications est généralement centralisée dans les "dotfiles", des fichiers / répertoires dont le nom commence par un point ("dot" en anglais) et qui sont chargés en début de session interactive ou au lancement d'applications. En utilisant un gestionnaire de sources et des liens symboliques, on peut facilement <strong>historiser</strong> et <strong>synchroniser</strong> l'évolution de ces dotfiles afin de :</p>
+<ul>
+<li>
+<p><strong>personnaliser le système d'exploitation</strong>  : options d'affichage (exemple : choisir de masquer automatiquement la barre des applications), audio, etc.</p>
+</li>
+<li>
+<p><strong>personnaliser son shell</strong> :</p>
+<ul>
+<li>
+<p>positionnement de variables d'environnement (exemples : <code>PATH</code>, <code>JAVA_HOME</code>, <code>MVN_OPTIONS</code> etc.)</p>
+</li>
+<li>
+<p>création d'alias pour les commandes fréquemment utilisées et/ou dures à mémoriser (exemple : <code>alias mcist="mvn clean install -DskipTests"</code>)</p>
+</li>
+<li>
+<p>utilisation d'un shell "sur-vitaminé" du type <a href="https://github.com/robbyrussell/oh-my-zsh">Oh My Zsh</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>gérér les applications installées</strong>, à condition d'utiliser un gestionnaire de paquets du type <code>homebrew</code> (ou <code>apt</code>, <code>OneGet</code> etc.).</p>
+</li>
+</ul>
+<h2 id="comment-un-exemple-d-utilisation-du-mini-framework-holman-dotfiles">Comment ? Un exemple d'utilisation du mini-framework "holman/dotfiles"</h2>
+<p>On peut créer son propre environnement ou bien utiliser un framework "dotfiles" prêt à l'emploi car il existe de nombreux frameworks "dotfiles", en voici une liste non-exhaustive : <a href="https://dotfiles.github.io/">https://dotfiles.github.io/</a>.</p>
+<p>J'ai pour ma part utilisé <a href="https://github.com/holman/dotfiles">https://github.com/holman/dotfiles</a> qui permet de gérer sa configuration <code>ZSH</code> en proposant les fonctionnalités suivantes :</p>
+<ul>
+<li>
+<p>chargement automatique des fichiers nommés <code>*.zsh</code>, quel que soit leur répertoire, favorisant ainsi une structure thématique. Par exemple, on peut distinguer la configuration du compilateur Java, dans le script <code>java/env.zsh</code>, de la configuration du compilateur Go, dans le script <code>golang/env.zsh</code>. Cette approche thématique remplace avantageusement l'utilisation d'un script monolithique.</p>
+</li>
+<li>
+<p>création de liens symboliques ("symlinks") pointant vers les scripts de démarrage du shell (exemple : le fichier <code>$HOME/.zshrc</code> pour le shell <code>ZSH</code>).</p>
+</li>
+</ul>
+<p>Après avoir "forké" <a href="https://github.com/holman/dotfiles">https://github.com/holman/dotfiles</a>, j'ai créé deux branches :</p>
+<ul>
+<li>
+<p>une pour mon ordinateur personnel sous Mac : <a href="https://github.com/nicokosi/dotfiles">https://github.com/nicokosi/dotfiles</a></p>
+</li>
+<li>
+<p>une autre pour mon ordinateur professionnel sous Linux : <a href="https://github.com/nicokosi/dotfiles/tree/vidal">https://github.com/nicokosi/dotfiles/tree/vidal</a>
+Ces branches me permettent d'avoir deux configurations bien distinctes même si elles partagent certaines similitudes.</p>
+</li>
+</ul>
+<h2 id="conclusion-dotfiles-all-the-things">Conclusion : <em>Dotfiles all the things</em>!</h2>
+<p>Même si la mise en place et la maintenance de ses dotfiles prend du temps, l'investissement vaut le coup pour notamment :</p>
+<ul>
+<li>
+<p><strong>la résolution de problèmes</strong> (exemples : identifier ce qui a été récemment modifié, revenir à une configuration précédente, etc.) ;</p>
+</li>
+<li>
+<p><strong>synchroniser</strong> des changements entre plusieurs machines (exemple : PC sous Linux au travail et Mac perso), chacune ayant  une configuration distincte ;</p>
+</li>
+<li>
+<p><strong>partager</strong> sa configuration avec d'autres développeurs ("Voici le dernier réglage que j'ai utilisé pour ...").
+:</p>
+</li>
+</ul>
+<p>PS : merci à Jean-Christophe Gay pour l'inspiration et les "bons tuyaux". Voici son blog : <a href="https://jeanchristophegay.com/">https://jeanchristophegay.com/</a>.</p>
+<p>[mise à jour, 2024-12-30 : correction d'une coquille dans un des liens vers https://github.com/holman/dotfiles]</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>

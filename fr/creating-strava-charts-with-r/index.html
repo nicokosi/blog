@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         Générer ses graphiques Strava avec R
+        
+    </title>
+
+        
+            <meta property="og:title" content="Générer ses graphiques Strava avec R" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="Utilisation de R pour générer des graphiques Strava personnalisés." />
+         
+     
+
+     
+         
+             <meta name="description" content="Utilisation de R pour générer des graphiques Strava personnalisés." />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    </head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Générer ses graphiques Strava avec R<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2017-04-14</time>
+                    
+
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/fr/tags/strava/" class="post-tag">strava</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/charts/" class="post-tag">charts</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/r/" class="post-tag">r</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/rstudio/" class="post-tag">rstudio</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="generer-ses-graphiques-strava-avec-r">Générer ses graphiques Strava avec R</h1>
+<p>Cet article fait suite à <a href="https://nicokosi.github.io/fr/creating-strava-charts-with-r/creating-strava-charts-with-clojure-and-incanter.html">Générer ses graphiques Strava avec Clojure et Incanter</a> : en effet, j'ai décidé de faire un deuxième essai de génération de graphiques avec R.</p>
+<p>R est un langage idéal pour le calcul statistique et la génération de graphiques. J'ai fait le choix d'utiliser l'IDE gratuit <a href="https://www.rstudio.com/products/RStudio/">RStudio Desktop</a> qui contient de nombreuses facilités (visualisation des données, historique des variables et des graphiques, aide intégrée etc.). RStudio Desktop est <a href="http://www.rstudio.com/products/rstudio/download/">téléchargeable</a> ou peut être installé via certains gestionnaires de paquets (exemple pour mac avec <code>homebrew</code>, exécuter <code>brew cask install rstudio</code> dans un terminal).</p>
+<p>Le but est toujours de :</p>
+<ol>
+<li>appeler l'API Strava pour récupérer les données au format JSON</li>
+<li>faire quelques transformations, essentiellement des conversions</li>
+<li>afficher des graphiques (exemple : temps en mouvement en fonction de la distance parcourue)</li>
+</ol>
+<p>C'est parti !</p>
+<br/>
+R bénéficie de très nombreuses bibliothèques additionnelles qui sont publiques et téléchargeables automatiquement ("CRAN repository"). Voici les instructions d'import correspondant à celles que j'ai utilisées :
+<pre data-lang="r" style="background-color:#2b303b;color:#c0c5ce;" class="language-r "><code class="language-r" data-lang="r"><span style="color:#96b5b4;">library</span><span>(rjson)
+</span><span style="color:#96b5b4;">library</span><span>(httr)
+</span><span style="color:#96b5b4;">library</span><span>(ggplot2)
+</span><span style="color:#96b5b4;">library</span><span>(scales)
+</span></code></pre>
+<br/>
+### 1. Récupérer les données Strava
+<p>Le code suivant appelle l'<a href="http://strava.github.io/api/v3/activities/">API Strava "activities"</a> avec un jeton d'autorisation (access token) et récupère les 200 dernières sorties ("activities" = activité de course à pied, vélo ou natation) sous forme d'une chaîne de caractères (<code>characters</code>) :</p>
+<pre data-lang="r" style="background-color:#2b303b;color:#c0c5ce;" class="language-r "><code class="language-r" data-lang="r"><span>token &lt;- </span><span style="color:#96b5b4;">readline</span><span>(</span><span style="color:#bf616a;">prompt</span><span>=&quot;</span><span style="color:#a3be8c;">Enter Strava access token: </span><span>&quot;)
+</span><span>activities &lt;- </span><span style="color:#bf616a;">GET</span><span>(&quot;</span><span style="color:#a3be8c;">https://www.strava.com/</span><span>&quot;, </span><span style="color:#bf616a;">path </span><span>= &quot;</span><span style="color:#a3be8c;">api/v3/activities</span><span>&quot;,
+</span><span>                  </span><span style="color:#bf616a;">query </span><span>= </span><span style="color:#b48ead;">list</span><span>(</span><span style="color:#bf616a;">access_token </span><span>= token, </span><span style="color:#bf616a;">per_page </span><span>= </span><span style="color:#d08770;">200</span><span>))
+</span><span>activities &lt;- </span><span style="color:#bf616a;">content</span><span>(activities, &quot;</span><span style="color:#a3be8c;">text</span><span>&quot;) </span><span style="color:#65737e;"># Retrieve JSON content as string
+</span></code></pre>
+<br/>
+<p>###2. Transformer les données</p>
+<p>Il faut ensuite transformer ces données en données tabulaires, appelées <code>dataframes</code>. Petite subtilité, il faut itérer sur les éléments des listes pour remplacer les valeurs vides (<code>null</code>) par des valeurs manquantes (<code>NA</code>, pour "not available") :</p>
+<pre data-lang="r" style="background-color:#2b303b;color:#c0c5ce;" class="language-r "><code class="language-r" data-lang="r"><span>activities &lt;- </span><span style="color:#bf616a;">fromJSON</span><span>(activities)      </span><span style="color:#65737e;"># Transformer le contenu JSON en liste
+</span><span>activities &lt;- </span><span style="color:#96b5b4;">lapply</span><span>(activities, </span><span style="color:#b48ead;">function</span><span>(</span><span style="color:#bf616a;">x</span><span>) {      </span><span style="color:#65737e;"># appliquer une fonction anonyme à chaque élément de la liste
+</span><span>  x[</span><span style="color:#96b5b4;">sapply</span><span>(x, is.null)] &lt;- </span><span style="color:#d08770;">NA           </span><span style="color:#65737e;"># remplacer les valeurs nulles en &quot;N/A&quot;
+</span><span>  </span><span style="color:#96b5b4;">unlist</span><span>(x)
+</span><span>})
+</span><span>df &lt;- </span><span style="color:#96b5b4;">data.frame</span><span>(</span><span style="color:#96b5b4;">do.call</span><span>(&quot;</span><span style="color:#a3be8c;">rbind</span><span>&quot;, activities)) </span><span style="color:#65737e;"># transformer les listes de listes en dataframe
+</span></code></pre>
+<p>J'avoue que j'ai triché en "googlant" car les manipulations de structures ne sont pas super évidentes pour moi ! 🤓</p>
+<p>On peut en tout cas remarquer que les variables ne sont pas typées - R est un language dynamique - et peuvent être ré-affectées. Par exemple, <code>activities</code> est une variable de type <code>character</code> (chaîne de caractères, contenant les données JSON) qui devient ensuite une variable de type <code>list</code>.</p>
+<p>Il m'a fallu convertir les distances et les durées pour utiliser des unités plus appriopriées :</p>
+<pre data-lang="r" style="background-color:#2b303b;color:#c0c5ce;" class="language-r "><code class="language-r" data-lang="r"><span style="color:#65737e;"># Convertir les durées en minutes (l&#39;API Strava API retourne des secondes) :
+</span><span>df</span><span style="color:#b48ead;">$</span><span>moving_time &lt;- </span><span style="color:#96b5b4;">as.numeric</span><span>(</span><span style="color:#96b5b4;">as.character</span><span>(df</span><span style="color:#b48ead;">$</span><span>moving_time)) / </span><span style="color:#d08770;">60
+</span><span>
+</span><span style="color:#65737e;"># Convertir les distances en kilomètres (l&#39;API Strava API retourne des mètres) :
+</span><span>df</span><span style="color:#b48ead;">$</span><span>distance &lt;- </span><span style="color:#96b5b4;">as.numeric</span><span>(</span><span style="color:#96b5b4;">as.character</span><span>(df</span><span style="color:#b48ead;">$</span><span>distance)) / </span><span style="color:#d08770;">1000
+</span></code></pre>
+<p>Pour l'anectode, les données sont des <code>factors</code>, c'est-à-dire des données dont on connaît toutes les valeurs (une énumération, en quelque sorte). Avant de les convertir, il faut récupérer leur libellé via la fonction <code>as.character</code>.</p>
+<br/>
+<p>###3. Affichage d'un graphique</p>
+<p>La dernière étape consiste à utiliser l'une des fonctions de la librairie <code>ggplot2</code> pour afficher et sauvegarder un graphique. Le code suivant affiche le temps en mouvement en fonction de la distance parcourue :</p>
+<pre data-lang="r" style="background-color:#2b303b;color:#c0c5ce;" class="language-r "><code class="language-r" data-lang="r"><span>  </span><span style="color:#bf616a;">ggplot</span><span>(df, </span><span style="color:#bf616a;">aes</span><span>(</span><span style="color:#bf616a;">x</span><span>=distance, </span><span style="color:#bf616a;">y</span><span>=moving_time)) + </span><span style="color:#65737e;"># à partir du dataframe, afficher les données &#39;distance&#39; en fonction de &#39;moving_time`
+</span><span>    </span><span style="color:#bf616a;">geom_point</span><span>(</span><span style="color:#bf616a;">size</span><span>=</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#bf616a;">colour</span><span>=&quot;</span><span style="color:#a3be8c;">#CC0000</span><span>&quot;) + </span><span style="color:#65737e;"># afficher les points en rouge
+</span><span>    </span><span style="color:#bf616a;">geom_smooth</span><span>(</span><span style="color:#bf616a;">method</span><span>=lm) </span><span style="color:#65737e;"># ajout d&#39;une courbe de régression linéaire +
+</span><span>    </span><span style="color:#bf616a;">xlab</span><span>(&quot;</span><span style="color:#a3be8c;">distance per activity (kilometers)</span><span>&quot;) </span><span style="color:#65737e;"># libellé de l&#39;axe X +
+</span><span>    </span><span style="color:#bf616a;">ylab</span><span>(&quot;</span><span style="color:#a3be8c;">moving time (minutes)</span><span>&quot;) </span><span style="color:#65737e;"># libellé de l&#39;axe Y
+</span><span>  </span><span style="color:#bf616a;">ggsave</span><span>(&quot;</span><span style="color:#a3be8c;">/tmp/moving-time.png</span><span>&quot;) </span><span style="color:#65737e;"># sauvegarder dans un fichier PNG
+</span></code></pre>
+<p>Le graphique généré :
+<img src="https://nicokosi.github.io/fr/creating-strava-charts-with-r/r-chart-distance-per-moving-time.png" alt="Chart: distance et temps en mouvement" /></p>
+<p>Voici le lien vers le <a href="https://gist.github.com/nicokosi/241331f67692945ddca4e4ea2cc0597d">code complet</a> pour afficher plusieurs graphiques similaires.</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>
