@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         A few &quot;unix-like&quot; terminal tricks 🧙
+        
+    </title>
+
+        
+            <meta property="og:title" content="A few &quot;unix-like&quot; terminal tricks 🧙" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="unix-like shell tricks" />
+         
+     
+
+     
+         
+             <meta name="description" content="unix-like shell tricks" />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    <script defer src="https://nicokosi.github.io/search_index.en.js?h=a9ca6989408ef98463ba"></script>
+        <script defer src="https://nicokosi.github.io/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script></head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+        <button 
+            id="search-button"
+            class="search-button"
+            title="$SHORTCUT to open search"
+        >
+            <img 
+                src="https://nicokosi.github.io/search.svg" 
+                alt="Search" 
+                class="search-icon"
+            >
+        </button>
+
+        <div id="searchModal" class="search-modal js" role="dialog" aria-labelledby="modalTitle">
+            <div id="modal-content">
+                <h1 id="modalTitle" class="page-header">Search</h1>
+                <div id="searchBar">
+                    <input 
+                        id="searchInput" 
+                        role="combobox" 
+                        autocomplete="off" 
+                        spellcheck="false" 
+                        aria-expanded="false" 
+                        aria-controls="results-container" 
+                        placeholder="Search..."
+                    />
+                    <button 
+                        id="clear-search" 
+                        class="clear-button"
+                        title="Clear search"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div id="results-container">
+                    <div id="results-info">
+                        <span id="zero_results" style="display: none;">No results</span>
+                        <span id="one_result" style="display: none;">1 result</span>
+                        <span id="many_results" style="display: none;">$NUMBER results</span>
+                    </div>
+                    <div id="results" role="listbox"></div>
+                </div>
+            </div>
+        </div>
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        A few &quot;unix-like&quot; terminal tricks 🧙<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2024-11-28</time>
+                    
+
+                    
+                        :: Updated on <time>2024-12-18</time>
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/tags/shell/" class="post-tag">shell</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/tags/terminal/" class="post-tag">terminal</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/tags/cli/" class="post-tag">cli</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/tags/tui/" class="post-tag">tui</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="a-few-unix-like-terminal-tricks-mage">A few "unix-like" terminal tricks 🧙</h1>
+<p>Assumed audience: developers interested in using the terminal for various tasks.</p>
+<p>As a developer, I like using shell commands in my terminal. Here are a few random tips I have. Maybe you can learn from them, or give me back your tips/advises?</p>
+<h2 id="simplified-help-using-tldr-memo">Simplified help using <code>tldr</code> 📝</h2>
+<p>I cannot remember all command options, and I like to find help in my terminal, without using internet or AI.</p>
+<p>So I often use <a href="https://tldr.sh">tldr</a> as a cheat sheet, it's OK for many common options!</p>
+<p>For instance, <code>tldr npm</code> outputs:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>  JavaScript and Node.js package manager.
+</span><span>  Manage Node.js projects and their module dependencies.
+</span><span>  More information: &lt;https://www.npmjs.com&gt;.
+</span><span>
+</span><span>  Create a `package.json` file with default values (omit `--yes` to do it interactively):
+</span><span>
+</span><span>      npm init -y|--yes
+</span><span>
+</span><span>  Download all the packages listed as dependencies in `package.json`:
+</span><span>
+</span><span>      npm install
+</span><span>
+</span><span>  Download a specific version of a package and add it to the list of dependencies in `package.json`:
+</span><span>
+</span><span>      npm install package_name@version
+</span><span>
+</span><span>  Download the latest version of a package and add it to the list of dev dependencies in `package.json`:
+</span><span>
+</span><span>      npm install package_name -D|--save-dev
+</span><span>
+</span><span>  Download the latest version of a package and install it globally:
+</span><span>
+</span><span>      npm install -g|--global package_name
+</span><span>
+</span><span>  Uninstall a package and remove it from the list of dependencies in `package.json`:
+</span><span>
+</span><span>      npm uninstall package_name
+</span><span>
+</span><span>  List all locally installed dependencies:
+</span><span>
+</span><span>      npm list
+</span><span>
+</span><span>  List all top-level globally installed packages:
+</span><span>
+</span><span>      npm list -g|--global --depth 0
+</span></code></pre>
+<h2 id="aliases-name-badge">Aliases 📛</h2>
+<h3 id="permanent-aliases">Permanent aliases</h3>
+<p>Use case: speed-up typing for frequently used commands.</p>
+<p>For instance, since I often use Maven's <code>mvn</code> commands in my terminal, I have defined this alias in my shell configuration:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#96b5b4;">alias </span><span style="color:#8fa1b3;">mvncist</span><span>=&quot;</span><span style="color:#a3be8c;">mvn clean install -DskipTests</span><span>&quot;
+</span></code></pre>
+<p>Then I can just type <code>mvncist</code> to build any Maven project without running tests.</p>
+<h3 id="on-demand-aliases">On-demand aliases</h3>
+<p>Use case: speed-up typing for commands used intensively during a given period.</p>
+<p>For instance, as a developer, I do not use the <code>docker</code> CLI every day, but I often use it intensively when updating a Docker image or debugging an issue.</p>
+<p>I will thus create this ephemeral for my current shell session, <code>alias d=docker</code>, then:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">d</span><span> ps
+</span><span style="color:#bf616a;">d</span><span> images
+</span><span style="color:#65737e;"># and so on...
+</span></code></pre>
+<h2 id="filtering-the-output-mag-right">Filtering the output 🔎</h2>
+<h3 id="with-grep">with <code>grep</code></h3>
+<p>Piping with <code>grep</code> or similar commands like <a href="https://github.com/ggreer/the_silver_searcher">ag, "the silver searcher"</a> is OK when I know what to search for.</p>
+<p>For instance, I often run the <code>df -h | grep disk1s1</code> command to know available space from my local hard drive.</p>
+<h3 id="with-fzf-the-command-line-fuzzy-finder">with <code>fzf</code>, the "command-line fuzzy finder"</h3>
+<p>When I don't exactly know out to filter the output, I use <a href="https://junegunn.github.io/fzf/">fzf, the "command-line fuzzy finder"</a>.</p>
+<p>For instance, when I want to know Java Development Kits that I have installed, I run <code>sdk list java | fzf</code>.</p>
+<p><img src="https://nicokosi.github.io/nix-terminal-tricks/fzf-sdk.gif" alt="Using &#39;fzf&#39; to filter the &#39;sdk&#39; command" /></p>
+<p>When I want to filter then copy several lines from command's output, the <code>--multi</code> (short <code>-m</code>) option is neat.</p>
+<p>For instance, <code>eza ~ | fzf -m</code>.</p>
+<p><img src="https://nicokosi.github.io/nix-terminal-tricks/fzf-m-eza.gif" alt="Using &#39;fzf&#39; to filter and select multiple lines from the &#39;eza&#39; command" /></p>
+<h2 id="tuis-for-speed-zap">TUIs for speed! ⚡️</h2>
+<p>I often use the following <a href="https://en.wikipedia.org/wiki/Text-based_user_interface">Text-based User Interfaces (or Terminal-based)</a>, aka TUIs:</p>
+<ul>
+<li>
+<p><a href="https://jonas.github.io/tig/">tig</a> to navigate git commits quickly (even if I usually use <code>git</code> in my terminal or within my favorite IDE)</p>
+</li>
+<li>
+<p><a href="https://github.com/jesseduffield/lazydocker">lazydocker</a> for managing docker containers quickly (even if usually use the <code>docker</code> command directly)</p>
+</li>
+<li>
+<p><a href="https://github.com/imsnif/diskonaut">diskonaut</a> for identifying big files on my hard disk drive</p>
+</li>
+<li>
+<p><a href="https://nicokosi.github.io/nix-terminal-tricks/%5Burl%5D(https://github.com/korosuke613/gh-user-stars?tab=readme-ov-file)">user-stars GitHub CLI extension</a> to search my GitHub stars</p>
+</li>
+</ul>
+<p>Thanks to my colleagues who helped me learning these tricks: Amazigh, Alexis, Stéphane, Yoann, Jean-Christophe...and all the others I forget (please forgive me)! 🤗</p>
+<p>That's all I got, nerds! 🤓</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>

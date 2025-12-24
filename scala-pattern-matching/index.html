@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         Let&#x27;s play with pattern matching in Scala
+        
+    </title>
+
+        
+            <meta property="og:title" content="Let&#x27;s play with pattern matching in Scala" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="Pattern matching is a powerful technique for filtering and testing variables. This article aims at illustrating pattern matching in Scala using a simple example." />
+         
+     
+
+     
+         
+             <meta name="description" content="Pattern matching is a powerful technique for filtering and testing variables. This article aims at illustrating pattern matching in Scala using a simple example." />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    <script defer src="https://nicokosi.github.io/search_index.en.js?h=a9ca6989408ef98463ba"></script>
+        <script defer src="https://nicokosi.github.io/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script></head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+        <button 
+            id="search-button"
+            class="search-button"
+            title="$SHORTCUT to open search"
+        >
+            <img 
+                src="https://nicokosi.github.io/search.svg" 
+                alt="Search" 
+                class="search-icon"
+            >
+        </button>
+
+        <div id="searchModal" class="search-modal js" role="dialog" aria-labelledby="modalTitle">
+            <div id="modal-content">
+                <h1 id="modalTitle" class="page-header">Search</h1>
+                <div id="searchBar">
+                    <input 
+                        id="searchInput" 
+                        role="combobox" 
+                        autocomplete="off" 
+                        spellcheck="false" 
+                        aria-expanded="false" 
+                        aria-controls="results-container" 
+                        placeholder="Search..."
+                    />
+                    <button 
+                        id="clear-search" 
+                        class="clear-button"
+                        title="Clear search"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div id="results-container">
+                    <div id="results-info">
+                        <span id="zero_results" style="display: none;">No results</span>
+                        <span id="one_result" style="display: none;">1 result</span>
+                        <span id="many_results" style="display: none;">$NUMBER results</span>
+                    </div>
+                    <div id="results" role="listbox"></div>
+                </div>
+            </div>
+        </div>
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Let&#x27;s play with pattern matching in Scala<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2016-09-14</time>
+                    
+
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/tags/scala/" class="post-tag">scala</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/tags/pattern-matching/" class="post-tag">pattern-matching</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/tags/console/" class="post-tag">console</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/tags/repl/" class="post-tag">repl</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="let-s-play-with-pattern-matching-in-scala">Let's play with pattern matching in Scala</h1>
+<p>Pattern matching is a powerful technique for filtering and testing variables. This article aims at illustrating pattern matching in Scala using a simple example.
+Let's say we want to return the color (red or black) of a playing card.</p>
+<p>Notes: The code below "shows" the console output using comments (ex: <code>"foo" // foo</code>). I have used a <a href="https://confluence.jetbrains.com/display/IntelliJIDEA/Working+with+Scala+Worksheet">IntelliJ IDEA worksheet</a> but the standard Scala console can also be used (REPL FTW!)</p>
+<br/>
+## Step #1: let's create a simple class
+<p>Let's create a immutable class for the "club" suite:</p>
+<pre data-lang="scala" style="background-color:#2b303b;color:#c0c5ce;" class="language-scala "><code class="language-scala" data-lang="scala"><span style="color:#b48ead;">class</span><span style="color:#ebcb8b;"> Club </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">  </span><span style="color:#b48ead;">val </span><span style="color:#bf616a;">symbol </span><span>= &quot;</span><span style="color:#a3be8c;">♣</span><span>&quot;
+</span><span style="color:#eff1f5;">  </span><span style="color:#b48ead;">val </span><span style="color:#bf616a;">label </span><span>= &quot;</span><span style="color:#a3be8c;">club</span><span>&quot;
+</span><span style="color:#eff1f5;">}
+</span><span>
+</span><span style="color:#b48ead;">val </span><span style="color:#bf616a;">club</span><span>: </span><span style="color:#ebcb8b;">Club </span><span>= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Club</span><span>()
+</span><span>club.symbol </span><span style="color:#65737e;">// ♣
+</span></code></pre>
+<p>So far, so good. Instances can be compared by identity (reference) but not by value because we did not override the <code>equals</code> method:</p>
+<pre data-lang="scala" style="background-color:#2b303b;color:#c0c5ce;" class="language-scala "><code class="language-scala" data-lang="scala"><span>club.equals(club) </span><span style="color:#65737e;">// true
+</span><span>club == </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Club </span><span style="color:#65737e;">// false
+</span><span>club.eq(</span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Club</span><span>) </span><span style="color:#65737e;">// false
+</span><span>club.equals(</span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Club</span><span>) </span><span style="color:#65737e;">// false
+</span></code></pre>
+<p><code>hashCode</code> and <code>toString</code> are also default ones:</p>
+<pre data-lang="scala" style="background-color:#2b303b;color:#c0c5ce;" class="language-scala "><code class="language-scala" data-lang="scala"><span>club </span><span style="color:#65737e;">// Club@1ac88f64
+</span><span>club.hashCode() </span><span style="color:#65737e;">// 1976061787
+</span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">Club</span><span>().hashCode() </span><span style="color:#65737e;">// 1751431390
+</span></code></pre>
+<br/>
+## Step #2: let's create a case class
+<p>A <code>case class</code> has two benefits:</p>
+<ol>
+<li>auto-implement <code>equals</code>, <code>hashCode</code> and <code>toString</code> methods.</li>
+<li>enhance pattern matching capability via two methods: a "constructor" method, <code>apply</code>, and a "de-constructor" method, <code>unapply</code>.</li>
+</ol>
+<pre data-lang="scala" style="background-color:#2b303b;color:#c0c5ce;" class="language-scala "><code class="language-scala" data-lang="scala"><span style="color:#b48ead;">case class</span><span style="color:#ebcb8b;"> CardSuite</span><span>(</span><span style="color:#bf616a;">symbol</span><span>: </span><span style="color:#ebcb8b;">String</span><span>, </span><span style="color:#bf616a;">label</span><span>: </span><span style="color:#ebcb8b;">String</span><span>)
+</span></code></pre>
+<p><code>apply</code> method is a kind of free constructor. By the way, we don't need to use the <code>new</code> keyword:</p>
+<pre data-lang="scala" style="background-color:#2b303b;color:#c0c5ce;" class="language-scala "><code class="language-scala" data-lang="scala"><span>CardSuite(&quot;</span><span style="color:#a3be8c;">♣</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">club</span><span>&quot;) </span><span style="color:#65737e;">// CardSuite(♣,club)
+</span></code></pre>
+<p><code>equals</code>, <code>hashCode</code> and <code>toString</code> methods are also implemented for free:</p>
+<pre data-lang="scala" style="background-color:#2b303b;color:#c0c5ce;" class="language-scala "><code class="language-scala" data-lang="scala"><span>CardSuite(&quot;</span><span style="color:#a3be8c;">♣</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">club</span><span>&quot;).symbol
+</span><span>CardSuite(&quot;</span><span style="color:#a3be8c;">♣</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">club</span><span>&quot;) == CardSuite(&quot;</span><span style="color:#a3be8c;">♣</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">club</span><span>&quot;) </span><span style="color:#65737e;">// true
+</span><span>CardSuite(&quot;</span><span style="color:#a3be8c;">♣</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">club</span><span>&quot;).equals(CardSuite(&quot;</span><span style="color:#a3be8c;">♣</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">club</span><span>&quot;)) </span><span style="color:#65737e;">// true
+</span><span>CardSuite(&quot;</span><span style="color:#a3be8c;">♣</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">club</span><span>&quot;).eq(CardSuite(&quot;</span><span style="color:#a3be8c;">♣</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">club</span><span>&quot;)) </span><span style="color:#65737e;">// false
+</span><span>CardSuite(&quot;</span><span style="color:#a3be8c;">♣</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">club</span><span>&quot;).hashCode() </span><span style="color:#65737e;">// 1302714609
+</span><span>CardSuite(&quot;</span><span style="color:#a3be8c;">♣</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">club</span><span>&quot;).hashCode() </span><span style="color:#65737e;">// 1302714609
+</span></code></pre>
+<br/>
+## "Bonus" step: use an enumeration
+<p>Since there are four suites in French playing cards, we can create an enumeration. This is not directly related to our pattern matching example, but let's do it, for fun and profit. ;-)</p>
+<pre data-lang="scala" style="background-color:#2b303b;color:#c0c5ce;" class="language-scala "><code class="language-scala" data-lang="scala"><span style="color:#b48ead;">object</span><span style="color:#ebcb8b;"> CardSuites </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">  </span><span style="color:#b48ead;">val </span><span style="color:#bf616a;">CLUB </span><span>= </span><span style="color:#eff1f5;">CardSuite(</span><span>&quot;</span><span style="color:#a3be8c;">♣</span><span>&quot;</span><span style="color:#eff1f5;">, </span><span>&quot;</span><span style="color:#a3be8c;">club</span><span>&quot;</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">  </span><span style="color:#b48ead;">val </span><span style="color:#bf616a;">DIAMOND </span><span>= </span><span style="color:#eff1f5;">CardSuite(</span><span>&quot;</span><span style="color:#a3be8c;">♦</span><span>&quot;</span><span style="color:#eff1f5;">, </span><span>&quot;</span><span style="color:#a3be8c;">diamond</span><span>&quot;</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">  </span><span style="color:#b48ead;">val </span><span style="color:#bf616a;">HEART </span><span>= </span><span style="color:#eff1f5;">CardSuite(</span><span>&quot;</span><span style="color:#a3be8c;">♥</span><span>&quot;</span><span style="color:#eff1f5;">, </span><span>&quot;</span><span style="color:#a3be8c;">heart</span><span>&quot;</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">  </span><span style="color:#b48ead;">val </span><span style="color:#bf616a;">SPADE </span><span>= </span><span style="color:#eff1f5;">CardSuite(</span><span>&quot;</span><span style="color:#a3be8c;">♠</span><span>&quot;</span><span style="color:#eff1f5;">, </span><span>&quot;</span><span style="color:#a3be8c;">spade</span><span>&quot;</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">  </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">values</span><span style="color:#eff1f5;">() </span><span>= </span><span style="color:#eff1f5;">List(DIAMOND, HEART, SPADE, CLUB)
+</span><span style="color:#eff1f5;">}
+</span><span>CardSuites.CLUB != CardSuites.DIAMOND </span><span style="color:#65737e;">// true
+</span><span>CardSuites.values </span><span style="color:#65737e;">// List(CardSuite(♦,diamond), CardSuite(♥,heart), CardSuite(♠,spade), CardSuite(♣,club))
+</span></code></pre>
+<br/>
+## Last step: let's use pattern matching!
+<h3 id="first-example">First example</h3>
+<p>Here is a first pattern matching example, used in a function that returns the color of a suite card:</p>
+<pre data-lang="scala" style="background-color:#2b303b;color:#c0c5ce;" class="language-scala "><code class="language-scala" data-lang="scala"><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">justColor</span><span>(</span><span style="color:#bf616a;">cardSuite</span><span>: </span><span style="color:#ebcb8b;">CardSuite</span><span>): </span><span style="color:#ebcb8b;">String </span><span>= cardSuite </span><span style="color:#b48ead;">match </span><span>{
+</span><span>  </span><span style="color:#b48ead;">case </span><span>CardSuites.CLUB | CardSuites.SPADE </span><span style="color:#b48ead;">=&gt; </span><span>&quot;</span><span style="color:#a3be8c;">black</span><span>&quot;
+</span><span>  </span><span style="color:#b48ead;">case </span><span>CardSuites.DIAMOND | CardSuites.HEART </span><span style="color:#b48ead;">=&gt; </span><span>&quot;</span><span style="color:#a3be8c;">red</span><span>&quot;
+</span><span>  </span><span style="color:#b48ead;">case </span><span style="color:#bf616a;">_ </span><span style="color:#b48ead;">=&gt; </span><span>&quot;</span><span style="color:#a3be8c;">none</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>justColor(CardSuites.SPADE) </span><span style="color:#65737e;">// black
+</span></code></pre>
+<p>This example demonstrates:</p>
+<ul>
+<li>the <code>|</code> notation (<em>disjunction</em>) that can be used to group several cases;</li>
+<li>the <code>_</code> notation (<em>wildcard</em>) for "other cases".</li>
+</ul>
+<h3 id="second-example">Second example</h3>
+<p>Here is a second example to demonstrate field filtering, also known as "de-structuring":</p>
+<pre data-lang="scala" style="background-color:#2b303b;color:#c0c5ce;" class="language-scala "><code class="language-scala" data-lang="scala"><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">describeColor</span><span>(</span><span style="color:#bf616a;">cardSuite</span><span>: </span><span style="color:#ebcb8b;">CardSuite</span><span>): </span><span style="color:#ebcb8b;">String </span><span>= cardSuite </span><span style="color:#b48ead;">match </span><span>{
+</span><span>  </span><span style="color:#b48ead;">case </span><span>CardSuite(</span><span style="color:#bf616a;">_</span><span>, </span><span style="color:#bf616a;">label</span><span>) </span><span style="color:#b48ead;">=&gt; </span><span style="color:#96b5b4;">s</span><span>&quot;</span><span style="color:#bf616a;">$label</span><span style="color:#a3be8c;"> is ${</span><span>justColor(cardSuite)</span><span style="color:#a3be8c;">}</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span>describeColor(CardSuites.SPADE) </span><span style="color:#65737e;">// spade is black
+</span></code></pre>
+<p>We only keep the suite label using the <code>unapply</code> method of our case class.</p>
+<p>That's all folks! 🤓</p>
+<p>PS: Thanks to Jérôme Prudent for the Scala tips and for the review. Jérôme contributes to the <a href="http://www.arolla.fr/blog">Arolla blog</a> (<a href="http://www.arolla.fr/blog/author/jerome-prudent/">direct link to his posts</a>).</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>

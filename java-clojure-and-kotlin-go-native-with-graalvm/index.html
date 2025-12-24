@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         Java, Kotlin and Clojure go native with GraalVM
+        
+    </title>
+
+        
+            <meta property="og:title" content="Java, Kotlin and Clojure go native with GraalVM" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="Generate native executables via GraalVM for Java, Kotlin and Clojure CLI tools." />
+         
+     
+
+     
+         
+             <meta name="description" content="Generate native executables via GraalVM for Java, Kotlin and Clojure CLI tools." />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    <script defer src="https://nicokosi.github.io/search_index.en.js?h=a9ca6989408ef98463ba"></script>
+        <script defer src="https://nicokosi.github.io/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script></head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+        <button 
+            id="search-button"
+            class="search-button"
+            title="$SHORTCUT to open search"
+        >
+            <img 
+                src="https://nicokosi.github.io/search.svg" 
+                alt="Search" 
+                class="search-icon"
+            >
+        </button>
+
+        <div id="searchModal" class="search-modal js" role="dialog" aria-labelledby="modalTitle">
+            <div id="modal-content">
+                <h1 id="modalTitle" class="page-header">Search</h1>
+                <div id="searchBar">
+                    <input 
+                        id="searchInput" 
+                        role="combobox" 
+                        autocomplete="off" 
+                        spellcheck="false" 
+                        aria-expanded="false" 
+                        aria-controls="results-container" 
+                        placeholder="Search..."
+                    />
+                    <button 
+                        id="clear-search" 
+                        class="clear-button"
+                        title="Clear search"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div id="results-container">
+                    <div id="results-info">
+                        <span id="zero_results" style="display: none;">No results</span>
+                        <span id="one_result" style="display: none;">1 result</span>
+                        <span id="many_results" style="display: none;">$NUMBER results</span>
+                    </div>
+                    <div id="results" role="listbox"></div>
+                </div>
+            </div>
+        </div>
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Java, Kotlin and Clojure go native with GraalVM<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2019-08-13</time>
+                    
+
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/tags/java/" class="post-tag">java</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/tags/clojure/" class="post-tag">clojure</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/tags/kotlin/" class="post-tag">kotlin</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/tags/native/" class="post-tag">native</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/tags/graalvm/" class="post-tag">graalvm</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/tags/jvm/" class="post-tag">jvm</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="java-kotlin-and-clojure-go-native-with-graalvm">Java, Kotlin and Clojure go native with GraalVM</h1>
+<p><a href="https://v4.chriskrycho.com/2018/assumed-audiences.html">Presumed audience</a> : developers interested in the Java ecosystem and more specifically on deploying executable programs that are fast and efficient.</p>
+<p>Plan :</p>
+<ol>
+<li>Introduction</li>
+<li>Our tools</li>
+<li>An optimized executable for a "WordCount" <code>Java</code> CLI tool</li>
+<li>An optimized executable for a <code>Kotlin</code> CLI tool</li>
+<li>An "not-fully optimized" executable for a <code>Clojure</code> CLI tool</li>
+<li>Conclusion</li>
+</ol>
+<h2 id="introduction">Introduction</h2>
+<p>I wrote about failures in my previous blog post <a href="https://nicokosi.github.io/clojure-goes-native-with-graalvm-en.html">Clojure goes native with GraalVM</a>. This post is about successful attempts to generate executables from small CLI tools, implemented in <a href="https://go.java/">Java</a>, <a href="https://kotlinlang.org/">Kotlin</a> and <a href="https://clojure.org/">Clojure</a>, using <a href="https://www.graalvm.org/">GraalVM</a> release (see the <a href="https://www.graalvm.org/release-notes/">release notes</a>).</p>
+<h2 id="tools">Tools</h2>
+<p>We will use the following applications:</p>
+<ul>
+<li><a href="https://www.graalvm.org/downloads/">GraalVM Community Edition</a> ("<em>a High-performance polyglot VM</em>") and more specifically, the <a href="https://www.graalvm.org/docs/getting-started/#native-images">Native Image</a> functionality (via the <code>native-image</code> command) in order to generate native executables from Java code.</li>
+<li><a href="https://sdkman.io/">SDKMAN!</a> ("<em>The Software Development Kit Manager</em>") in order to use several <em>Java Development Kits</em> / <em>Java Runtime Environments</em>.</li>
+<li><a href="http://manpages.ubuntu.com/manpages/cosmic/en/man1/time.1.html">time</a> ("<em>run programs and summarize system resource usage</em>") in order to measure runtime durations.</li>
+<li><a href="http://valgrind.org/">valgrind</a> ("<em>tool for memory debugging, memory leak detection, and profiling</em>") in order to evaluate the memory footprints.</li>
+</ul>
+<h2 id="an-optimized-executable-for-a-wordcount-java-application">An optimized executable for a "WordCount" <code>Java</code> application</h2>
+<p>Our "hello world" is a 10-line program that counts the number of distinct words in a text file: <a href="https://github.com/nicokosi/wordcount-with-java-stream">wordcount-with-java-stream</a>.</p>
+<p>Let's generate an executable JAR file via Maven and OpenJDK. It takes 2 seconds on my machine:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> sdk use java 8.0.222.hs-adpt
+</span><span style="color:#bf616a;">Using</span><span> java version 8.0.222.hs-adpt in this shell.
+</span><span style="color:#bf616a;">$</span><span> time ./mvnw clean</span><span style="color:#bf616a;"> --quiet</span><span> compile
+</span><span style="color:#bf616a;">./mvnw</span><span> clean</span><span style="color:#bf616a;"> --quiet</span><span> compile  6.24s user 0.31s system 323% cpu 2.022 total
+</span></code></pre>
+<p>Note that the ellapsed time is at the end of the last line, in seconds: <code>2.022 total</code> means 2.022 seconds.</p>
+<p>Now generate an executable via GraalVM native-image. It takes 42 seconds on my machine:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> time $</span><span style="color:#bf616a;">HOME</span><span>/.sdkman/candidates/java/19.1.1-grl/bin/native-image \
+</span><span style="color:#bf616a;">     --enable-https </span><span>\
+</span><span style="color:#bf616a;">     --no-fallback </span><span>\
+</span><span style="color:#bf616a;">     --no-server </span><span>\
+</span><span style="color:#bf616a;">     -cp</span><span> target/classes org.nicokosi.WordCount \
+</span><span>     wordcount-with-java-stream
+</span><span>$</span><span style="color:#bf616a;">HOME/.sdkman/candidates/java/19.1.1-grl/bin/native-image --enable-https   -c</span><span>  236,70s user 2,75s system 566% cpu 42,285 total
+</span></code></pre>
+<p>Let's compare the runtime durations for a small input file:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> alias wordcount_java=&quot; $</span><span style="color:#bf616a;">HOME</span><span style="color:#a3be8c;">/.sdkman/candidates/java/8.0.222.hs-adpt/bin/java -cp target/classes org.nicokosi.WordCount</span><span>&quot;
+</span><span style="color:#bf616a;">$</span><span> time wordcount_java /etc/hosts
+</span><span style="color:#bf616a;">File</span><span> /etc/hosts contains 26 words
+</span><span style="color:#bf616a;">/home/nkosinski/.sdkman/candidates/java/8.0.222.hs-adpt/bin/java -cp</span><span>     0,16s user 0,02s system 152% cpu 0,118 total
+</span></code></pre>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> time ./wordcount-with-java-stream /etc/hosts
+</span><span style="color:#bf616a;">File</span><span> /etc/hosts contains 26 words
+</span><span style="color:#bf616a;">./wordcount-with-java-stream</span><span> /etc/hosts  0,00s user 0,01s system 92% cpu 0,007 total
+</span></code></pre>
+<p>And the memory footprints:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> JAVA_HOME=$</span><span style="color:#bf616a;">HOME</span><span>/.sdkman/candidates/java/8.0.222.hs-adpt \
+</span><span>  valgrind java</span><span style="color:#bf616a;"> -cp</span><span> target/classes org.nicokosi.WordCount /etc/hosts
+</span><span>
+</span><span>=</span><span style="color:#a3be8c;">=23352== </span><span style="color:#bf616a;">HEAP</span><span> SUMMARY:
+</span><span>=</span><span style="color:#a3be8c;">=23352==     </span><span style="color:#bf616a;">in</span><span> use at exit: 34,892,297 bytes in 6,155 blocks
+</span><span>=</span><span style="color:#a3be8c;">=23352==   </span><span style="color:#bf616a;">total</span><span> heap usage: 14,555 allocs, 8,400 frees, 49,960,719 bytes allocated  **
+</span></code></pre>
+<p>Note that the amount of allocated memory is at the end of the last line, in bytes: <code>49,960,719 allocated</code> means that 50 megabytes have been allocated.</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> valgrind ./wordcount-with-java-stream /etc/hosts
+</span><span>
+</span><span>=</span><span style="color:#a3be8c;">=23753== </span><span style="color:#bf616a;">HEAP</span><span> SUMMARY:
+</span><span>=</span><span style="color:#a3be8c;">=23753==     </span><span style="color:#bf616a;">in</span><span> use at exit: 10,468 bytes in 3 blocks
+</span><span>=</span><span style="color:#a3be8c;">=23753==   </span><span style="color:#bf616a;">total</span><span> heap usage: 8 allocs, 5 frees, 12,436 bytes allocated**
+</span></code></pre>
+<p>To sum up, at the cost of a longer compilation (42 seconds instead of 2 seconds), GraalVM:</p>
+<ul>
+<li>speeds up our application: 7 milliseconds instead of 118 milliseconds ;</li>
+<li>reduces the memory footprint: 12 kilobytes instead of 50 megabytes.</li>
+</ul>
+<h2 id="an-optimized-executable-for-a-kotlin-cli-tool">An optimized executable for a <code>Kotlin</code> CLI tool</h2>
+<p>Now let's generate an executable for a <a href="https://kotlinlang.org/">Kotlin</a> CLI tool, <a href="https://github.com/nicokosi/pullpitoK/">pullpitoK</a> (200 lines of code, with third-party libraries) that calls GitHub API to display information on GitHub pull requests.</p>
+<p>The cost of compilation is similar, so let's focus on comparing the runtime behavior for a short execution (we will display the <a href="https://en.wikipedia.org/wiki/Usage_message">"usage message"</a>):</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> export PATH=$</span><span style="color:#bf616a;">HOME</span><span>/.sdkman/candidates/java/8.0.222.hs-adpt/bin:$</span><span style="color:#bf616a;">PATH
+</span><span style="color:#bf616a;">$</span><span> time (java</span><span style="color:#bf616a;"> -jar</span><span> ./build/libs/pullpitoK-all.jar | </span><span style="color:#bf616a;">head -1</span><span>)
+</span><span style="color:#bf616a;">Usage:</span><span> pullpitoK &lt;repository&gt; &lt;token&gt;
+</span><span>( </span><span style="color:#bf616a;">java -jar</span><span> ./build/libs/pullpitoK-all.jar | </span><span style="color:#bf616a;">head -1</span><span>; )  0.08s user 0.02s system 108% cpu 0.093 total
+</span></code></pre>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> alias pullpitoK=&quot;</span><span style="color:#a3be8c;">PULLPITOK_LIBSUNEC=</span><span>$</span><span style="color:#bf616a;">HOME</span><span style="color:#a3be8c;">/.sdkman/candidates/java/19.1.1-grl/jre/lib ./pullpitoK</span><span>&quot;
+</span><span style="color:#bf616a;">$</span><span> time (pullpitoK</span><span style="color:#bf616a;"> --help </span><span>| </span><span style="color:#bf616a;">head -1</span><span>)
+</span><span style="color:#bf616a;">Usage:</span><span> pullpitoK &lt;repository&gt; &lt;token&gt;
+</span><span>( </span><span style="color:#bf616a;">PULLPITOK_LIBSUNEC</span><span>=</span><span style="color:#a3be8c;">/Users/nicolas/.sdkman/candidates/java/19.1.1-grl/jre/li</span><span>)  0.00s user 0.00s system 88% cpu 0.009 total
+</span></code></pre>
+<p>So, 9 milliseconds for the native version versus 93 milliseconds for the JVM version.</p>
+<p>Now let's compare the memory footprints:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> valgrind java</span><span style="color:#bf616a;"> -jar</span><span> ./build/libs/pullpitoK-all.jar
+</span><span style="color:#bf616a;">...
+</span><span style="color:#bf616a;">Usage:</span><span> pullpitoK &lt;repository&gt; &lt;token&gt;
+</span><span style="color:#bf616a;">...
+</span><span>=</span><span style="color:#a3be8c;">=26273== </span><span style="color:#bf616a;">HEAP</span><span> SUMMARY:
+</span><span>=</span><span style="color:#a3be8c;">=26273==     </span><span style="color:#bf616a;">in</span><span> use at exit: 32,181,758 bytes in 2,134 blocks
+</span><span>=</span><span style="color:#a3be8c;">=26273==   </span><span style="color:#bf616a;">total</span><span> heap usage: 5,725 allocs, 3,591 frees, 33,187,784 bytes allocated
+</span><span style="color:#bf616a;">...
+</span></code></pre>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> valgrind pullpitoK | </span><span style="color:#bf616a;">head -1
+</span><span style="color:#bf616a;">...
+</span><span style="color:#bf616a;">Usage:</span><span> pullpitoK &lt;repository&gt; &lt;token&gt;
+</span><span style="color:#bf616a;">...
+</span><span>=</span><span style="color:#a3be8c;">=27690== </span><span style="color:#bf616a;">HEAP</span><span> SUMMARY:
+</span><span>=</span><span style="color:#a3be8c;">=27690==     </span><span style="color:#bf616a;">in</span><span> use at exit: 228 bytes in 1 blocks
+</span><span>=</span><span style="color:#a3be8c;">=27690==   </span><span style="color:#bf616a;">total</span><span> heap usage: 6 allocs, 5 frees, 2,196 bytes allocated
+</span><span style="color:#bf616a;">...
+</span></code></pre>
+<p>So, 2 kilobytes for the native version versus 33 megabytes for the JVM version.</p>
+<h2 id="an-not-fully-optimized-executable-for-a-clojure-cli-tool">An "not-fully optimized" executable for a <code>Clojure</code> CLI tool</h2>
+<p>When I wrote my previous article <a href="https://nicokosi.github.io/clojure-goes-native-with-graalvm-en.html">Clojure goes native with GraalVM</a>, GraalVM was still experimental (<em>release candidates</em>). Moreover, I was stuck with the Native Image limitations with dynamic class loading, the refection API (<code>java.lang.reflect</code>).
+[edit from 2024-12-30: Native Image limitations link was broken has been removed]</p>
+<p>Let's try again with GraalVM release for a Clojure CLI tool: <a href="https://github.com/nicokosi/hubstats/">hubstats</a> (200 lines of code, with third-party libraries).</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> time $</span><span style="color:#bf616a;">HOME</span><span>/.sdkman/candidates/java/19.1.1-grl/bin/native-image \
+</span><span style="color:#bf616a;">   --enable-https </span><span>\
+</span><span style="color:#bf616a;">   --no-fallback </span><span>\
+</span><span style="color:#bf616a;">   --no-server </span><span>\
+</span><span style="color:#bf616a;">   -jar</span><span> target/hubstats-0.1.0-SNAPSHOT-standalone.jar \
+</span><span>   hubstats
+</span></code></pre>
+<p>Native compilation fails:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Error: Unsupported features in 4 methods
+</span><span>Detailed message:
+</span><span>Error: Unsupported type java.lang.invoke.MemberName is reachable: All methods from java.lang.invoke should have been replaced during image building.
+</span><span>To diagnose the issue, you can add the option --report-unsupported-elements-at-runtime. The unsupported element is then reported at run time when it is accessed the first time.
+</span><span>...
+</span></code></pre>
+<p>We could probably change the source code to fix this issue. As quick fix, let's try the <code>fallback</code> mode that embeds a classic virtual machine:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> time $</span><span style="color:#bf616a;">HOME</span><span>/.sdkman/candidates/java/19.1.1-grl/bin/native-image \
+</span><span style="color:#bf616a;">   --enable-https </span><span>\
+</span><span style="color:#bf616a;">   --force-fallback </span><span>\
+</span><span style="color:#bf616a;">   --no-server </span><span>\
+</span><span style="color:#bf616a;">   -jar</span><span> target/hubstats-0.1.0-SNAPSHOT-standalone.jar \
+</span><span>   hubstats
+</span><span style="color:#bf616a;">...
+</span><span style="color:#bf616a;">[hubstats:31661]      </span><span style="color:#b48ead;">[</span><span>total</span><span style="color:#b48ead;">]</span><span>:  14,663.95 ms
+</span><span style="color:#bf616a;">Warning:</span><span> Image &#39;</span><span style="color:#a3be8c;">hubstats</span><span>&#39; is a fallback image that requires a JDK for execution (use</span><span style="color:#bf616a;"> --no-fallback</span><span> to suppress fallback image generation)</span><span style="color:#96b5b4;">.
+</span><span>$</span><span style="color:#bf616a;">HOME/.sdkman/candidates/java/19.1.1-grl/bin/native-image --enable-https</span><span>       78,73s user 1,31s system 536% cpu 14,926 total
+</span></code></pre>
+<p>With the fallback mode, duration times are similar since the startup time cannot be reduced in the native mode:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> export PATH=$</span><span style="color:#bf616a;">HOME</span><span>/.sdkman/candidates/java/8.0.222.hs-adpt/bin:$</span><span style="color:#bf616a;">PATH
+</span><span style="color:#bf616a;">$</span><span> time (java</span><span style="color:#bf616a;"> -jar</span><span> target/hubstats-0.1.0-SNAPSHOT-standalone.jar | </span><span style="color:#bf616a;">head -1</span><span>)
+</span><span style="color:#bf616a;">Display</span><span> statistics for GitHub pull requests.
+</span><span>( </span><span style="color:#bf616a;">java -jar</span><span> target/hubstats-0.1.0-SNAPSHOT-standalone.jar | </span><span style="color:#bf616a;">head -1</span><span>; )  3,36s user 0,10s system 262% cpu 1,318 total
+</span></code></pre>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> time (./hubstats | </span><span style="color:#bf616a;">head -1</span><span>)
+</span><span>
+</span><span style="color:#bf616a;">Display</span><span> statistics for GitHub pull requests.
+</span><span>( </span><span style="color:#bf616a;">./hubstats </span><span>| </span><span style="color:#bf616a;">head -1</span><span>; )  2,86s user 0,14s system 236% cpu 1,272 total
+</span><span>
+</span></code></pre>
+<p>but the memory footprint of the executable is still reduced:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> export PATH=$</span><span style="color:#bf616a;">HOME</span><span>/.sdkman/candidates/java/8.0.222.hs-adpt/bin:$</span><span style="color:#bf616a;">PATH
+</span><span style="color:#bf616a;">$</span><span> valgrind java</span><span style="color:#bf616a;"> -jar</span><span> target/hubstats-0.1.0-SNAPSHOT-standalone.jar
+</span><span style="color:#bf616a;">...
+</span><span style="color:#bf616a;">Display</span><span> statistics for GitHub pull requests.
+</span><span style="color:#bf616a;">...
+</span><span>=</span><span style="color:#a3be8c;">=2690== </span><span style="color:#bf616a;">HEAP</span><span> SUMMARY:
+</span><span>=</span><span style="color:#a3be8c;">=2690==     </span><span style="color:#bf616a;">in</span><span> use at exit: 38,656,326 bytes in 34,800 blocks
+</span><span>=</span><span style="color:#a3be8c;">=2690==   </span><span style="color:#bf616a;">total</span><span> heap usage: 170,569 allocs, 135,769 frees, 406,386,571 bytes allocated
+</span><span style="color:#bf616a;">...
+</span></code></pre>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> valgrind pullpitoK
+</span><span style="color:#bf616a;">...
+</span><span style="color:#bf616a;">Usage:</span><span> pullpitoK &lt;repository&gt; &lt;token&gt;
+</span><span style="color:#bf616a;">...
+</span><span>=</span><span style="color:#a3be8c;">=5747== </span><span style="color:#bf616a;">HEAP</span><span> SUMMARY:
+</span><span>=</span><span style="color:#a3be8c;">=5747==     </span><span style="color:#bf616a;">in</span><span> use at exit: 228 bytes in 1 blocks
+</span><span>=</span><span style="color:#a3be8c;">=5747==   </span><span style="color:#bf616a;">total</span><span> heap usage: 6 allocs, 5 frees, 2,196 bytes allocated
+</span><span style="color:#bf616a;">...
+</span></code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>With these three small applications implemented with distinct JVM languages (Java, Kotlin and Clojure), we have checked some values of GraalVM native images:</p>
+<ul>
+<li><strong>compact executables</strong> that can be deployed without a Java Virtual Machine</li>
+<li><strong>small memory footprints</strong></li>
+<li><strong>fast startup</strong> (sometimes!).</li>
+</ul>
+<p>Moreover, we can see that GraalVM will probably modernize Java for the <strong>cloud-computing</strong> and for <strong>micro-services</strong>, with the Java Runtime Environment or with frameworks like <a href="https://quarkus.io/">Quarkus</a> and <a href="https://micronaut.io/">Micronaut</a>).</p>
+<p>PS: thanks to my colleagues at <a href="http://www.vidalfrance.com/">Vidal</a>, notably Viviane, Marc and Jean-Christophe for the discussions on GraalVM, and Stéphane for reviewing the french version of this article.</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>

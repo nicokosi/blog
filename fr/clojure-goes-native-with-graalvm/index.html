@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         Du Clojure &quot;natif&quot; grâce à GraalVM
+        
+    </title>
+
+        
+            <meta property="og:title" content="Du Clojure &quot;natif&quot; grâce à GraalVM" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="Générer un programme exécutable natif via GraalVM pour un projet Clojure, &#x27;hubstats&#x27;." />
+         
+     
+
+     
+         
+             <meta name="description" content="Générer un programme exécutable natif via GraalVM pour un projet Clojure, &#x27;hubstats&#x27;." />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    </head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Du Clojure &quot;natif&quot; grâce à GraalVM<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2018-05-12</time>
+                    
+
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/fr/tags/clojure/" class="post-tag">clojure</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/native/" class="post-tag">native</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/graalvm/" class="post-tag">graalvm</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="du-clojure-natif-grace-a-graalvm">Du Clojure "natif" grâce à GraalVM</h1>
+<h2 id="graalvm-qu-est-ce-que-c-est">GraalVM, qu'est-ce que c'est ?</h2>
+<p><a href="http://www.graalvm.org/">GraalVM</a> est une machine virtuelle multi-langages : Java, autres langages de la machine virtuelle Java (Scala, Groovy, Kotlin etc.), JavaScript, LLVM, Ruby et R.</p>
+<p>GraalVM permet également de générer des exécutables natifs à partir du code Java :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>For JVM-based languages, GraalVM offers a mechanism to create precompiled native images with instant start up and low memory footprint.
+</span></code></pre>
+<p>Oracle labs a annoncé en avril 2018 la sortie de <a href="https://www.infoq.com/news/2018/04/oracle-graalvm-v1/">GraalVM 1.0 release candidate</a>, donc c'est parti pour un essai !
+[mise à jour, 2024-12-30 : le lien original vers le blog Oracle, étant cassé, a été remplacé par un lien équivalent vers InfoQ]</p>
+<h2 id="construire-un-executable-a-partir-d-un-projet-clojure">Construire un exécutable à partir d'un projet Clojure</h2>
+<p><a href="https://github.com/nicokosi/hubstats">hubstats</a> est mon projet perso implémenté en Clojure qui permet d'afficher des statistiques sur les pull requests GitHub. C'est un outil en ligne de commande utilisant une machine virtuelle Java, donc GraalVM devrait permettre d'accélérer son démarrage en générant un exécutable "natif".</p>
+<p>Notes :</p>
+<ul>
+<li>
+<p>Cet <a href="https://www.innoq.com/en/blog/native-clojure-and-graalvm/">article intéressant</a> m'a inspiré et m'a aidé.</p>
+</li>
+<li>
+<p>J'ai utilisé la version "Community Edition" de GraalVM qui est gratuite et open source (une version "Enterprise Edition" existe également).</p>
+</li>
+</ul>
+<h3 id="essai-ndeg1">Essai n°1</h3>
+<p>A partir du "fat" JAR de mon projet 'hubstats' ("fat jar" : archive de code Java qui inclut toutes les dépendances), j'ai lancé la commande <code>native-image</code> de <a href="https://github.com/Danny02/graalvm-docker">GraaVM 1.0.0-rc1 dans un conteneur Docker</a> :</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">native-image </span><span>\
+</span><span style="color:#bf616a;">  -jar</span><span> hubstats-0.1.0-SNAPSHOT-standalone.jar \
+</span><span style="color:#bf616a;">  -H</span><span>:+ReportUnsupportedElementsAtRuntime \
+</span><span>  hubstats.core
+</span></code></pre>
+<p>(cf. <a href="https://github.com/nicokosi/hubstats/pull/12/files">tous les détails</a>)</p>
+<p>Pas de chance, la génération de l'exécutable échoue :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Step 4/15 : RUN native-image   -jar hubstats-0.1.0-SNAPSHOT-standalone.jar   -H:+ReportUnsupportedElementsAtRuntime   hubstats.core
+</span><span> ---&gt; Running in e7f911774bd4
+</span><span>Build on Server(pid: 11, port: 26681)*
+</span><span>   classlist:   3,159.26 ms
+</span><span>       (cap):   1,485.02 ms
+</span><span>       setup:   2,563.80 ms
+</span><span>    analysis:  10,109.06 ms
+</span><span>fatal error: java.lang.NullPointerException
+</span><span>	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+</span><span>	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+</span><span>	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+</span><span>	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+</span><span>	at java.util.concurrent.ForkJoinTask.getThrowableException(ForkJoinTask.java:598)
+</span><span>	at java.util.concurrent.ForkJoinTask.get(ForkJoinTask.java:1005)
+</span><span>	at com.oracle.svm.hosted.NativeImageGenerator.run(NativeImageGenerator.java:398)
+</span><span>	at com.oracle.svm.hosted.NativeImageGeneratorRunner.buildImage(NativeImageGeneratorRunner.java:240)
+</span><span>	at com.oracle.svm.hosted.NativeImageGeneratorRunner.build(NativeImageGeneratorRunner.java:337)
+</span><span>	at com.oracle.svm.hosted.server.NativeImageBuildServer.executeCompilation(NativeImageBuildServer.java:378)
+</span><span>	at com.oracle.svm.hosted.server.NativeImageBuildServer.lambda$processCommand$8(NativeImageBuildServer.java:315)
+</span><span>	at com.oracle.svm.hosted.server.NativeImageBuildServer.withJVMContext(NativeImageBuildServer.java:396)
+</span><span>	at com.oracle.svm.hosted.server.NativeImageBuildServer.processCommand(NativeImageBuildServer.java:312)
+</span><span>	at com.oracle.svm.hosted.server.NativeImageBuildServer.processRequest(NativeImageBuildServer.java:256)
+</span><span>	at com.oracle.svm.hosted.server.NativeImageBuildServer.lambda$serve$7(NativeImageBuildServer.java:216)
+</span><span>	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+</span><span>	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+</span><span>	at java.lang.Thread.run(Thread.java:748)
+</span><span>Caused by: java.lang.NullPointerException
+</span><span>	at com.oracle.graal.pointsto.ObjectScanner.scanField(ObjectScanner.java:113)
+</span><span>	at com.oracle.graal.pointsto.ObjectScanner.doScan(ObjectScanner.java:263)
+</span><span>	at com.oracle.graal.pointsto.ObjectScanner.finish(ObjectScanner.java:307)
+</span><span>	at com.oracle.graal.pointsto.ObjectScanner.scanBootImageHeapRoots(ObjectScanner.java:78)
+</span><span>	at com.oracle.graal.pointsto.ObjectScanner.scanBootImageHeapRoots(ObjectScanner.java:60)
+</span><span>	at com.oracle.graal.pointsto.BigBang.checkObjectGraph(BigBang.java:581)
+</span><span>	at com.oracle.graal.pointsto.BigBang.finish(BigBang.java:552)
+</span><span>	at com.oracle.svm.hosted.NativeImageGenerator.doRun(NativeImageGenerator.java:653)
+</span><span>	at com.oracle.svm.hosted.NativeImageGenerator.lambda$run$0(NativeImageGenerator.java:381)
+</span><span>	at java.util.concurrent.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1386)
+</span><span>	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+</span><span>	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+</span><span>	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+</span><span>	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+</span><span>Error: Processing image build request failed
+</span></code></pre>
+<p>Le problème ressemble fortement à <a href="https://github.com/oracle/graal/issues/385">issue#385</a> et <a href="https://github.com/oracle/graal/issues/375">issue#375</a>. Si je comprends bien, il est lié à l'une des limitations de GraalVM : "static initializers" limitation. 😢
+[mise à jour, 2024-12-30 : le lien vers les limitations, étant cassé, a été supprimé]</p>
+<h3 id="essai-ndeg2">Essai n°2</h3>
+<p>Puisque certaines corrections étaient uniquement disponibles dans le <a href="https://github.com/graalvm/">code source de GraalVM</a>, j'ai voulu essayer avec le module <code>substratevm</code>
+(qui inclut la commande 'native-image') construit à partir du code source.</p>
+<p>J'ai donc récupéré le code source de GraalVM :</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">git</span><span> clone git@github.com:oracle/graal.git
+</span></code></pre>
+<p>Puis en suivant les <a href="https://github.com/oracle/graal/tree/master/substratevm">indications du module substratevm</a>, j'ai téléchargé le <a href="http://www.oracle.com/technetwork/oracle-labs/program-languages/downloads/index.html">JDK GraalVM "labs"</a> puis j'ai construit le module 'substratevm' :</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#96b5b4;">cd</span><span> substratevm
+</span><span style="color:#bf616a;">JAVA_HOME</span><span>=</span><span style="color:#bf616a;">~</span><span style="color:#a3be8c;">/Downloads/labsjdk1.8.0_161-jvmci-0.42/Contents/Home </span><span style="color:#bf616a;">../../mx/mx</span><span> build
+</span></code></pre>
+<p>J'ai ensuite lancé la commande 'native-image' qui est malheuresement restée "coincée" :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$&gt; JAVA_HOME=~/Downloads/labsjdk1.8.0_161-jvmci-0.42/Contents/Home ../graal/substratevm/native-image -jar target/hubstats-0.1.0-SNAPSHOT-standalone.jar hubstats.core
+</span><span>Build on Server(pid: 18933, port: 55103)*
+</span><span>   classlist:   2,744.32 ms
+</span><span>       (cap):   1,531.16 ms
+</span><span>       setup:   2,401.40 ms
+</span></code></pre>
+<p>Une anomalie similaire à déjà été rapportée : <a href="https://github.com/oracle/graal/issues/411">"native image failed to build jar</a>. 😭</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>C'est sûr, ces premiers essais ont été infructueux. GraalVM est un projet encore jeune que je ne connais pas vraiment. Néanmoins, ce fut une expérience sympathique de découvrir cet outil prometteur ! 😍</p>
+<p>A refaire sous peu, avec un nouvel article à la clé ?</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>

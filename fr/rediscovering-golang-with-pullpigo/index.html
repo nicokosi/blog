@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         Re-découvrons le langage Go avec &quot;pullpigo&quot;, un petit projet d&#x27;expérimentation
+        
+    </title>
+
+        
+            <meta property="og:title" content="Re-découvrons le langage Go avec &quot;pullpigo&quot;, un petit projet d&#x27;expérimentation" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="Une rétrospective sur mon expérimentation avec le langage de programmation Go pour un (modeste) outil en ligne de commande, &quot;pullpigo&quot;." />
+         
+     
+
+     
+         
+             <meta name="description" content="Une rétrospective sur mon expérimentation avec le langage de programmation Go pour un (modeste) outil en ligne de commande, &quot;pullpigo&quot;." />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    </head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Re-découvrons le langage Go avec &quot;pullpigo&quot;, un petit projet d&#x27;expérimentation<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2019-12-24</time>
+                    
+
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/fr/tags/golang/" class="post-tag">golang</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/native/" class="post-tag">native</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="re-decouvrons-le-langage-go-avec-pullpigo-un-petit-projet-d-experimentation">Re-découvrons le langage Go avec "pullpigo", un petit projet d'expérimentation</h1>
+<p>Développant au quotidien en Java, j'avais envie d'apprendre quelques rudiments du langage de programmation <strong><a href="https://golang.org/">Go</a></strong>.
+Pour ce faire, j'ai implémenté un petit outil en <strong>ligne de commande (<em>CLI</em>)</strong> afin d'afficher des informations sur les pull requests GitHub.
+J'ai créé ainsi un petit projet, versionné dans GitHub, <a href="https://github.com/nicokosi/pullpigo">pullpigo</a>. Son but
+est d'afficher le nombre d'événements du type "tant d'événements créés par tel auteur GitHub (<em>commiter</em>)" en utilisant une API publique de GitHub.</p>
+<p>Notez que j'ai déjà implémenté un outil similaire dans d'autres langages (que je voulais aussi découvrir ou approfondir) : en <strong>Clojure</strong> (cf. <a href="https://github.com/nicokosi/hubstats">hubstats</a>), <strong>Kotlin</strong> (cf. <a href="https://github.com/nicokosi/pullpitoK">pullpitoK</a>) et <strong>Rust</strong> (cf. <a href="https://github.com/nicokosi/pullpito">pullpito</a>).</p>
+<h2 id="les-executables-natifs-sont-rapides-rocket">Les exécutables natifs sont rapides 🚀</h2>
+<p>Compilons pullpigo :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>go clean
+</span><span>time go build
+</span><span>go build  1.05s user 0.58s system 105% cpu 1.559 total
+</span></code></pre>
+<p>Puis lançons le :</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">time</span><span> ./pullpigo</span><span style="color:#bf616a;"> -repo</span><span>=vidal-community/atom-jaxb
+</span><span style="color:#bf616a;">GitHub</span><span> repository &#39;</span><span style="color:#a3be8c;">vidal-community/atom-jaxb</span><span>&#39;
+</span><span>  </span><span style="color:#bf616a;">2</span><span> events created by amairi
+</span><span>  </span><span style="color:#bf616a;">1</span><span> events created by fchetouani
+</span><span>  </span><span style="color:#bf616a;">6</span><span> events created by AElMehdiVidal
+</span><span>  </span><span style="color:#bf616a;">3</span><span> events created by jcgay
+</span><span style="color:#bf616a;">./pullpigo -repo</span><span>=vidal-community/atom-jaxb  0.07s user 0.03s system 20% cpu 0.482 total
+</span></code></pre>
+<p>Comparons ces temps avec ceux d'un projet similaire implémenté en Kotlin, (<a href="https://github.com/nicokosi/pullpitoK/">pullpitoK</a>) :</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">./gradlew</span><span> clean
+</span><span style="color:#bf616a;">time</span><span> ./gradlew build</span><span style="color:#bf616a;"> --quiet
+</span><span style="color:#bf616a;">./gradlew</span><span> build</span><span style="color:#bf616a;"> --quiet</span><span>  1.37s user 0.17s system 39% cpu 3.932 total
+</span><span style="color:#bf616a;">time</span><span> ./gradlew run</span><span style="color:#bf616a;"> --quiet --args </span><span>&quot;</span><span style="color:#a3be8c;">vidal-community/atom-jaxb</span><span>&quot;
+</span><span>
+</span><span style="color:#bf616a;">pull</span><span> requests for &quot;</span><span style="color:#a3be8c;">vidal-community/atom-jaxb</span><span>&quot; -&gt;
+</span><span>            </span><span style="color:#bf616a;">opened</span><span> per author
+</span><span>                </span><span style="color:#bf616a;">amairi:</span><span> 1
+</span><span>            </span><span style="color:#bf616a;">commented</span><span> per author
+</span><span>                </span><span style="color:#bf616a;">AElMehdiVidal:</span><span> 1
+</span><span>                </span><span style="color:#bf616a;">jcgay:</span><span> 1
+</span><span>            </span><span style="color:#bf616a;">closed</span><span> per author
+</span><span>
+</span><span style="color:#bf616a;">./gradlew</span><span> run</span><span style="color:#bf616a;"> --quiet --args </span><span>&quot;</span><span style="color:#a3be8c;">vidal-community/atom-jaxb</span><span>&quot;  1.37s user 0.18s system 62% cpu 2.473 total
+</span></code></pre>
+<p>Compilation rapide + exécution rapide = ❤️</p>
+<h2 id="les-librairies-et-l-outillage-standards-de-go-sont-complets-package">Les librairies et l'outillage standards de Go sont complets 📦</h2>
+<p>Pour appeler l'<a href="https://developer.github.com/v3/activity/events/">API REST v3 'events' de GitHub</a>, j'avais besoin de : un client HTTP, un <em>parser</em> JSON ainsi qu'un <em>framework</em> de test. C'est cool, tout est présent dans les librairies de base : <a href="https://golang.org/pkg/testing/">testing</a>, <a href="https://golang.org/pkg/net/http/">HTTP client</a> et <a href="https://golang.org/pkg/encoding/json/">JSON parsing</a>.</p>
+<p>J'ai donc pu implémenter mon outil sans utiliser une seule librairie tierce !</p>
+<p>J'ai également apprécié l'outillage (notez mon <em>background</em> Java) :</p>
+<ul>
+<li>
+<p>pour <strong>formatter le code</strong>, il sufffit de lancer la commande <code>go fmt</code>, sans aucune configuration.</p>
+</li>
+<li>
+<p>pour analyser statiquement son code, un <strong>code linter</strong> est également inclus. <del>Il suffit d'installer <code>golang/linttype</code> et de lancer la commande <code>golint</code>, sans configuration (pour être franc, ce <em>linter</em> ne m'a pas aidé pour coder pullpigo mais je trouve ça génial que cet outil existe).</del>
+[mise à jour, 2024-12-30 : <code>golang/linttype</code> n'existe plus, voir la commande <a href="https://pkg.go.dev/cmd/vet">go vet</a>).</p>
+</li>
+</ul>
+<h2 id="opportunites-annexes-sunglasses">Opportunités "annexes" 😎</h2>
+<p>En dehors du langage et des libraries, ce petit projet a aussi été l'occasion d'<strong>essayer et d'apprendre de nouveaux outils</strong>. En l’occurrence :</p>
+<ul>
+<li>
+<p><a href="https://code.visualstudio.com/">Visual Studio Code</a>, un environnement de développement (<em>Integrated Development Environment</em>) que je n'utilise pas professionnellement.</p>
+</li>
+<li>
+<p><a href="https://github.com/features/actions">GitHub Actions</a>, une plate-forme pour l'intégration continue : chaque commit git GitHub déclenche la compilation et les tests unitaires. Bien que je n'avais jamaais utilisé GitHub Actions, ça a été rapide à mettre en place (quelques minutes). En en plus, c'est gratuit !</p>
+</li>
+</ul>
+<p>Un autre point bonus, j'ai apprécié de <strong>discuter et d'échanger</strong> avec des gens que je connais (et pas uniquement de "googler").</p>
+<p>Dans mon cas, mes "amis Golang" ont été :</p>
+<ul>
+<li>
+<p><a href="https://github.com/jcgay/">Jean-Christophe</a> qui m'a motivé et m'a aidé à corriger un problème de <em>parsing</em> JSON. 😅</p>
+</li>
+<li>
+<p><a href="https://github.com/fbiville">Florent</a> qui m'a donné des pointeurs sympas vers des librairies : <a href="https://golang.org/pkg/testing/quick/">testing/quick</a> pour le <em>property-based testing</em>, <a href="https://github.com/onsi/ginkgo">ginkgo</a> pour les test style <em>BDD</em> et <a href="https://github.com/onsi/gomega">gomega</a> pour les assertions de test. A essayer ! 😎</p>
+</li>
+</ul>
+<h3 id="la-suite-crystal-ball">La suite ? 🔮</h3>
+<p>Quelques pistes :</p>
+<ul>
+<li>
+<p>Améliorer les messages en sortie. Par exemple, afficher les compteurs par type d'événements ("pull requests créés", "pull requests fusionnées" etc.)</p>
+</li>
+<li>
+<p>Récupérer les données de l'API <code>GraphQL</code> de GitHub (<a href="https://developer.github.com/v4/">GitHub's GraphQL API v4</a>) de façon à ne pas être limité aux 300 derniers événements (c'est une limitation de l'API GitHub REST).</p>
+</li>
+<li>
+<p>Utiliser des dépendances pour les tests (assertions plus faciles, property-based testing etc.) et en profiter pour découvrir la gestion des dépendances en Go.</p>
+</li>
+</ul>
+<p>A suivre !</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>

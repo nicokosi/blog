@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         Exploration des données sportives Strava avec Kibana (2ème partie) : un dashboard amélioré
+        
+    </title>
+
+        
+            <meta property="og:title" content="Exploration des données sportives Strava avec Kibana (2ème partie) : un dashboard amélioré" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="Comment j&#x27;ai créé un dashboard détaillé et interactif pour explorer visuellement mes sorties sportives strava.com." />
+         
+     
+
+     
+         
+             <meta name="description" content="Comment j&#x27;ai créé un dashboard détaillé et interactif pour explorer visuellement mes sorties sportives strava.com." />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    </head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Exploration des données sportives Strava avec Kibana (2ème partie) : un dashboard amélioré<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2021-11-09</time>
+                    
+
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/fr/tags/dataviz/" class="post-tag">dataviz</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/data/" class="post-tag">data</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/visualization/" class="post-tag">visualization</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="exploration-des-donnees-sportives-strava-avec-kibana-2eme-partie-un-dashboard-ameliore">Exploration des données sportives Strava avec Kibana (2ème partie) : un dashboard amélioré</h1>
+<p>Public présumé : personnes intéressées par l’exploration de données.</p>
+<p>Cet article fait suite à <a href="https://nicokosi.github.io/fr/explore-strava-activities-with-kibana-2/./explore-strava-activities-with-kibana.html">ce premier article</a> pour la mise en place de Kibana et l'import des données Strava.</p>
+<p>Franck, un collègue qui connaît bien Kibana, m'a conseillé d'essayer un graphique  de type "vertical bar" avec un opérateur "count".
+J'ai notamment voulu essayer ce type de graphique, tout en en testant d'autres, en créant un "dashboard" plus complet que celui détaillé dans mon premier article.</p>
+<p>J'ai créé avec les graphiques suivants :</p>
+<ul>
+<li>
+<p>"histogramme de la vitesse moyenne", en utilisant un graphique <code>Vertical bar</code> : <em>Y-axis</em> "average(average_speed)", <em>X-axis</em> "@timestamp" and <em>Split series</em> on "type".</p>
+</li>
+<li>
+<p>"compteurs d'activités par type", en utilisant un graphique de type <code>Metric</code> avec <em>Aggregation</em> "Count" and <em>Split group</em> sur "type".</p>
+</li>
+<li>
+<p>"histogramme de la distance parcourue", en utilisant un graphique de type <code>Vertical bar</code> : <em>Y-axis</em> "average(distance)", <em>X-axis</em> "@timestamp" et <em>split series</em> sur "type".</p>
+</li>
+<li>
+<p>"tree map du nombre d'activité par type", en utilisant un graphique de type <code>Treemap</code> chart avec <em>Group by</em> "type.</p>
+</li>
+<li>
+<p>"compteurs d'activités par jour" en utilisant un graphique de type <code>Bar vertical</code> avec <em>horizontal axis</em> sur "start_date", <em>vertical axis</em> sur "Count of records" et <em>break down by</em> "top values of type".</p>
+</li>
+</ul>
+<p>Et voila le dashboard final : 🎉</p>
+<p><img src="https://nicokosi.github.io/fr/explore-strava-activities-with-kibana-2/explore-strava-activities-with-kibana-2-view-dashboard.png" alt="dashboard final" title="final dashboard" />.</p>
+<p>Le même dashboard après avoir cliqué sur le type d'activité "Run" (course à pied) :</p>
+<p><img src="https://nicokosi.github.io/fr/explore-strava-activities-with-kibana-2/explore-strava-activities-with-kibana-2-view-dashboard-run.png" alt="dashboard &quot;Run&quot;" title="dashboard &#39;Run&#39;" />.</p>
+<p>Le dashboard et ses graphiques peuvent être importés via le bouton en haut à gauche (avec trois traits horizontaux) / "Management" / "Stack Management" / "Saved Objects" / "Import" avec ce <a href="https://nicokosi.github.io/fr/explore-strava-activities-with-kibana-2/%7Bstatic%7D/misc/strava-dashboard.ndjson">fichier d'import du dashboard</a>.</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         Jouons avec le pattern matching en Haskell
+        
+    </title>
+
+        
+            <meta property="og:title" content="Jouons avec le pattern matching en Haskell" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="Découvrons par l&#x27;exemple le pattern matching en Haskell." />
+         
+     
+
+     
+         
+             <meta name="description" content="Découvrons par l&#x27;exemple le pattern matching en Haskell." />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    </head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Jouons avec le pattern matching en Haskell<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2016-09-27</time>
+                    
+
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/fr/tags/haskell/" class="post-tag">haskell</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/pattern-matching/" class="post-tag">pattern-matching</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="jouons-avec-le-pattern-matching-en-haskell">Jouons avec le pattern matching en Haskell</h1>
+<p>Découvrons le pattern matching en Haskell en reprenant l'exemple des cartes à jouer utilisé dans l'article <a href="https://nicokosi.github.io/scala-pattern-matching.html">"Jouons avec le pattern matching en Scala"</a>.</p>
+<br/>
+## Préambule : création d'une énumération
+<p>Codons notre énumération correspondant à nos quatre enseignes (carreau, cœur, pique et trèfle) :</p>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#b48ead;">data </span><span style="color:#d08770;">Enseigne </span><span>= </span><span style="color:#d08770;">Carreau </span><span>| </span><span style="color:#d08770;">Coeur </span><span>| </span><span style="color:#d08770;">Pique </span><span>| </span><span style="color:#d08770;">Trèfle
+</span><span>  </span><span style="color:#b48ead;">deriving</span><span> (</span><span style="color:#a3be8c;">Eq</span><span>, </span><span style="color:#a3be8c;">Enum</span><span>, </span><span style="color:#a3be8c;">Show</span><span>)
+</span></code></pre>
+<p>Nous venons de créer notre propre type (<em>data type</em>) qui :</p>
+<ul>
+<li>a quatre constructeurs (<em>value constructors</em>)</li>
+<li>hérite des classes de base :
+<ul>
+<li><code>Eq</code> pour implémenter l'égalité entre deux valeurs</li>
+<li><code>Enum</code> pour que les valeurs sont finies et ordonnées (<em>sequentially ordered types</em>)</li>
+<li><code>Show</code> pour avoir une représentation sous forme de chaîne de caractères, ce qui peut être utile pour débugguer ou pour évaluer interactivement du code via le REPL.</li>
+</ul>
+</li>
+</ul>
+<p>Utilisons maintenant <code>ghci</code> (<em>Glascow Haskell Compiler Interactive environment</em>), le REPL d'Haskell, pour interagir avec cette énumération :</p>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span>*</span><span style="color:#d08770;">Main</span><span>&gt; </span><span style="color:#d08770;">Coeur </span><span>== </span><span style="color:#d08770;">Coeur
+</span><span style="color:#d08770;">True
+</span><span>*</span><span style="color:#d08770;">Main</span><span>&gt; succ </span><span style="color:#d08770;">Coeur
+</span><span style="color:#d08770;">Pique
+</span></code></pre>
+<br/>
+<h2 id="exemples-de-pattern-matching">Exemples de pattern matching</h2>
+<h3 id="premier-exemple-basique">Premier exemple basique</h3>
+<p>La fonction suivante retourne le symbole d'une enseigne :</p>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">symbole </span><span style="color:#b48ead;">:: Enseigne -&gt; String
+</span><span>symbole enseigne =
+</span><span>  </span><span style="color:#b48ead;">case</span><span> enseigne </span><span style="color:#b48ead;">of
+</span><span>    </span><span style="color:#d08770;">Carreau </span><span>-&gt;&quot;</span><span style="color:#a3be8c;">♦</span><span>&quot;
+</span><span>    </span><span style="color:#d08770;">Coeur </span><span>-&gt; &quot;</span><span style="color:#a3be8c;">♥</span><span>&quot;
+</span><span>    </span><span style="color:#d08770;">Pique </span><span>-&gt; &quot;</span><span style="color:#a3be8c;">♠</span><span>&quot;
+</span><span>    </span><span style="color:#d08770;">Trèfle </span><span>-&gt; &quot;</span><span style="color:#a3be8c;">♣</span><span>&quot;
+</span></code></pre>
+<p>Exemple d'appel :</p>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span>*</span><span style="color:#d08770;">Main</span><span>&gt; putStrLn $ symbole $ </span><span style="color:#d08770;">Coeur
+</span><span>♥
+</span></code></pre>
+<p>Notons que :</p>
+<ul>
+<li>L'opérateur <code>$</code> nous permet de chaîner nos fonctions, plutôt que de les imbriquer dans des parenthèses (<code>putStrLn(symbole(Coeur))</code>).</li>
+<li>la fonction <code>putStrLn</code> permet d'afficher des caractères Unicode, à l'inverse de la fonction standard <code>show</code> qui ne retourne que des chaînes ASCII. 😎</li>
+</ul>
+<br/>
+Remarque : le compilateur sait détecter un pattern matching non exhaustif. Par exemple, le code suivant :
+```haskell
+symbole :: Enseigne -> String
+symbole enseigne = case enseigne of
+    Carreau ->"♦"
+```
+génère un avertissement de compilation :
+```haskell
+warning: [-Wincomplete-patterns]
+    Pattern match(es) are non-exhaustive
+    In a case alternative:
+        Patterns not matched:
+            Coeur
+            Pique
+            Trèfle
+```
+Et l'appel de cette fonction génére une exception :
+```haskell
+*Main> symbole Coeur
+"*** Exception: test.hs:(5,20)-(6,17): Non-exhaustive patterns in case
+```
+<br/>
+<h3 id="deuxieme-exemple-partage-d-expression-via-un-bloc-where">Deuxième exemple, partage d'expression via un bloc 'where'</h3>
+<p>Autre exemple, implémentons une fonction <code>couleur</code> qui retourne la couleur d'une enseigne (chaîne de caractères "rouge" ou "noir") :</p>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#8fa1b3;">couleur </span><span style="color:#b48ead;">:: Enseigne -&gt; String
+</span><span>couleur enseigne = </span><span style="color:#b48ead;">case</span><span> enseigne </span><span style="color:#b48ead;">of
+</span><span>    </span><span style="color:#d08770;">Carreau </span><span>-&gt; rouge
+</span><span>    </span><span style="color:#d08770;">Coeur </span><span>-&gt; rouge
+</span><span>    </span><span style="color:#d08770;">Pique </span><span>-&gt; noir
+</span><span>    </span><span style="color:#d08770;">Trèfle </span><span>-&gt; noir
+</span><span>    </span><span style="color:#b48ead;">where
+</span><span>      rouge = &quot;</span><span style="color:#a3be8c;">rouge</span><span>&quot;
+</span><span>      noir = &quot;</span><span style="color:#a3be8c;">noir</span><span>&quot;
+</span></code></pre>
+<p>Exemple d'appel :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>*Main&gt; couleur(Coeur)
+</span><span>&quot;rouge&quot;
+</span></code></pre>
+<p>Nous avons ici utilisé le mot-clé <code>where</code> qui nous permet de partager des expressions.
+<br/>
+<br/></p>
+<h3 id="troisieme-exemple-destructuration">Troisième exemple, déstructuration</h3>
+<p>Définissons notre propre type <code>Carte</code> combinant un rang (1, 2, 3, ..., valet, dame, roi) et une enseigne :</p>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span style="color:#b48ead;">data </span><span style="color:#d08770;">Rang </span><span>=
+</span><span>  </span><span style="color:#d08770;">R1 </span><span>| </span><span style="color:#d08770;">R2 </span><span>| </span><span style="color:#d08770;">R3 </span><span>| </span><span style="color:#d08770;">R4 </span><span>| </span><span style="color:#d08770;">R5 </span><span>| </span><span style="color:#d08770;">R6 </span><span>| </span><span style="color:#d08770;">R7 </span><span>| </span><span style="color:#d08770;">R8 </span><span>| </span><span style="color:#d08770;">R9 </span><span>| </span><span style="color:#d08770;">R10 </span><span>| </span><span style="color:#d08770;">Valet </span><span>| </span><span style="color:#d08770;">Dame </span><span>| </span><span style="color:#d08770;">Roi
+</span><span>  </span><span style="color:#b48ead;">deriving</span><span> (</span><span style="color:#a3be8c;">Eq</span><span>, </span><span style="color:#a3be8c;">Ord</span><span>, </span><span style="color:#a3be8c;">Enum</span><span>, </span><span style="color:#a3be8c;">Show</span><span>)
+</span><span>
+</span><span style="color:#b48ead;">data </span><span style="color:#d08770;">Carte </span><span>= </span><span style="color:#d08770;">Carte</span><span> {
+</span><span>  </span><span style="color:#8fa1b3;">rang </span><span style="color:#b48ead;">:: Rang</span><span>,
+</span><span>  </span><span style="color:#8fa1b3;">enseigne </span><span style="color:#b48ead;">:: Enseigne
+</span><span>} </span><span style="color:#b48ead;">deriving</span><span> (</span><span style="color:#a3be8c;">Eq</span><span>, </span><span style="color:#a3be8c;">Show</span><span>)
+</span></code></pre>
+<p>Le type <code>Carte</code> utilise la syntaxe <em>record</em> permettant de nommer les champs.</p>
+<p>Nous pouvons ainsi utiliser le pattern matching pour "déstructurer" une carte en filtrant les champs. Par exemple, la fonction suivante permet de déterminer si deux cartes, associées par un <em>tuple</em>, sont de même enseigne :</p>
+<pre data-lang="haskell" style="background-color:#2b303b;color:#c0c5ce;" class="language-haskell "><code class="language-haskell" data-lang="haskell"><span>mêmeEnseigne :: (</span><span style="color:#d08770;">Carte</span><span>, </span><span style="color:#d08770;">Carte</span><span>) -&gt; </span><span style="color:#d08770;">Bool
+</span><span>mêmeEnseigne ((</span><span style="color:#d08770;">Carte</span><span> _ enseigne1), (</span><span style="color:#d08770;">Carte</span><span> _ enseigne2)) =
+</span><span>  enseigne1 == enseigne2
+</span></code></pre>
+<p>Exemples d'appel :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>*Main&gt; :{
+</span><span>*Main| mêmeEnseigne (
+</span><span>*Main|     Carte {rang=R1, enseigne=Carreau},
+</span><span>*Main|     Carte {rang=R1, enseigne=Coeur} )
+</span><span>*Main| :}
+</span><span>False
+</span><span>*Main&gt; :{
+</span><span>*Main| mêmeEnseigne (
+</span><span>*Main|     Carte {rang=Valet, enseigne=Coeur},
+</span><span>*Main|     Carte {rang=R1, enseigne=Coeur} )
+</span><span>*Main| :}
+</span><span>True
+</span></code></pre>
+<p>Les rangs, que l'on n'utilise pas dans la fonction, ont été filtrés via le caractère <em>wild-card</em> (<code>_</code>).</p>
+<p>Et voilà ! 🤓</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>

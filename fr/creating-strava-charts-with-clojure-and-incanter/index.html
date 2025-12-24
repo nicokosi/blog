@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         Générer ses graphiques Strava avec Clojure et Incanter
+        
+    </title>
+
+        
+            <meta property="og:title" content="Générer ses graphiques Strava avec Clojure et Incanter" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="Utilisation de la librairie Clojure Incanter pour générer des graphiques Strava" />
+         
+     
+
+     
+         
+             <meta name="description" content="Utilisation de la librairie Clojure Incanter pour générer des graphiques Strava" />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    </head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Générer ses graphiques Strava avec Clojure et Incanter<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2017-04-09</time>
+                    
+
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/fr/tags/strava/" class="post-tag">strava</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/charts/" class="post-tag">charts</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/clojure/" class="post-tag">clojure</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/incanter/" class="post-tag">incanter</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="generer-ses-graphiques-strava-avec-clojure-et-incanter">Générer ses graphiques Strava avec Clojure et Incanter</h1>
+<p>J'utilise <a href="https://www.strava.com/">Strava</a> pour enregistrer mes sessions de jogging : après avoir enregistré une session avec mon smartphone, je la publie pour pouvoir la partager et la revoir plus tard.</p>
+<p>Strava fournit quelques tableaux de bord mais je voulais générer mes propres graphiques afin de visualiser ma progression.</p>
+<br/>
+##Premier essai avec R
+J'ai d'abord essayé d'utiliser [RStudio](https://www.rstudio.com/), un IDE pour le langage R. Je pense que c'est un outil adapté mais je le connais très peu. Après avoir essayé pendant quelques heures d'importer mes données et de les transformer, j'ai abandonné !
+<p><img src="https://nicokosi.github.io/fr/creating-strava-charts-with-clojure-and-incanter/RStudio.png" alt="RStudio : un IDE pour la plate-forme R" /></p>
+<p>J'essairai une autre fois ! 😅</p>
+<br/>
+##Deuxième essai avec Clojure et Incanter
+J'ai ensuite essayé d'utiliser [Incanter](incanter.org), une librairie Clojure inspirée de R :
+> Clojure-based, R-like platform for statistical computing and graphics.
+<p>J'avais besoin de faire 3 choses :</p>
+<ol>
+<li>appeler l'API Strava pour récupérer les données au format JSON</li>
+<li>faire quelques transformations, essentiellement des conversions (m/s en km/h, secondes en minutes)</li>
+<li>afficher des graphiques (exemple : évolution de la vitesse moyenne par sortie en fonction du temps)</li>
+</ol>
+<p>Allons-y !</p>
+<br/>
+###1. Récupérer les données Strava
+<p>La fonction suivante appelle l'<a href="http://strava.github.io/api/v3/activities/">API Strava "activities"</a> avec un jeton d'autorisation (access token) et récupère les 200 dernières sorties ("activities" = activité de course à pied, vélo ou natation) sous forme d'un tableau d'objets JSON :</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">strava-activities </span><span>[token]
+</span><span>  (</span><span style="color:#bf616a;">json/read-str </span><span>(</span><span style="color:#d08770;">:body
+</span><span>                   (</span><span style="color:#bf616a;">http-client/get
+</span><span>                     &quot;</span><span style="color:#a3be8c;">https://www.strava.com/api/v3/activities</span><span>&quot;
+</span><span>{</span><span style="color:#d08770;">:query-params </span><span>{</span><span style="color:#d08770;">:access_token</span><span> token </span><span style="color:#d08770;">:per_page 200</span><span>}}))))
+</span></code></pre>
+<br/>
+###2. Transformer les données
+<p>On définit les fonctions suivantes pour transformer les données :</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">; Convertir les vitesses en km/h (l&#39;API Strava retourne des m/s) :
+</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">meters-per-second-&gt;kilometers-per-hour </span><span>(</span><span style="color:#bf616a;">partial</span><span> * </span><span style="color:#d08770;">3.6</span><span>))
+</span><span>
+</span><span style="color:#65737e;">; Convertir les durées en minutes (l&#39;API Strava API retourne des secondes) :
+</span><span>(</span><span style="color:#b48ead;">defn- </span><span style="color:#8fa1b3;">seconds-&gt;minutes </span><span>[s] (</span><span style="color:#bf616a;">/</span><span> s </span><span style="color:#d08770;">60</span><span>))
+</span><span>
+</span><span style="color:#65737e;">; Incanter peut seulement générer des graphiques à partir de données numériques, les dates au format ISO doivent donc être converties en timestamps :
+</span><span>(</span><span style="color:#b48ead;">defn- </span><span style="color:#8fa1b3;">string-date-&gt;millis </span><span>[str-date]
+</span><span>  (</span><span style="color:#bf616a;">.getTime
+</span><span>    (</span><span style="color:#bf616a;">clojure.instant/read-instant-date</span><span> str-date)))
+</span></code></pre>
+<p>Ces fonctions peuvent être appliquées aux données brutes, en utilisant par exemple l'opérateur "thread-last" (<code>-&gt;&gt;</code>), bien pratique pour chaîner les appels de fonctions :</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">-&gt;&gt; </span><span>(</span><span style="color:#bf616a;">strava-activities</span><span> token)
+</span><span>       (</span><span style="color:#bf616a;">map </span><span>#(</span><span style="color:#bf616a;">update-in</span><span> % [&quot;</span><span style="color:#a3be8c;">average_speed</span><span>&quot;] meters-per-second-&gt;kilometers-per-hour))
+</span><span>       (</span><span style="color:#bf616a;">map </span><span>#(</span><span style="color:#bf616a;">update-in</span><span> % [&quot;</span><span style="color:#a3be8c;">start_date_local</span><span>&quot;] string-date-&gt;millis))
+</span><span>       (</span><span style="color:#bf616a;">map </span><span>#(</span><span style="color:#bf616a;">update-in</span><span> % [&quot;</span><span style="color:#a3be8c;">elapsed_time</span><span>&quot;] seconds-&gt;minutes))
+</span><span>       (</span><span style="color:#bf616a;">map </span><span>#(</span><span style="color:#bf616a;">update-in</span><span> % [&quot;</span><span style="color:#a3be8c;">moving_time</span><span>&quot;] seconds-&gt;minutes)))
+</span></code></pre>
+<br/>
+###3. Affichage d'un graphique avec Incanter
+<p>La dernière étape consiste à utiliser l'une des fonctions de la librairie Incanter pour afficher un graphique. L'exemple de code suivant affiche l'évolution de la vitesse moyenne de chaque sortie en fonction de la date de la sortie :</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">display-chart </span><span>[token]
+</span><span>  (</span><span style="color:#bf616a;">let </span><span>[activities (</span><span style="color:#bf616a;">get-activities</span><span> token)]
+</span><span>    (</span><span style="color:#bf616a;">with-data
+</span><span>      (</span><span style="color:#bf616a;">to-dataset</span><span> activities)
+</span><span>      #_(</span><span style="color:#bf616a;">view</span><span> $data)
+</span><span>      (</span><span style="color:#bf616a;">view
+</span><span>        (</span><span style="color:#bf616a;">time-series-plot
+</span><span>          (</span><span style="color:#bf616a;">$ </span><span style="color:#d08770;">:start_date_local</span><span>)
+</span><span>          (</span><span style="color:#bf616a;">$ </span><span style="color:#d08770;">:average_speed</span><span>)
+</span><span>          </span><span style="color:#d08770;">:group-by </span><span>(</span><span style="color:#bf616a;">$ </span><span style="color:#d08770;">:type</span><span>)
+</span><span>          </span><span style="color:#d08770;">:title </span><span>&quot;</span><span style="color:#a3be8c;">Average speed over time</span><span>&quot;
+</span><span>          </span><span style="color:#d08770;">:x-label </span><span>&quot;</span><span style="color:#a3be8c;">time</span><span>&quot;
+</span><span>          </span><span style="color:#d08770;">:y-label </span><span>&quot;</span><span style="color:#a3be8c;">average speed (km/h)</span><span>&quot;
+</span><span>          </span><span style="color:#d08770;">:points true
+</span><span>          </span><span style="color:#d08770;">:legend true</span><span>)))))
+</span></code></pre>
+<p>Le graphique généré :
+<img src="https://nicokosi.github.io/fr/creating-strava-charts-with-clojure-and-incanter/chart-average-speed-over-time.png" alt="Chart: average speed over time" /></p>
+<p>Le code complet, qui affiche plusieurs graphiques similaires, se trouve sur le <a href="https://github.com/nicokosi/strava-activity-graphs/">repository GitHub strava-activity-graphs</a>.</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>

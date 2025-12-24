@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         Quelques astuces shell &quot;unix-like&quot; que j&#x27;utilise dans mon terminal 🧙
+        
+    </title>
+
+        
+            <meta property="og:title" content="Quelques astuces shell &quot;unix-like&quot; que j&#x27;utilise dans mon terminal 🧙" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="astuces shell &quot;unix-like&quot;" />
+         
+     
+
+     
+         
+             <meta name="description" content="astuces shell &quot;unix-like&quot;" />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    </head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Quelques astuces shell &quot;unix-like&quot; que j&#x27;utilise dans mon terminal 🧙<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2024-11-28</time>
+                    
+
+                    
+                        :: Updated on <time>2024-12-18</time>
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/fr/tags/shell/" class="post-tag">shell</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/terminal/" class="post-tag">terminal</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/cli/" class="post-tag">cli</a>, 
+                                
+                                    <a href="https://nicokosi.github.io/fr/tags/tui/" class="post-tag">tui</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="quelques-astuces-shell-nix-que-j-utilise-dans-mon-terminal-mage">Quelques astuces shell *nix que j'utilise dans mon terminal 🧙</h1>
+<p>Public présumé : dévelopeurs.ses utilisant leur terminal pour diverses tâches.</p>
+<p>Voici quelques commandes / utilitaires que j'utilise régulièrement, peut-être que ça peut vous être utile ou que vous pourrez me donner votre avis ?</p>
+<h2 id="l-anti-seche-tldr-memo">l'anti-sèche <code>tldr</code> 📝</h2>
+<p>Ca m'est impossible de retenir toutes les options des commandes que j'utilise. Personnellement, j'aime avoir une sorte d'anti-sèches directement dans mon terminal, sans utiliser ni mon navigateur web, ni un outil d'intelligence artificielle comme ChatGPT.</p>
+<p>Pour ça, j'utilise souvent <a href="https://tldr.sh">tldr</a> comme une anti-sèche, c'est très pratique !</p>
+<p>Par exemple, la commande <code>tldr --language fr git</code> affiche les 8 options les plus courantes de <code>git</code>, avec une description courte (pour information, on peut avoir les informations en plusieurs langues) :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Système de gestion de versions décentralisé.
+</span><span>Certaines commandes comme `git commit` ont leur propre documentation.
+</span><span>Plus d&#39;informations : &lt;https://git-scm.com/&gt;.
+</span><span>
+</span><span>Exécuter une sous-commande Git :
+</span><span>
+</span><span>    git sous_commande
+</span><span>
+</span><span>Exécuter une sous-commande Git sur un répertoire personnalisé :
+</span><span>
+</span><span>    git -C chemin/vers/repertoire sous_commande
+</span><span>
+</span><span>Exécuter une sous-commande Git avec un paramètre de configuration spécifique :
+</span><span>
+</span><span>    git -c &#39;cle_param_config=valeur&#39; sous_commande
+</span><span>
+</span><span>Afficher l&#39;aide générale :
+</span><span>
+</span><span>    git --help
+</span><span>
+</span><span>Afficher l&#39;aide sur une sous-commande Git :
+</span><span>
+</span><span>    git help sous_commande
+</span><span>
+</span><span>Obtenir la version de Git :
+</span><span>
+</span><span>    git --version
+</span></code></pre>
+<h3 id="aliases-name-badge">aliases 📛</h3>
+<h2 id="alias-permanents">alias permanents</h2>
+<p>Cas d'utilisation : taper plus vite les commandes souvent utilisées.</p>
+<p>Par exemple, comme j'utilise souvent la commande Maven <code>mvn</code>, j'ai défini cet aliax Unix dans ma configuration de shell :</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#96b5b4;">alias </span><span style="color:#8fa1b3;">mvncist</span><span>=&quot;</span><span style="color:#a3be8c;">mvn clean install -DskipTests</span><span>&quot;
+</span></code></pre>
+<p>Ainsi, je n'ai qu'à taper <code>mvncist</code> pour reconstruire un projet Maven sans avoir à attendre l'exécution des tests.</p>
+<h3 id="aliases-a-la-demande">aliases à la demande</h3>
+<p>Cas d'utilisation : éviter de taper de nombreuses fois la même commande que j'utilise de façon intensive pendant une période donnée.</p>
+<p>Par exemple, je n'utilise pas souvent Docker en ligne de commandes, mais il peut m'arriver de l'utiliser plusieurs dizaines de fois pendant une heure, si j'investigue un problème ou si je définis une image via un fichier Dockerfile.
+Dans ce cas, je peux être amené à créer un alias Unix qui ne dure que le temps de ma session, puis je taperai les différents commandes en utilisant cet alias :</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#96b5b4;">alias </span><span style="color:#8fa1b3;">d</span><span>=</span><span style="color:#a3be8c;">docker
+</span><span style="color:#bf616a;">d</span><span> ps
+</span><span style="color:#bf616a;">d</span><span> images
+</span><span style="color:#65737e;"># etc.
+</span></code></pre>
+<h2 id="filtrer-la-sortie-mag-right">filtrer la sortie 🔎</h2>
+<h3 id="avec-grep">avec <code>grep</code></h3>
+<p>L'utilisation de <em>pipe</em> Unix avec la commande <code>grep</code> ou ses équivalents comme <a href="https://github.com/ggreer/the_silver_searcher">ag, "the silver searcher"</a> est bien utile quand je sais quoi chercher.</p>
+<p>Par exemple, j'utilise souvent la commande <code>df -h | grep disk1s1</code> pour connaître l'espace disque restant sur mon disque dur.</p>
+<h3 id="avec-fzf-le-command-line-fuzzy-finder">avec <code>fzf</code>, le "command-line fuzzy finder"</h3>
+<p>Quand je ne sais pas précisement quoi chercher, j'utilise souvent <a href="https://junegunn.github.io/fzf/">fzf, the "command-line fuzzy finder"</a>.</p>
+<p>Par exemple, quand je veux connaître la liste des environnements Java (<em>Java Development Kits</em>) que j'ai installés, je lance peux taper la commande <code>sdk list java | fzf</code> :</p>
+<p><img src="https://nicokosi.github.io/fr/nix-terminal-tricks/fzf-sdk.gif" alt="Utilisation de &#39;fzf&#39; pour filtrer la commande &#39;sdk&#39;" /></p>
+<p>Et pour copier plusieurs lignes, l'option <code>--multi</code> (ou sa version courte <code>-m</code>) est pratique.</p>
+<p>Par exemple, <code>eza ~ | fzf -m</code> affiche :</p>
+<p><img src="https://nicokosi.github.io/fr/nix-terminal-tricks/fzf-m-eza.gif" alt="Utilisation de &#39;fzf&#39; pour filtrer et selectionner plusieurs lignes de la commande &#39;eza&#39;" /></p>
+<h2 id="les-tuis-pour-aller-plus-vite-zap">les <em>TUIs</em>, pour aller plus vite ! ⚡️</h2>
+<p>J'utilise plusieurs commandes de type <a href="https://en.wikipedia.org/wiki/Text-based_user_interface"><em>Text-based User Interfaces</em> (ou <em>Terminal-based</em>)</a>, souvent désignées par le sigle <em>TUI</em> :</p>
+<ul>
+<li>
+<p><a href="https://jonas.github.io/tig/">tig</a> pour explorer rapidement les commits Git (même si j'utilise aussi la commande <code>git</code> dans mon terminal, ainsi que l'intégration Git de mon environnement de développement (<em>IDE</em>).)</p>
+</li>
+<li>
+<p><a href="https://github.com/jesseduffield/lazydocker">lazydocker</a> pour manipuler des containers Docker rapidement (même j'utilise aussi la commande <code>docker</code> directement)</p>
+</li>
+<li>
+<p><a href="https://github.com/imsnif/diskonaut">diskonaut</a> pour faire du ménage sur mon disque dur</p>
+</li>
+<li>
+<p><a href="https://nicokosi.github.io/fr/nix-terminal-tricks/%5Burl%5D(https://github.com/korosuke613/gh-user-stars?tab=readme-ov-file)">l'extension GitHub CLI <code>user-stars</code></a> pour retrouver des dépôts GitHub auxquels j'ai mis une "étoile" (sorte de favori)</p>
+</li>
+</ul>
+<p>Avant de finir, un remerciement à mes collègues qui m'ont aidé à apprendre ces astuces. Je pense notamment à Amazigh, Alexis, Stéphane, Yoann, Jean-Christophe... et je suis sûr d'en oublier (ne m'en veuillez pas) ! 🤗</p>
+<p>Et voilà, c'est terminé ! 🤓</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>

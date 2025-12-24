@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nicokosi.github.io">
+
+    
+
+    
+    
+    
+    <title>
+         Découvrons Rust
+        
+    </title>
+
+        
+            <meta property="og:title" content="Découvrons Rust" />
+        
+     
+
+     
+         
+             <meta property="og:description" content="Découvrons le langage de programmation Rust en développant un petit projet personnel." />
+         
+     
+
+     
+         
+             <meta name="description" content="Découvrons le langage de programmation Rust en développant un petit projet personnel." />
+         
+    
+
+    
+    
+
+    
+    
+        <link href=https://nicokosi.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="" href="https://nicokosi.github.io/atom.xml">
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href=https://nicokosi.github.io/theme/light.css />
+        <link rel="stylesheet" type="text/css" href="https://nicokosi.github.io/theme/dark.css" media="(prefers-color-scheme: dark)" />
+    
+
+    <!-- Set the correct theme in the script -->
+    <script src=https://nicokosi.github.io/js/themetoggle.js></script>
+    
+        <script>
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        </script>
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://nicokosi.github.io/main.css />
+
+    
+
+    <script src=https://nicokosi.github.io/js/mermaid.js></script>
+
+    </head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main">
+        
+            <a href=https:&#x2F;&#x2F;nicokosi.github.io></a>
+        
+
+
+        <div class="socials">
+            
+            <a rel="me" href="https:&#x2F;&#x2F;fosstodon.org&#x2F;@nicokosi" class="social">
+                <img alt=mastodon src=https://nicokosi.github.io/social_icons/mastodon.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;nicokosi.bsky.social" class="social">
+                <img alt=bluesky src=https://nicokosi.github.io/social_icons/bluesky.svg>
+            </a>
+            
+            <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nicokosi&#x2F;" class="social">
+                <img alt=github src=https://nicokosi.github.io/social_icons/github.svg>
+            </a>
+            
+        </div>
+    </div>
+
+    <nav>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">posts</a>
+        
+            <a href=https://nicokosi.github.io/tags style="margin-left: 0.25em">tags</a>
+        
+            <a href=https://nicokosi.github.io/fr style="margin-left: 0.25em">🌐 fr</a>
+        
+            <a href=https://nicokosi.github.io style="margin-left: 0.25em">🌐 en</a>
+        
+
+        
+
+        
+    </nav>
+</header>
+
+
+        
+        
+    
+<main>
+    <article>
+        <div class="title">
+            
+            
+    <div class="page-header">
+        Découvrons Rust<span class="primary-color" style="font-size: 1.6em">.</span>
+    </div>
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2018-06-10</time>
+                    
+
+                    
+
+                    
+
+                    
+                    
+                            <span class="tags-label"> :: Tags:</span>
+                            <span class="tags">
+                                    <a href="https://nicokosi.github.io/fr/tags/rust/" class="post-tag">rust</a>
+                                
+                            </span>
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+        </div>
+
+        
+
+        
+        
+
+        <section class="body">
+            <h1 id="decouvrons-rust">Découvrons Rust</h1>
+<p><em>En tant que développeur.se Java, je veux découvrir Rust, de façon à bien comprendre la phrase suivante citée de <a href="https://www.rust-lang.org">rust-lang.org</a>*:</em></p>
+<blockquote>
+<p>Rust is a systems programming language that runs blazingly <strong>fast</strong>, <strong>prevents segfaults</strong>, and <strong>guarantees thread safety</strong></p>
+</blockquote>
+<p>*: avez-vous remarqué le "agile stories meme" ? 😉</p>
+<h2 id="comment-j-ai-commence-a-apprendre-rust">Comment j'ai commencé à apprendre Rust</h2>
+<p><a href="https://doc.rust-lang.org/stable/book/second-edition/">The Rust Programming Language (2nd edition)</a> est un chouette un livre en ligne avec des exemples concrets de petits projets implémentés pas-à-pas (un outil en ligne de commande et un serveur web).</p>
+<p>Après avoir lu partiellement ce livre, j'ai "porté" en Rust un projet personnel nommé <a href="https://github.com/nicokosi/hubstats">hubstats</a>. Hubstats est un outil en ligne de commande que j'ai écrit en Clojure, qui utilise une API REST GitHub pour afficher des informations sur les pull requests GitHub dans la sortie standard. J'ai baptisé le projet Rust <a href="https://github.com/nicokosi/pullpito/">pullpito</a>.</p>
+<p>Ce portage a été une façon ludique et facile d'apprendre Rust car je n'ai eu ni à réfléchir au "quoi" (afficher des informations sur le pull requests GitHub), ni au "comment" (appeler l'API GitHub que j'avais déjà utilisée dans le projet existant) : je me suis uniquement foculisé sur l'implémentation en Rust.</p>
+<h2 id="mes-premieres-impressions">Mes premières impressions</h2>
+<p>Le code Rust, ça <strong>dépote sévère</strong> ! Comparons par exemple l'exécution des tests unitaires <code>pullpito</code>, qui se lancent en une demi seconde :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pullpito $&gt; time (cargo test --quiet)
+</span><span>
+</span><span>running 8 tests
+</span><span># couic
+</span><span>test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+</span><span>
+</span><span>( cargo test --quiet; )  0.43s user 0.21s system 96% cpu 0.665 total
+</span></code></pre>
+<p>Alors que les tests unitaires de <code>hubstats</code> se lancent en 10 secondes :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>hubstats $&gt; time (lein test)
+</span><span># couic
+</span><span>
+</span><span>Ran 3 tests containing 20 assertions.
+</span><span>0 failures, 0 errors.
+</span><span>( lein test; )  10.86s user 0.70s system 129% cpu 8.923 total
+</span></code></pre>
+<p><em>Note: la commande <code>cargo</code> lance <a href="https://github.com/rust-lang/cargo/">Cargo</a>, l'outil de build de Rust ; la commande <code>lein</code> lance <a href="https://leiningen.org/">Leiningen</a>, un des outils de build de Clojure.</em></p>
+<p>Comparons désormais les temps d'exécutions des lignes de commande. <code>pullpito</code> se lance en 20 millisecondes sur ma machine :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pullpito $&gt; time (cargo run --quiet python/peps)
+</span><span>pull requests for &quot;python/peps&quot; -&gt;
+</span><span>  opened per author:
+</span><span>    brainwane: 1
+</span><span>  commented per author:
+</span><span>    the-knights-who-say-ni: 1
+</span><span>    stevendaprano: 2
+</span><span>    pradyunsg: 2
+</span><span>    gvanrossum: 1
+</span><span>    6502: 1
+</span><span>    Rosuav: 1
+</span><span>    brainwane: 1
+</span><span>  closed per author:
+</span><span>    markshannon: 1
+</span><span>
+</span><span>( cargo run --quiet python/peps; )  0.22s user 0.09s system 20% cpu 1.524 total
+</span></code></pre>
+<p>...alors que <code>hubstats</code> prend une dizaine de secondes (oups, un peu d'optimisation serait nécessaire 😇) :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>hubstats $&gt; time (lein run --organization python --repository peps)
+</span><span>pull requests for python/peps -&gt;
+</span><span>	since 2018-05-15T05:35:57Z
+</span><span>		8 opened / 8 closed / 2 commented (15 comments)
+</span><span> 		opened per author:  {encukou 2, willingc 1, jdemeyer 1, gvanrossum 1, ethanhs 1, daxm 1, brainwane 1}
+</span><span> 		comments per author:  {tim-one 4, ethanhs 3, vlasovskikh 2, gvanrossum 2, JelleZijlstra 2, ilevkivskyi 1, Rosuav 1}
+</span><span> 		closed per author:  {brettcannon 4, markshannon 3, encukou 1}
+</span><span>( lein run --organization python --repository peps; )  11.30s user 0.77s system 66% cpu 18.160 total
+</span></code></pre>
+<p>Qu'en est-il de la <strong>compilation</strong> ? La première compilation est plus lente car toutes les dépendances doivent également être compilées. Sur ma machine, <code>pullpito</code> compile en 40 secondes :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pullpito $&gt; time (cargo clean &amp;&amp; cargo build)
+</span><span>Compiling void v1.0.2
+</span><span>   Compiling byteorder v1.2.2
+</span><span>   Compiling serde v1.0.37
+</span><span>   Compiling scoped-tls v0.1.
+</span><span># snip
+</span><span>    Finished dev [unoptimized + debuginfo] target(s) in 41.53 secs
+</span><span>( cargo clean &amp;&amp; cargo build; )  213.99s user 16.77s system 552% cpu 41.788 total
+</span></code></pre>
+<p>Mais le compilateur Rust est incrémental, les compilations suivantes seront plus rapides voire immédiates si le code source ne change pas :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pullpito $&gt; cargo build
+</span><span>    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+</span></code></pre>
+<p>De son côté, <code>hubstats</code> compile en 40 secondes (ses dépendances ne sont pas compilées) :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>hubstats $&gt; time (lein clean &amp;&amp; lein uberjar)
+</span><span># couic
+</span><span>( lein clean &amp;&amp; lein uberjar; )  37.55s user 6.49s system 223% cpu 19.750 total
+</span></code></pre>
+<br/>
+## A propos de Rust, le langage
+<br/>
+### Ownership, gloups ! 😱
+<p>Rust gère la mémoire de façon particulière. Au lieu d'utiliser un ramasse-miettes (<em>garbage collector</em>) comme en Java ou une gestion manuelle comme en C/C++, la mémoire est automatiquement récupérée grâce aux <a href="https://doc.rust-lang.org/book/second-edition/ch04-01-what-is-ownership.html">règles d'<em>ownership</em></a> :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>    Each value in Rust has a variable that’s called its owner.
+</span><span>    There can only be one owner at a time.
+</span><span>    When the owner goes out of scope, the value will be dropped.
+</span></code></pre>
+<p>Cela semble facile, mais ça l'est beaucoup moins en réalité.</p>
+<p>N'ayant pas encore bien compris les implications du concept d'ownership, je n'irai pas plus loin sur ce sujet. Ma compréhension actuelle se limite à corriger toutes les erreurs de compilation liées aux violation des ces règles ! 😇</p>
+<p>Pour plus de précisions, lire le chapitre <a href="https://doc.rust-lang.org/book/second-edition/ch04-00-understanding-ownership.html">"Understanding Ownership"</a> de "The Rust Programming Language".</p>
+<br/>
+### Immuable, par défaut 😎
+<p>Les variables sont immuables, par défaut. Elles ne peuvent pas être ré-assignées à moins d'être explicitement déclarées <em>mutables</em> :</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let</span><span> name = &quot;</span><span style="color:#a3be8c;">foo</span><span>&quot;;
+</span><span style="color:#65737e;">// name = &quot;bar&quot;; // Générerait l&#39;erreur de compilation &quot;error: re-assignment of immutable variable&quot;
+</span><span>
+</span><span style="color:#b48ead;">let mut</span><span> changing_name = &quot;</span><span style="color:#a3be8c;">bar</span><span>&quot;;
+</span><span>changing_name = &quot;</span><span style="color:#a3be8c;">baz</span><span>&quot;;
+</span></code></pre>
+<p>Néanmoins, les variables immuables peut être surchargées (<em>shadowed</em>) :</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let</span><span> name = &quot;</span><span style="color:#a3be8c;">foo</span><span>&quot;;
+</span><span style="color:#b48ead;">let</span><span> name = &quot;</span><span style="color:#a3be8c;">bar</span><span>&quot;; </span><span style="color:#65737e;">// &quot;shadowed variable&quot;
+</span></code></pre>
+<br/>
+### Inférence de type 😎
+L'inférence de type est bien sympathique et simplifie le code :
+```rust
+// le type peut être inféré :
+let foo = "foo".to_string();
+// ou bien spécifié :
+let foo : String = "foo".to_string();
+```
+<br/>
+### Filtrage par motif (_pattern matching_) 😎
+<p>On peut utiliser le pattern matching au lieu de if/else... et c'est cool !</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let</span><span> body = </span><span style="color:#b48ead;">match</span><span> body {
+</span><span>  Ok(body) =&gt; body,
+</span><span>  Err(_) =&gt; &quot;</span><span style="color:#a3be8c;">default</span><span>&quot;
+</span><span>}
+</span></code></pre>
+<p>Par contre, le fait que les variables soient "empruntées" (<em>variable borrowing</em>) semble rendre le pattern matching plus dur à utiliser que dans d'autres langages (comme Scala). Se référer à <a href="https://stackoverflow.com/questions/29926724/matching-string-cannot-move-out-of-borrowed-content">ce fil Stack Overflow</a>. Note personnelle : creuser ce sujet.</p>
+<br/>
+### Tuples, énumérations et structures 😎
+<p>Rust permet d'utiliser des tuples, des énumérations et des structures de données :</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#bf616a;">allow</span><span>(dead_code)]
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug)] </span><span style="color:#b48ead;">enum </span><span>Suite {
+</span><span>  </span><span style="color:#d08770;">CLUB</span><span>, </span><span style="color:#d08770;">DIAMOND</span><span>, </span><span style="color:#d08770;">HEART</span><span>, </span><span style="color:#d08770;">SPADE
+</span><span>}
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug)] </span><span style="color:#b48ead;">enum </span><span>Rank {
+</span><span>  Ace, King, Queen, Jack
+</span><span>}
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug)] </span><span style="color:#b48ead;">struct </span><span>Card {
+</span><span>  </span><span style="color:#bf616a;">suite</span><span>: Suite,
+</span><span>  </span><span style="color:#bf616a;">rank</span><span>: Rank,
+</span><span>}
+</span></code></pre>
+<p>Testons cela avec le REPL <code>rusti</code> :</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>rusti=&gt; Card { suite: Suite::</span><span style="color:#d08770;">CLUB</span><span>, rank: Rank::King }
+</span><span>Card { suite: </span><span style="color:#d08770;">CLUB</span><span>, rank: King }
+</span></code></pre>
+<br/>
+## Outillage
+<br/>
+### Pas de REPL (avec un support complet de Rust) 😢
+<p>Il n'y a pas de REPL (Read Eval Print Loop) officiel. C'est bien dommage !</p>
+<p><a href="https://github.com/murarth/rusti">rusti</a> peut dépanner mais est limité et ne supporte pas toutes les évolutions récentes du langage.</p>
+<p>Les REPL en ligne comme <a href="https://repl.it/site/languages/rust">repl.it</a> peuvent se révéler utiles, même s'ils sont limités (par exemple, on ne peut pas toujours y importer des dépendances externes appelées <code>crates</code>).</p>
+<h3 id="gestion-des-dependances-descripteur-cargo-toml-avec-gestion-semantique-semantic-versioning-sunglasses">Gestion des dépendances (descripteur <code>Cargo.toml</code>) avec gestion sémantique (<em>semantic versioning</em>) 😎</h3>
+<p>Chaque dépendance binaires (appelée <code>crate</code>) :</p>
+<ul>
+<li>a un descripteur <a href="https://semver.org/">versionné "sémantiquement"</a>. Par exemple, la version de pullpito est 0.1.0, comme indiqué dans le descripteur <code>Cargo.toml</code> :</li>
+</ul>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pullpito $&gt; grep &quot;^version =&quot; Cargo.toml
+</span><span>version = &quot;0.1.0&quot;
+</span></code></pre>
+<ul>
+<li>déclare la version des ses dépendances :</li>
+</ul>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pullpito $&gt; grep -A 10 &quot;dependencies&quot; Cargo.toml
+</span><span>[dependencies]
+</span><span>log = &quot;0.4&quot;
+</span><span>env_logger = &quot;0.5&quot;
+</span><span>futures = &quot;0.1&quot;
+</span><span>serde = &quot;1.0&quot;
+</span><span>serde_json = &quot;1.0&quot;
+</span><span>serde_derive = &quot;1.0&quot;
+</span><span>chrono = { version = &quot;0.4&quot;, features = [&quot;serde&quot;] }
+</span><span>reqwest = &quot;0.8&quot;
+</span></code></pre>
+<p>Cool et concis, non ?</p>
+<br/>
+### Formattage du code 😎
+<p><a href="https://github.com/rust-lang-nursery/rustfmt">rustfmt</a> est l'outil standard pour formater le code en utilisant un style par défaut :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pullpito $&gt; cat src/main.rs
+</span><span>fn main() {
+</span><span>  println! (&quot;foo&quot;);
+</span><span> let bar = &quot;bar&quot;;
+</span><span>}
+</span><span>
+</span><span>pullpito $&gt; cargo fmt
+</span><span>
+</span><span>pullpito $&gt; cat src/main.rs
+</span><span>fn main() {
+</span><span>    println!(&quot;foo&quot;);
+</span><span>    let bar = &quot;bar&quot;;
+</span><span>}
+</span></code></pre>
+<p>Plus de guerre du style "tabulation / espace" ! Cf. <a href="https://xkcd.com/1285/">https://xkcd.com/1285/</a>!</p>
+<br/>
+### Compilateur "user-friendly" (souvent) 😎
+<p>En cas d'erreur, le compilateur Rust compiler fait souvent des suggestions "amicales". Par exemple :</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug)] </span><span style="color:#b48ead;">enum </span><span>Suite { </span><span style="color:#d08770;">CLUB </span><span>}
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    println!(&quot;</span><span style="color:#d08770;">{:?}</span><span>&quot;, Suite.</span><span style="color:#d08770;">CLUB</span><span>);
+</span><span>}
+</span></code></pre>
+<p>génère l'erreur suivante :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>error[E0423]: expected value, found enum `Suite`
+</span><span> --&gt; src/main.rs:5:22
+</span><span>  |
+</span><span>5 |     println!(&quot;{:?}&quot;, Suite.CLUB);
+</span><span>  |                      ^^^^^
+</span><span>  |
+</span><span>  = note: did you mean to use one of the following variants?
+</span><span>          - `Suite::CLUB`
+</span></code></pre>
+<br/>
+### Outillage multi-version 😎
+<p>Rust a trois canaux de mise à jour (<em>release channels</em>): stable, beta, et nightly. On peut en utiliser un ou plusieurs. Par exemple, si un projet nécessite le "stable toolchain", un autre peut avoir besoin du "nightly". Dans ce cas, on utilise la commande <code>rustup</code> pour installer et utiliser ces deux versions.</p>
+<p>Par exemple, installons le toolchain "nightly" :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$&gt; rustup install nightly
+</span></code></pre>
+<p>Il y a maintenant deux toolchains : <code>stable</code> (celui par défaut) and <code>nightly</code> :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$&gt; rustup show
+</span><span>Default host: x86_64-apple-darwin
+</span><span>
+</span><span>installed toolchains
+</span><span>--------------------
+</span><span>
+</span><span>stable-x86_64-apple-darwin
+</span><span>nightly-x86_64-apple-darwin
+</span><span>
+</span><span>active toolchain
+</span><span>----------------
+</span><span>
+</span><span>stable-x86_64-apple-darwin (default)
+</span><span>rustc 1.25.0 (84203cac6 2018-03-25)
+</span></code></pre>
+<p>On peut ensuite :</p>
+<ul>
+<li>changer le toolchain par défaut via <code>rustup default</code></li>
+<li>activer un toolchain via <code>rustup set</code></li>
+<li>utiliser un toolchain à la demande via <code>rustup run $toolchain $cmd</code> (exemple : <code>rustup run nightly cargo build</code>)</li>
+</ul>
+<p>etc.</p>
+
+        </section>
+    </article>
+</main>
+
+
+
+        
+            
+        
+
+        
+    </div>
+</body>
+
+</html>
